@@ -209,7 +209,7 @@ local theme = lush(function()
         TSStrike             { gui = "strikethrough" } , -- Strikethrough text.
         -- TSTitle              { } , -- Text that is part of a title.
         -- TSLiteral            { } , -- Literal or verbatim text.
-        TSURI                { sp = colors.purple, gui = "undercurl" } , -- URIs like hyperlinks or email addresses.
+        TSURI                { gui = "none" } , -- URIs like hyperlinks or email addresses.
         -- TSMath               { } , -- Math environments like LaTeX's `$ ... $`
         -- TSTextReference      { } , -- Footnotes, text references, citations, etc.
         -- TSEnvironment        { } , -- Text environments of markup languages.
@@ -242,7 +242,7 @@ local theme = lush(function()
         IndentBlanklineChar  { fg = VertSplit.bg },
         TreeIndentMarker { IndentBlanklineChar },
 
-        MarkSignHL           { fg = colors.red, bg = LineNr.bg, gui = "bold,italic"},
+        MarkSignHL           { fg = colors.red, bg = LineNr.bg, gui = "bold"},
 
         GitGutterAdd         { DiffAdd, bg = LineNr.bg },
         GitGutterChange      { DiffChange, bg = LineNr.bg },
@@ -250,11 +250,11 @@ local theme = lush(function()
         GitGutterDelete      { DiffDelete, bg = LineNr.bg },
 
         CmpItemAbbrMatch    { fg = colors.blue, gui = "bold" },
-        CmpItemAbbrMatchFuzzy { fg = CmpItemAbbrMatch.fg.lighten(25).rotate(180) },
+        CmpItemAbbrMatchFuzzy { fg = CmpItemAbbrMatch.fg.lighten(20).rotate(180) },
         CmpItemAbbrDefault { fg = colors.white },
         CmpItemKindVariable { Constant },
         CmpItemKindConstant { Constant },
-        CmpItemKindInterface { Identifier }, 
+        CmpItemKindInterface { Identifier },
         CmpItemKindFunction { Function },
         CmpItemKindMethod { Function },
         CmpItemKindSnippet { fg = colors.green },
@@ -313,6 +313,11 @@ local theme = lush(function()
         yaraIdentifier { fg = colors.white },
 
         dockerfileTSKeyword { Keyword, gui = "none" },
+
+        devIconDockerfile { fg = colors.blue },
+        devIconDefault { fg = colors.blue.desaturate(50).darken(10) },
+
+        helpTSURI { TSURI },
 
     }
 end)
