@@ -89,14 +89,14 @@ local theme = lush(function()
         Float        { fg = colors.orange }, --   A floating point constant: 2.3e10
 
         Identifier     { fg = colors.purple }, -- (*) Any variable name
-        -- Function       { }, --   Function name (also: methods for classes)
+        Function       { fg = colors.blue }, --   Function name (also: methods for classes)
 
         Statement      { fg = colors.purple }, -- (*) Any statement
         -- Conditional    { }, --   if, then, else, endif, switch, etc.
         -- Repeat         { }, --   for, do, while, etc.
         -- Label          { }, --   case, default, etc.
         -- Operator       { }, --   "sizeof", "+", "*", etc.
-        -- Keyword        { }, --   any other keyword
+        Keyword        { Statement }, --   any other keyword
         -- Exception      { }, --   try, catch, throw
 
         PreProc        { fg = colors.blue, gui = "italic" }, -- (*) Generic Preprocessor
@@ -122,9 +122,9 @@ local theme = lush(function()
         Error          { fg = colors.red, gui = "bold" }, -- Any erroneous construct
         Todo           { fg = colors.black, bg = colors.cyan, gui = "bold" }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
-        LspReferenceText            { illuminatedCurWord } , -- Used for highlighting "text" references
-        LspReferenceWrite           { illuminatedCurWord} , -- Used for highlighting "write" references
-        LspReferenceRead            { illuminatedWord } , -- Used for highlighting "read" references
+        -- LspReferenceText            { illuminatedCurWord } , -- Used for highlighting "text" references
+        -- LspReferenceWrite           { illuminatedCurWord} , -- Used for highlighting "write" references
+        -- LspReferenceRead            { illuminatedWord } , -- Used for highlighting "read" references
         -- LspCodeLens                 { } , -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
         -- LspCodeLensSeparator        { } , -- Used to color the separator between two or more code lens.
         -- LspSignatureActiveParameter { } , -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
@@ -170,7 +170,7 @@ local theme = lush(function()
         TSFuncBuiltin        { fg = colors.blue, gui = "italic" } , -- Built-in functions: `print` in Lua.
         -- TSFuncMacro          { } , -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
         -- TSInclude            { } , -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
-        -- TSKeyword            { } , -- Keywords that don't fit into other categories.
+        TSKeyword            { Keyword } , -- Keywords that don't fit into other categories.
         -- TSKeywordFunction    { } , -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
         -- TSKeywordOperator    { } , -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
         -- TSKeywordReturn      { } , -- Keywords like `return` and `yield`.
@@ -183,7 +183,7 @@ local theme = lush(function()
         -- TSParameter          { } , -- Parameters of a function.
         -- TSParameterReference { } , -- References to parameters of a function.
         -- TSPreProc            { } , -- Preprocessor #if, #else, #endif, etc.
-        -- TSProperty           { } , -- Same as `TSField`.
+        TSProperty           { TSField } , -- Same as `TSField`.
         -- TSPunctDelimiter     { } , -- Punctuation delimiters: Periods, commas, semicolons, etc.
         -- TSPunctBracket       { } , -- Brackets, braces, parentheses, etc.
         -- TSPunctSpecial       { } , -- Special punctuation that doesn't fit into the previous categories.
@@ -247,7 +247,22 @@ local theme = lush(function()
         GitGutterChangeDelete { DiffChange, bg = VertSplit.bg },
         GitGutterDelete      { DiffDelete, bg = VertSplit.bg },
 
-        CmpItemAbbrMatch    { fg = colors.white, bg = "none", gui = "bold" }
+        CmpItemAbbrMatch    { fg = colors.blue, bg = "none", gui = "bold" },
+        CmpItemAbbrMatchFuzzy { CmpItemAbbrMatch, fg = CmpItemAbbrMatch.fg.lighten(25) },
+        CmpItemAbbrDefault { fg = colors.white },
+        CmpItemKindVariable { Constant },
+        CmpItemKindInterface { Identifier }, 
+        CmpItemKindFunction { Function },
+        CmpItemKindMethod { Function },
+        CmpItemKindSnippet { fg = colors.green },
+        CmpItemKindText { fg = colors.white },
+        CmpItemKindKeyword { Keyword },
+        CmpItemKindProperty { TSProperty },
+        CmpItemKindUnit { fg = colors.white },
+        CmpItemKindDeprecated { fg = colors.black.lighten(50), gui = "strikethrough,italic"},
+
+        FidgetTitle { fg = colors.white, gui = "italic" },
+        FidgetTask { fg = colors.blue }
 
     }
 end)
