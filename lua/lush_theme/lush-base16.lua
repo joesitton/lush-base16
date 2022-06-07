@@ -23,7 +23,6 @@ local theme = lush(function()
         Normal       { bg = "none" }, -- Normal text
         NormalNC     { bg = "none" }, -- normal text in non-current windows
         NormalFloat  { bg = colors.black }, -- Normal text in floating windows.
-        FloatBorder  { fg = colors.black.lighten(15), bg = colors.black.lighten(15)},
         Comment      { fg = colors.black.lighten(25), gui = "italic" }, -- Any comment
         -- Conceal      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
         -- Cursor       { }, -- Character under the cursor
@@ -91,6 +90,7 @@ local theme = lush(function()
         Number         { fg = colors.orange }, --   A number constant: 234, 0xff
         Boolean      { fg = colors.orange }, --   A boolean constant: TRUE, false
         Float        { fg = colors.orange }, --   A floating point constant: 2.3e10
+        FloatBorder  { fg = colors.black, bg = colors.black },
 
         Identifier     { fg = colors.purple }, -- (*) Any variable name
         Function       { fg = colors.blue }, --   Function name (also: methods for classes)
