@@ -57,7 +57,7 @@ local theme = lush(function()
         -- ModeMsg      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
         -- MsgArea      { }, -- Area for messages and cmdline
         -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
-        MoreMsg      { fg = colors.blue, gui = "bold,italic" }, -- |more-prompt|
+        MoreMsg      { fg = colors.green, gui = "bold,italic" }, -- |more-prompt|
         NonText      { Comment, gui = "none" }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
         Pmenu        { fg = "none", bg = colors.black.lighten(15) }, -- Popup menu: Normal item.
         PmenuSel     { bg = Pmenu.bg.lighten(15) }, -- Popup menu: Selected item.
@@ -76,7 +76,7 @@ local theme = lush(function()
         -- TabLine      { }, -- Tab pages line, not active tab page label
         -- TabLineFill  { }, -- Tab pages line, where there are no labels
         -- TabLineSel   { }, -- Tab pages line, active tab page label
-        Title        { fg = colors.purple, gui = "bold"}, -- Titles for output from ":set all", ":autocmd" etc.
+        Title        { fg = colors.blue }, -- Titles for output from ":set all", ":autocmd" etc.
         Visual       { fg = "none", bg = CursorLine.bg }, -- Visual mode selection
         -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
         WarningMsg   { fg = colors.yellow }, -- Warning messages
@@ -95,7 +95,7 @@ local theme = lush(function()
         Identifier     { fg = colors.purple }, -- (*) Any variable name
         Function       { fg = colors.blue }, --   Function name (also: methods for classes)
 
-        Statement      { fg = colors.purple }, -- (*) Any statement
+        Statement      { fg = colors.purple, gui = "italic" }, -- (*) Any statement
         -- Conditional    { }, --   if, then, else, endif, switch, etc.
         -- Repeat         { }, --   for, do, while, etc.
         -- Label          { }, --   case, default, etc.
@@ -109,7 +109,7 @@ local theme = lush(function()
         -- Macro          { }, --   Same as Define
         -- PreCondit      { }, --   Preprocessor #if, #else, #endif, etc.
 
-        Type           { fg = colors.blue }, -- (*) int, long, char, etc.
+        Type           { fg = colors.yellow }, -- (*) int, long, char, etc.
         -- StorageClass   { }, --   static, register, volatile, etc.
         -- Structure      { }, --   struct, union, enum, etc.
         -- Typedef        { }, --   A typedef
@@ -136,7 +136,7 @@ local theme = lush(function()
         DiagnosticError            { fg = colors.red } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         DiagnosticWarn             { fg = colors.yellow } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         DiagnosticInfo             { fg = colors.blue } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-        DiagnosticHint             { fg = colors.purple } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+        DiagnosticHint             { fg = colors.green } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
         -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
         -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
@@ -161,35 +161,34 @@ local theme = lush(function()
         -- TSComment            { }, -- Line comments and block comments.
         -- TSConditional        { } , -- Keywords related to conditionals: `if`, `when`, `cond`, etc.
         -- TSConstant           { } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
-        -- TSConstBuiltin       { } , -- Built-in constant values: `nil` in Lua.
-        -- TSConstMacro         { } , -- Constants defined by macros: `NULL` in C.
-        -- TSConstructor        { } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
+        TSConstBuiltin       { fg = colors.orange } , -- Built-in constant values: `nil` in Lua.
+        TSConstMacro         { TSConstBuiltin } , -- Constants defined by macros: `NULL` in C.
         -- TSDebug              { } , -- Debugging statements.
         -- TSDefine             { } , -- Preprocessor #define statements.
         -- TSError              { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
         -- TSException          { } , -- Exception related keywords: `try`, `except`, `finally` in Python.
-        TSField              { fg = colors.yellow } , -- Object and struct fields.
+        TSField              { fg = colors.red } , -- Object and struct fields.
+        TSProperty           { TSField } , -- Same as `TSField`.
         -- TSFloat              { } , -- Floating-point number literals.
-        -- TSFunction           { } , -- Function calls and definitions.
-        TSFuncBuiltin        { fg = colors.blue, gui = "italic" } , -- Built-in functions: `print` in Lua.
+        TSFunction           { fg = colors.blue, gui = "italic" } , -- Function calls and definitions.
+        TSFuncBuiltin        { fg = colors.cyan, gui = "italic" } , -- Built-in functions: `print` in Lua.
+        TSMethod             { TSFunction } , -- Method calls and definitions.
         -- TSFuncMacro          { } , -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
         -- TSInclude            { } , -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
         TSKeyword            { Keyword } , -- Keywords that don't fit into other categories.
-        -- TSKeywordFunction    { } , -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
+        TSKeywordFunction    { Keyword, gui = "none" } , -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
         -- TSKeywordOperator    { } , -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
-        -- TSKeywordReturn      { } , -- Keywords like `return` and `yield`.
-        -- TSLabel              { } , -- GOTO labels: `label:` in C, and `::label::` in Lua.
-        -- TSMethod             { } , -- Method calls and definitions.
-        -- TSNamespace          { } , -- Identifiers referring to modules and namespaces.
-        -- TSNone               { } , -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
+        TSKeywordReturn      { Keyword, gui = "italic" } , -- Keywords like `return` and `yield`.
+        TSLabel              { fg = colors.yellow } , -- GOTO labels: `label:` in C, and `::label::` in Lua.
+        -- TSNamespace          { TSField } , -- Identifiers referring to modules and namespaces.
+        TSNone               { fg = colors.white } , -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
         -- TSNumber             { } , -- Numeric literals that don't fit into other categories.
         -- TSOperator           { } , -- Binary or unary operators: `+`, and also `->` and `*` in C.
         TSVariable           { fg = colors.white } , -- Variable names that don't fit into other categories.
-        TSVariableBuiltin    { fg = colors.red, gui = "italic" } , -- Variable names defined by the language: `this` or `self` in Javascript.
-        TSParameter          { TSVariable } , -- Parameters of a function.
+        TSParameter          { fg = colors.cyan } , -- Parameters of a function.
+        TSVariableBuiltin    { Type, gui = "italic" } , -- Variable names defined by the language: `this` or `self` in Javascript.
         -- TSParameterReference { } , -- References to parameters of a function.
         -- TSPreProc            { } , -- Preprocessor #if, #else, #endif, etc.
-        TSProperty           { TSField } , -- Same as `TSField`.
         -- TSPunctDelimiter     { } , -- Punctuation delimiters: Periods, commas, semicolons, etc.
         -- TSPunctBracket       { } , -- Brackets, braces, parentheses, etc.
         -- TSPunctSpecial       { } , -- Special punctuation that doesn't fit into the previous categories.
@@ -218,8 +217,10 @@ local theme = lush(function()
         -- TSNote               { } , -- Text representation of an informational note.
         TSWarning            { WarningMsg } , -- Text representation of a warning note.
         TSDanger             { Error } , -- Text representation of a danger note.
-        -- TSType               { } , -- Type (and class) definitions and annotations.
-        -- TSTypeBuiltin        { } , -- Built-in types: `i32` in Rust.
+        TSType               { Type } , -- Type (and class) definitions and annotations.
+        TSTypeBuiltin        { Type, gui = "italic" } , -- Built-in types: `i32` in Rust.
+        TSTypeDefinition     { Type },
+        TSConstructor        { Type } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
 
         OffscreenPopup       { CursorLine },
 
@@ -263,7 +264,7 @@ local theme = lush(function()
         CmpItemKindUnit { fg = colors.white },
         CmpItemKindDeprecated { fg = colors.black.lighten(50), gui = "strikethrough,italic"},
 
-        TelescopeNormal      { fg = colors.white.darken(25), bg = colors.black },
+        TelescopeNormal      { fg = colors.white.darken(50), bg = colors.black },
         TelescopeBorder      { fg = colors.black, bg = colors.black },
         TelescopeTitle       { TelescopeBorder },
         TelescopePreviewNormal { bg = colors.black },
@@ -277,7 +278,7 @@ local theme = lush(function()
         TelescopePromptPrefix { fg = colors.blue, bg = TelescopeNormal.bg, gui = "bold" },
         TelescopePromptBorder { TelescopeBorder },
         TelescopeResultsLineNr { LineNr },
-        TelescopeSelection { fg = PmenuSel.fg, bg = CursorLine.bg },
+        TelescopeSelection { fg = colors.white, bg = CursorLine.bg },
         TelescopeSelectionCaret { fg = colors.yellow, bg = TelescopeNormal.bg },
         TelescopePreviewLine { Search },
         TelescopeResultsFunction { CmpItemKindFunction },
@@ -296,7 +297,7 @@ local theme = lush(function()
         TreeExpander { fg = colors.orange },
         TreeModified { fg = BufferCurrentMod.fg },
         NeoTreeDirectoryIcon { Directory },
-        NeoTreeRootName { fg = colors.purple },
+        NeoTreeRootName { Directory, gui = "bold,italic" },
         NeoTreeFileIcon { DevIconDefault },
         NeoTreeGitUntracked { fg = colors.orange },
         NeoTreeGitConflict { fg = colors.red },
@@ -304,6 +305,14 @@ local theme = lush(function()
         NeoTreeGitRenamed { fg = colors.purple },
         NeoTreeGitDeleted { DiffDelete },
         NeoTreeGitAdded { DiffAdd },
+
+        yamlBool { Boolean },
+        yamlBlockCollectionItemStart { Special },
+
+        yaraRuleSection { fg = colors.yellow },
+        yaraIdentifier { fg = colors.white },
+
+        dockerfileTSKeyword { Keyword, gui = "none" },
 
     }
 end)
