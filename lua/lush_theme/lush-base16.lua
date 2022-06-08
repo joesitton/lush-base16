@@ -319,13 +319,13 @@ local theme = lush(function()
 
         helpTSURI { TSURI },
 
-        rainbowcol1 { fg = colors.red },
-        rainbowcol2 { fg = colors.orange },
-        rainbowcol3 { fg = colors.yellow },
-        rainbowcol4 { fg = colors.green },
-        rainbowcol5 { fg = colors.cyan },
-        rainbowcol6 { fg = colors.blue },
-        rainbowcol7 { fg = colors.purple },
+        rainbowcol1 { fg = colors.red.saturate(25) },
+        rainbowcol2 { fg = colors.orange.saturate(25) },
+        rainbowcol3 { fg = colors.yellow.saturate(25) },
+        rainbowcol4 { fg = colors.green.saturate(25) },
+        rainbowcol5 { fg = colors.cyan.saturate(25) },
+        rainbowcol6 { fg = colors.blue.saturate(25) },
+        rainbowcol7 { fg = colors.purple.saturate(25) },
 
     }
 end)
