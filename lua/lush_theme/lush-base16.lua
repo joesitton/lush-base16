@@ -47,9 +47,9 @@ local theme = lush(function()
         ErrorMsg     { fg = colors.red }, -- Error messages on the command line
         Folded       { CursorLine, fg = CursorLine.bg.lighten(25) }, -- Line used for closed folds
         FoldColumn   { Folded }, -- 'foldcolumn'
-        Search       { fg = colors.black, bg = colors.yellow }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
-        IncSearch    { Search }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-        Substitute   { Search, bg = Search.bg.darken(20) }, -- |:substitute| replacement text highlighting
+        Search       { }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+        IncSearch    { fg = colors.black, bg = colors.yellow }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+        Substitute   { IncSearch, bg = IncSearch.bg.darken(20) }, -- |:substitute| replacement text highlighting
         LineNr       { fg = colors.black.lighten(25), bg = colors.black.lighten(5) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         SignColumn   { LineNr }, -- Column where |signs| are displayed
         CursorLineNr { fg = colors.white, bg = LineNr.bg, gui = "bold"  }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
@@ -66,7 +66,7 @@ local theme = lush(function()
         DocMenu      { bg = Pmenu.bg },
         Question     { fg = colors.green, gui = "bold,italic"}, -- |hit-enter| prompt and yes/no questions
         -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-        -- SpecialKey   { }, -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
+        SpecialKey   { fg = colors.orange }, -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
         SpellBad     { sp = colors.red, gui = "undercurl" }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
         SpellCap     { sp = colors.blue, gui = "underdot" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
         SpellLocal   { sp = colors.cyan, gui = "undercurl"}, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
@@ -96,12 +96,12 @@ local theme = lush(function()
         Function       { fg = colors.blue }, --   Function name (also: methods for classes)
 
         Statement      { fg = colors.purple, gui = "italic" }, -- (*) Any statement
-        -- Conditional    { }, --   if, then, else, endif, switch, etc.
-        -- Repeat         { }, --   for, do, while, etc.
-        -- Label          { }, --   case, default, etc.
-        -- Operator       { }, --   "sizeof", "+", "*", etc.
         Keyword        { Statement }, --   any other keyword
-        -- Exception      { }, --   try, catch, throw
+        Operator       { fg = colors.purple }, --   "sizeof", "+", "*", etc.
+        -- Conditional    { }, --   if, then, else, endif, switch, etc.
+        Repeat         { fg = colors.yellow, gui = "italic" }, --   for, do, while, etc.
+        -- Label          { }, --   case, default, etc.
+        Exception      { fg = colors.red, gui = "italic" }, --   try, catch, throw
 
         PreProc        { fg = colors.blue, gui = "italic" }, -- (*) Generic Preprocessor
         -- Include        { }, --   Preprocessor #include
@@ -136,15 +136,15 @@ local theme = lush(function()
         DiagnosticError            { fg = colors.red } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         DiagnosticWarn             { fg = colors.yellow } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         DiagnosticInfo             { fg = colors.blue } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-        DiagnosticHint             { fg = colors.green } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+        DiagnosticHint             { fg = colors.white } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
         -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
         -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
         -- DiagnosticVirtualTextHint  { } , -- Used for "Hint" diagnostic virtual text.
-        DiagnosticUnderlineError   { sp = DiagnosticError.fg, gui = "underline" } , -- Used to underline "Error" diagnostics.
-        DiagnosticUnderlineWarn    { sp = DiagnosticWarn.fg, gui = "underline" } , -- Used to underline "Warn" diagnostics.
-        DiagnosticUnderlineInfo    { sp = DiagnosticInfo.fg, gui = "underline" } , -- Used to underline "Info" diagnostics.
-        DiagnosticUnderlineHint    { sp = DiagnosticHint.fg, gui = "underline"} , -- Used to underline "Hint" diagnostics.
+        DiagnosticUnderlineError   { sp = DiagnosticError.fg, gui = "underdot" } , -- Used to underline "Error" diagnostics.
+        DiagnosticUnderlineWarn    { sp = DiagnosticWarn.fg, gui = "underdot" } , -- Used to underline "Warn" diagnostics.
+        DiagnosticUnderlineInfo    { sp = DiagnosticInfo.fg, gui = "underdot" } , -- Used to underline "Info" diagnostics.
+        DiagnosticUnderlineHint    { sp = DiagnosticHint.fg, gui = "underdot"} , -- Used to underline "Hint" diagnostics.
         -- DiagnosticFloatingError    { } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
         -- DiagnosticFloatingWarn     { } , -- Used to color "Warn" diagnostic messages in diagnostics float.
         -- DiagnosticFloatingInfo     { } , -- Used to color "Info" diagnostic messages in diagnostics float.
@@ -186,7 +186,7 @@ local theme = lush(function()
         -- TSOperator           { } , -- Binary or unary operators: `+`, and also `->` and `*` in C.
         TSVariable           { fg = colors.white } , -- Variable names that don't fit into other categories.
         TSParameter          { TSVariable, gui = "italic" } , -- Parameters of a function.
-        TSVariableBuiltin    { Type, gui = "italic" } , -- Variable names defined by the language: `this` or `self` in Javascript.
+        TSVariableBuiltin    { fg = colors.yellow, gui = "italic" } , -- Variable names defined by the language: `this` or `self` in Javascript.
         -- TSParameterReference { } , -- References to parameters of a function.
         -- TSPreProc            { } , -- Preprocessor #if, #else, #endif, etc.
         -- TSPunctDelimiter     { } , -- Punctuation delimiters: Periods, commas, semicolons, etc.
@@ -280,7 +280,7 @@ local theme = lush(function()
         TelescopeResultsLineNr { LineNr },
         TelescopeSelection { fg = colors.white, bg = CursorLine.bg },
         TelescopeSelectionCaret { fg = colors.yellow, bg = TelescopeNormal.bg },
-        TelescopePreviewLine { Search },
+        TelescopePreviewLine { IncSearch },
         TelescopeResultsFunction { CmpItemKindFunction },
         TelescopeResultsClass { CmpItemKindFunction },
         TelescopeResultsVariable { CmpItemKindVariable },
@@ -326,6 +326,20 @@ local theme = lush(function()
         rainbowcol5 { fg = colors.cyan.saturate(25) },
         rainbowcol6 { fg = colors.blue.saturate(25) },
         rainbowcol7 { fg = colors.purple.saturate(25) },
+
+        ScrollbarHandle { bg = colors.black.lighten(20) },
+        ScrollbarSearchHandle { ScrollbarHandle, fg = IncSearch.bg }, -- Inside the scrollbar
+        ScrollbarSearch { fg = IncSearch.bg }, -- Outside the scrollbr
+        ScrollbarErrorHandle { ScrollbarHandle, fg = DiagnosticError.fg },
+        ScrollbarError { DiagnosticError },
+        ScrollbarWarnHandle { ScrollbarHandle, fg = DiagnosticWarn.fg },
+        ScrollbarWarn { DiagnosticWarn },
+        ScrollbarInfoHandle { ScrollbarHandle, fg = DiagnosticInfo.fg },
+        ScrollbarInfo { DiagnosticInfo },
+        ScrollbarHintHandle { ScrollbarHandle, fg = DiagnosticHint.fg },
+        ScrollbarHint { DiagnosticHint },
+        ScrollbarMiscHandle { ScrollbarHandle },
+        ScrollbarMisc { },
 
     }
 end)
