@@ -315,7 +315,7 @@ local theme = lush(function()
         dockerfileTSKeyword { Keyword, gui = "none" },
 
         devIconDockerfile { fg = colors.blue },
-        devIconDefault { fg = colors.blue.desaturate(50).darken(10) },
+        devIconDefault { fg = colors.blue.desaturate(20).darken(10) },
 
         helpTSURI { TSURI },
 
