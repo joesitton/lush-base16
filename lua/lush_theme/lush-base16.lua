@@ -319,6 +319,14 @@ local theme = lush(function()
 
         helpTSURI { TSURI },
 
+        rainbowcol1 { fg = colors.red },
+        rainbowcol2 { fg = colors.orange },
+        rainbowcol3 { fg = colors.yellow },
+        rainbowcol4 { fg = colors.green },
+        rainbowcol5 { fg = colors.cyan },
+        rainbowcol6 { fg = colors.blue },
+        rainbowcol7 { fg = colors.purple },
+
     }
 end)
 
