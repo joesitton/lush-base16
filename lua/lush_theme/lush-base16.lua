@@ -185,7 +185,7 @@ local theme = lush(function()
         -- TSNumber             { } , -- Numeric literals that don't fit into other categories.
         -- TSOperator           { } , -- Binary or unary operators: `+`, and also `->` and `*` in C.
         TSVariable           { fg = colors.white } , -- Variable names that don't fit into other categories.
-        TSParameter          { fg = colors.cyan } , -- Parameters of a function.
+        TSParameter          { TSVariable, gui = "italic" } , -- Parameters of a function.
         TSVariableBuiltin    { Type, gui = "italic" } , -- Variable names defined by the language: `this` or `self` in Javascript.
         -- TSParameterReference { } , -- References to parameters of a function.
         -- TSPreProc            { } , -- Preprocessor #if, #else, #endif, etc.
