@@ -232,12 +232,12 @@ local theme = lush(function()
         BufferVisible        { fg = BufferCurrent.fg.darken(25), bg = colors.black.lighten(5) },
         BufferVisibleMod     { BufferCurrentMod, bg = BufferVisible.bg },
         BufferVisibleIcon    { bg = BufferVisible.bg },
-        BufferVisibleSign    { bg = BufferVisible.bg },
+        BufferVisibleSign    { fg = BufferVisisble.fg, bg = BufferVisible.bg },
 
         BufferInactive       { fg = BufferVisible.fg.darken(50), bg = BufferVisible.bg },
         BufferInactiveMod    { BufferCurrentMod, bg = BufferInactive.bg },
         BufferInactiveIcon   { bg = BufferInactive.bg },
-        BufferInactiveSign   { bg = BufferInactive.bg },
+        BufferInactiveSign   { fg = BufferInactive.fg, bg = BufferInactive.bg },
 
         IndentBlanklineChar  { fg = VertSplit.bg },
         TreeIndentMarker { IndentBlanklineChar },
