@@ -90,7 +90,7 @@ local theme = lush(function()
         Number         { fg = colors.orange }, --   A number constant: 234, 0xff
         Boolean      { fg = colors.orange }, --   A boolean constant: TRUE, false
         Float        { fg = colors.orange }, --   A floating point constant: 2.3e10
-        FloatBorder  { fg = colors.black, bg = colors.black },
+        FloatBorder  { fg = colors.white, bg = "none" },
 
         Identifier     { fg = colors.purple }, -- (*) Any variable name
         Function       { fg = colors.blue }, --   Function name (also: methods for classes)
@@ -305,6 +305,7 @@ local theme = lush(function()
         NeoTreeGitRenamed { fg = colors.purple },
         NeoTreeGitDeleted { DiffDelete },
         NeoTreeGitAdded { DiffAdd },
+        NeoTreeFloatBorder { NeoTreeNormal, fg = NeoTreeNormal.bg },
 
         yamlBool { Boolean },
         yamlBlockCollectionItemStart { Special },
