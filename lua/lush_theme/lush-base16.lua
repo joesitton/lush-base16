@@ -160,9 +160,9 @@ local theme = lush(function()
         -- TSCharacterSpecial   { } , -- Special characters.
         -- TSComment            { }, -- Line comments and block comments.
         -- TSConditional        { } , -- Keywords related to conditionals: `if`, `when`, `cond`, etc.
-        -- TSConstant           { } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
-        TSConstBuiltin       { fg = colors.orange } , -- Built-in constant values: `nil` in Lua.
-        TSConstMacro         { TSConstBuiltin } , -- Constants defined by macros: `NULL` in C.
+        TSConstant           { fg = colors.red } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
+        TSConstBuiltin       { TSConstant } , -- Built-in constant values: `nil` in Lua.
+        TSConstMacro         { TSConstant } , -- Constants defined by macros: `NULL` in C.
         -- TSDebug              { } , -- Debugging statements.
         -- TSDefine             { } , -- Preprocessor #define statements.
         -- TSError              { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
@@ -252,7 +252,7 @@ local theme = lush(function()
         CmpItemAbbrMatch    { fg = colors.blue, gui = "bold" },
         CmpItemAbbrMatchFuzzy { fg = CmpItemAbbrMatch.fg.lighten(20).rotate(180) },
         CmpItemAbbrDefault { fg = colors.white },
-        CmpItemKindVariable { Constant },
+        CmpItemKindVariable { TSVariable },
         CmpItemKindConstant { Constant },
         CmpItemKindInterface { Identifier },
         CmpItemKindFunction { Function },
