@@ -137,10 +137,10 @@ local theme = lush(function()
         DiagnosticWarn             { fg = colors.yellow } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         DiagnosticInfo             { fg = colors.blue } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         DiagnosticHint             { fg = colors.white } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-        -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
-        -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
-        -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
-        -- DiagnosticVirtualTextHint  { } , -- Used for "Hint" diagnostic virtual text.
+        DiagnosticVirtualTextError { fg = DiagnosticError.fg, bg = DiagnosticError.fg.darken(70) } , -- Used for "Error" diagnostic virtual text.
+        DiagnosticVirtualTextWarn { fg = DiagnosticWarn.fg, bg = DiagnosticWarn.fg.darken(70) } , -- Used for "Warn" diagnostic virtual text.
+        DiagnosticVirtualTextInfo { fg = DiagnosticInfo.fg, bg = DiagnosticInfo.fg.darken(70) } , -- Used for "Info" diagnostic virtual text.
+        DiagnosticVirtualTextHint { fg = DiagnosticHint.fg, bg = DiagnosticHint.fg.darken(70) } , -- Used for "Hint" diagnostic virtual text.
         DiagnosticUnderlineError   { sp = DiagnosticError.fg, gui = "underdot" } , -- Used to underline "Error" diagnostics.
         DiagnosticUnderlineWarn    { sp = DiagnosticWarn.fg, gui = "underdot" } , -- Used to underline "Warn" diagnostics.
         DiagnosticUnderlineInfo    { sp = DiagnosticInfo.fg, gui = "underdot" } , -- Used to underline "Info" diagnostics.
