@@ -249,6 +249,7 @@ local theme = require("lush")(function()
         CmpItemKindProperty             { TSProperty },
         CmpItemKindUnit                 { fg = colors.white },
         CmpItemKindDeprecated           { fg = colors.black.lighten(50), gui = "strikethrough,italic" },
+        CmpItemMenu                     { fg = Pmenu.bg.lighten(25), gui = "italic" },
         CmpGhostText                    { Comment, gui = "none" },
 
         TelescopeNormal                 { fg = colors.white.darken(50), bg = colors.black },
