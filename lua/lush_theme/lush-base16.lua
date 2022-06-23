@@ -14,7 +14,7 @@ local theme = require("lush")(function()
         -- Cursor                       { }, -- Character under the cursor
         -- lCursor                      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
         -- CursorIM                     { }, -- Like Cursor, but used when in IME mode |CursorIM|
-        CursorLine                      { bg = colors.black.lighten(4) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+        CursorLine                      { bg = colors.black.lighten(8) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
         CursorColumn                    { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
         ColorColumn                     { CursorLine }, -- Columns set with 'colorcolumn'
         VertSplit                       { fg = "none", bg = colors.black.lighten(10) }, -- Column separating vertically split windows
@@ -33,9 +33,9 @@ local theme = require("lush")(function()
         ErrorMsg                        { fg = colors.red }, -- Error messages on the command line
         Folded                          { CursorLine, fg = CursorLine.bg.lighten(25) }, -- Line used for closed folds
         FoldColumn                      { Folded }, -- 'foldcolumn'
-        Search                          { }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
-        IncSearch                       { fg = colors.black, bg = colors.yellow }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-        Substitute                      { IncSearch, bg = IncSearch.bg.darken(20) }, -- |:substitute| replacement text highlighting
+        IncSearch                       { fg = colors.black, bg = colors.yellow, gui = "bold"}, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+        Search                          { CursorLine }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+        Substitute                      { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
         LineNr                          { fg = colors.black.lighten(20), bg = colors.black.lighten(5) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         SignColumn                      { LineNr }, -- Column where |signs| are displayed
         CursorLineNr                    { fg = colors.white, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
@@ -127,7 +127,7 @@ local theme = require("lush")(function()
         DiagnosticVirtualTextWarn       { fg = DiagnosticWarn.fg, bg = DiagnosticWarn.fg.darken(70), gui = "italic" }, -- Used for "Warn" diagnostic virtual text.
         DiagnosticVirtualTextInfo       { fg = DiagnosticInfo.fg, bg = DiagnosticInfo.fg.darken(70), gui = "italic" }, -- Used for "Info" diagnostic virtual text.
         DiagnosticVirtualTextHint       { fg = DiagnosticHint.fg, bg = DiagnosticHint.fg.darken(70), gui = "italic" }, -- Used for "Hint" diagnostic virtual text.
-        DiagnosticUnderlineError        { sp = DiagnosticError.fg, gui = "underdot" }, -- Used to underline "Error" diagnostics.
+        DiagnosticUnderlineError        { sp = DiagnosticError.fg, gui = "undercurl" }, -- Used to underline "Error" diagnostics.
         DiagnosticUnderlineWarn         { sp = DiagnosticWarn.fg, gui = "underdot" }, -- Used to underline "Warn" diagnostics.
         DiagnosticUnderlineInfo         { sp = DiagnosticInfo.fg, gui = "underdot" }, -- Used to underline "Info" diagnostics.
         DiagnosticUnderlineHint         { sp = DiagnosticHint.fg, gui = "underdot" }, -- Used to underline "Hint" diagnostics.
@@ -236,8 +236,8 @@ local theme = require("lush")(function()
         GitGutterDelete                 { DiffDelete, bg = LineNr.bg },
 
         CmpItemAbbrMatch                { fg = colors.blue, gui = "bold" },
-        CmpItemAbbrMatchFuzzy           { fg = CmpItemAbbrMatch.fg.lighten(20).rotate(180) },
-        CmpItemAbbrDefault              { fg = colors.white },
+        CmpItemAbbrMatchFuzzy           { fg = CmpItemAbbrMatch.fg.rotate(180) },
+        CmpItemAbbrDefault              { fg = colors.white.darken(10) },
         CmpItemKindVariable             { TSVariable },
         CmpItemKindConstant             { Constant },
         CmpItemKindInterface            { Identifier },
@@ -329,6 +329,8 @@ local theme = require("lush")(function()
         ScrollbarHint                   { DiagnosticHint },
         ScrollbarMiscHandle             { ScrollbarHandle },
         ScrollbarMisc                   { },
+
+        HlSearchLens                   { Comment, gui = "none" },
     }
 end)
 
