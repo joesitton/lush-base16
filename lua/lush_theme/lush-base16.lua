@@ -9,6 +9,7 @@ local theme = require("lush")(function()
         Normal                          { bg = "none" }, -- Normal text
         NormalNC                        { bg = "none" }, -- normal text in non-current windows
         NormalFloat                     { bg = colors.black }, -- Normal text in floating windows.
+        FloatBorder                     { fg = NormalFloat.bg.lighten(10), bg = NormalFloat.bg },
         Comment                         { fg = colors.black.lighten(25), gui = "italic" }, -- Any comment
         -- Conceal                      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
         -- Cursor                       { }, -- Character under the cursor
@@ -45,10 +46,10 @@ local theme = require("lush")(function()
         -- MsgSeparator                 { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
         MoreMsg                         { fg = colors.green, gui = "bold,italic" }, -- |more-prompt|
         NonText                         { Comment, gui = "none" }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-        Pmenu                           { fg = "none", bg = colors.black.lighten(15) }, -- Popup menu: Normal item.
-        PmenuSel                        { bg = Pmenu.bg.lighten(15) }, -- Popup menu: Selected item.
-        PmenuSbar                       { bg = Pmenu.bg.lighten(10) }, -- Popup menu: Scrollbar.
-        PmenuThumb                      { bg = Pmenu.bg.lighten(90) }, -- Popup menu: Thumb of the scrollbar.
+        Pmenu                           { fg = "none", bg = colors.black.lighten(10) }, -- Popup menu: Normal item.
+        PmenuSel                        { bg = Pmenu.bg.lighten(20) }, -- Popup menu: Selected item.
+        PmenuSbar                       { bg = Pmenu.bg.lighten(40) }, -- Popup menu: Scrollbar.
+        PmenuThumb                      { bg = Pmenu.bg.lighten(60) }, -- Popup menu: Thumb of the scrollbar.
         DocMenu                         { bg = Pmenu.bg },
         Question                        { fg = colors.green, gui = "bold,italic" }, -- |hit-enter| prompt and yes/no questions
         -- QuickFixLine                 { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -76,7 +77,6 @@ local theme = require("lush")(function()
         Number                          { fg = colors.orange }, --   A number constant: 234, 0xff
         Boolean                         { fg = colors.orange }, --   A boolean constant: TRUE, false
         Float                           { fg = colors.orange }, --   A floating point constant: 2.3e10
-        FloatBorder                     { fg = colors.white, bg = "none" },
 
         Identifier                      { fg = colors.purple }, -- (*) Any variable name
         Function                        { fg = colors.blue }, --   Function name (also: methods for classes)
@@ -235,22 +235,27 @@ local theme = require("lush")(function()
         GitGutterChangeDelete           { DiffChange, bg = LineNr.bg },
         GitGutterDelete                 { DiffDelete, bg = LineNr.bg },
 
+        CmpGhostText                    { fg = Comment.fg.darken(10), gui = "none" },
         CmpItemAbbrMatch                { fg = colors.blue, gui = "bold" },
         CmpItemAbbrMatchFuzzy           { fg = CmpItemAbbrMatch.fg.rotate(180) },
         CmpItemAbbrDefault              { fg = colors.white.darken(10) },
-        CmpItemKindVariable             { TSVariable },
-        CmpItemKindConstant             { Constant },
-        CmpItemKindInterface            { Identifier },
-        CmpItemKindFunction             { Function },
-        CmpItemKindMethod               { Function },
-        CmpItemKindSnippet              { fg = colors.green },
-        CmpItemKindText                 { fg = colors.white },
-        CmpItemKindKeyword              { Keyword },
-        CmpItemKindProperty             { TSProperty },
-        CmpItemKindUnit                 { fg = colors.white },
+        CmpItemMenu                     { fg = Pmenu.bg.lighten(45), gui = "italic" },
+        CmpItemKindVariable             { TSVariable, gui = "reverse" },
+        CmpItemKindConstant             { Constant , gui = "reverse" },
+        CmpItemKindInterface            { Identifier , gui = "reverse" },
+        CmpItemKindFunction             { Function , gui = "reverse" },
+        CmpItemKindMethod               { Function , gui = "reverse" },
+        CmpItemKindSnippet              { fg  =  colors.green , gui="reverse" },
+        CmpItemKindText                 { fg  =  colors.white , gui="reverse" },
+        CmpItemKindKeyword              { Keyword , gui = "reverse" },
+        CmpItemKindField                { TSField, gui = "reverse" },
+        CmpItemKindProperty             { TSProperty , gui = "reverse" },
+        CmpItemKindUnit                 { fg  =  colors.white , gui="reverse" },
+        CmpItemKindFile                 { fg = colors.white, gui = "reverse" },
+        CmpItemKindColor                { fg = colors.white, gui = "reverse" },
+        CmpItemKindFolder               { fg = colors.cyan, gui = "reverse" },
+        CmpItemKindModule               { fg = PreProc.fg, gui = "reverse" },
         CmpItemKindDeprecated           { fg = colors.black.lighten(50), gui = "strikethrough,italic" },
-        CmpItemMenu                     { fg = Pmenu.bg.lighten(25), gui = "italic" },
-        CmpGhostText                    { Comment, gui = "none" },
 
         TelescopeNormal                 { fg = colors.white.darken(50), bg = colors.black },
         TelescopeBorder                 { fg = colors.black, bg = colors.black },
@@ -330,7 +335,7 @@ local theme = require("lush")(function()
         ScrollbarMiscHandle             { ScrollbarHandle },
         ScrollbarMisc                   { },
 
-        HlSearchLens                   { Comment, gui = "none" },
+        HlSearchLens                    { Comment, gui = "none" },
     }
 end)
 
