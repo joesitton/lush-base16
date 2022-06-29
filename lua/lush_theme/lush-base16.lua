@@ -37,7 +37,7 @@ local theme = require("lush")(function()
         IncSearch                       { fg = colors.black, bg = colors.yellow, gui = "bold"}, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
         Search                          { CursorLine }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
         Substitute                      { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
-        LineNr                          { fg = colors.black.lighten(20), bg = colors.black }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+        LineNr                          { fg = colors.black.lighten(15), bg = colors.black.lighten(1) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         SignColumn                      { LineNr }, -- Column where |signs| are displayed
         CursorLineNr                    { fg = colors.white, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
         MatchParen                      { CursorLine }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
