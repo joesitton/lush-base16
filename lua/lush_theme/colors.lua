@@ -18,19 +18,17 @@ local colors = {
     purple = hsl("#ba8baf"),
 }
 
+for k, v in pairs(colors) do
+    if string.sub(k, 1, 5) ~= "dark_" then
+        colors["dark_" .. k] = v.darken(70)
+    end
+end
+
 colors.fg = colors.white
 colors.bg = colors.black
 colors.oceanblue = colors.blue
 colors.skyblue = colors.blue
 colors.magenta = colors.purple
 colors.violet = colors.purple
-
-for k, v in pairs(colors) do
-    if string.sub(k, 1, 5) == "dark_" then goto continue end
-
-    colors["dark_" .. k] = v.darken(70)
-
-    ::continue::
-end
 
 return colors

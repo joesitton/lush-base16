@@ -9,8 +9,8 @@ local theme = require("lush")(function()
         Normal                          { bg = "none" }, -- Normal text
         NormalNC                        { bg = "none" }, -- normal text in non-current windows
         NormalFloat                     { bg = colors.black }, -- Normal text in floating windows.
-        FloatBorder                     { fg = NormalFloat.bg.lighten(30), bg = colors.black },
         Comment                         { fg = colors.black.lighten(25), gui = "italic" }, -- Any comment
+        FloatBorder                     { fg = NormalFloat.bg.lighten(30), bg = colors.black },
         -- Conceal                      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
         -- Cursor                       { }, -- Character under the cursor
         -- lCursor                      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
@@ -20,14 +20,14 @@ local theme = require("lush")(function()
         ColorColumn                     { CursorLine }, -- Columns set with 'colorcolumn'
         VertSplit                       { fg = "none", bg = colors.black.lighten(10) }, -- Column separating vertically split windows
         Directory                       { fg = colors.white }, -- Directory names (and other special names in listings)
-        DiffAdd                         { fg = colors.green }, -- Diff mode: Added line |diff.txt|
-        diffAdded                       { DiffAdd },
-        DiffChange                      { fg = colors.blue }, -- Diff mode: Changed line |diff.txt|
-        diffChanged                     { DiffChange },
-        DiffDelete                      { fg = colors.red }, -- Diff mode: Deleted line |diff.txt|
-        diffDelete                      { DiffDelete },
-        diffRemoved                     { DiffDelete },
-        DiffText                        { fg = colors.blue.lighten(50) }, -- Diff mode: Changed text within a changed line |diff.txt|
+        DiffAdd                         { fg = colors.green.lighten(25), bg = colors.green.darken(75) }, -- Diff mode: Added line |diff.txt|
+        diffAdded                       { fg = colors.green },
+        DiffChange                      { fg = colors.blue.lighten(25), bg = colors.blue.darken(75) }, -- Diff mode: Changed line |diff.txt|
+        diffChanged                     { fg = colors.blue },
+        DiffDelete                      { fg = colors.red.lighten(25), bg = colors.red.darken(75) }, -- Diff mode: Deleted line |diff.txt|
+        diffDelete                      { fg = colors.red },
+        diffRemoved                     { fg = colors.red },
+        DiffText                        { fg = colors.blue.lighten(50), bg = DiffChange.bg, gui = "bold" }, -- Diff mode: Changed text within a changed line |diff.txt|
         EndOfBuffer                     { Normal }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
         -- TermCursor                   { }, -- Cursor in a focused terminal
         -- TermCursorNC                 { }, -- Cursor in an unfocused terminal
@@ -230,10 +230,10 @@ local theme = require("lush")(function()
 
         MarkSignHL                      { fg = colors.red, bg = LineNr.bg, gui = "bold" },
 
-        GitGutterAdd                    { DiffAdd, bg = LineNr.bg },
-        GitGutterChange                 { DiffChange, bg = LineNr.bg },
-        GitGutterChangeDelete           { DiffChange, bg = LineNr.bg },
-        GitGutterDelete                 { DiffDelete, bg = LineNr.bg },
+        GitGutterAdd                    { diffAdded, bg = LineNr.bg },
+        GitGutterChange                 { diffChanged, bg = LineNr.bg },
+        GitGutterChangeDelete           { diffChanged, bg = LineNr.bg },
+        GitGutterDelete                 { diffDelete, bg = LineNr.bg },
 
         CmpGhostText                    { fg = Comment.fg.darken(10), gui = "none" },
         CmpItemAbbrMatch                { fg = colors.blue, gui = "bold" },
@@ -294,10 +294,10 @@ local theme = require("lush")(function()
         NeoTreeFileIcon                 { DevIconDefault },
         NeoTreeGitUntracked             { fg = colors.orange },
         NeoTreeGitConflict              { fg = colors.red },
-        NeoTreeGitModified              { DiffChange },
+        NeoTreeGitModified              { diffChanged },
         NeoTreeGitRenamed               { fg = colors.purple },
-        NeoTreeGitDeleted               { DiffDelete },
-        NeoTreeGitAdded                 { DiffAdd },
+        NeoTreeGitDeleted               { diffDelete },
+        NeoTreeGitAdded                 { diffAdded },
         NeoTreeFloatBorder              { NeoTreeNormal, fg = NeoTreeNormal.bg },
 
         yamlBool                        { Boolean },
@@ -321,7 +321,7 @@ local theme = require("lush")(function()
         rainbowcol6                     { fg = colors.blue.saturate(25) },
         rainbowcol7                     { fg = colors.purple.saturate(25) },
 
-        ScrollbarHandle                 { bg = colors.black.lighten(25) },
+        ScrollbarHandle                 { bg = colors.black.lighten(20) },
         ScrollbarSearchHandle           { ScrollbarHandle, fg = IncSearch.bg }, -- Inside the scrollbar
         ScrollbarSearch                 { fg = IncSearch.bg }, -- Outside the scrollbr
         ScrollbarErrorHandle            { ScrollbarHandle, fg = DiagnosticError.fg },
