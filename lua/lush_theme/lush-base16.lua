@@ -345,6 +345,23 @@ local theme = require("lush")(function()
         ScrollbarMisc                   { },
 
         HlSearchLens                    { Comment, gui = "none" },
+
+        -- HopCursor                       { },
+        HopUnmatched                    { Comment, gui = "none" },
+        -- HopPreview                      { },
+        HopNextKey                      { fg = colors.purple.saturate(25), bg = colors.purple.darken(75), gui = "bold" },
+        HopNextKey1                     { fg = colors.blue.saturate(25), bg = colors.blue.darken(75), gui = "bold" },
+        HopNextKey2                     { fg = colors.cyan.saturate(25), bg = colors.cyan.darken(75), gui = "bold" },
+
+        GitSignsAddLn                   { DiffAdd },
+        GitSignsAddInline               { GitSignsAddLn, bg = GitSignsAddLn.bg.lighten(10), gui = "bold" },
+        -- GitSignsAddLnInline             { bg = colors.yellow },
+        GitSignsDeleteLn                { DiffDelete },
+        GitSignsDeleteInline            { GitSignsDeleteLn, bg = GitSignsDeleteLn.bg.lighten(10), gui = "bold" },
+        -- GitSignsDeleteLnInline          { GitSignsDeleteLn },
+        GitSignsChangeLn                { DiffChange },
+        GitSignsChangeInline            { GitSignsChangeLn, bg = GitSignsChangeLn.bg.lighten(10), gui = "bold" },
+        -- GitSignsChangeLnInline          { GitSignsChangeLn },
     }
 end)
 
