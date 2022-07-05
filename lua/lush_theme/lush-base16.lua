@@ -1,16 +1,26 @@
-local ok, colors = pcall(require, "lush_theme.colors")
+local hsl = require("lush").hsl
 
-if not ok then
-    error("Could not load colors")
-end
+local colors = {
+    black = hsl("#181818"),
+    white = hsl("#f8f8f8"),
+    red = hsl("#ab4642"),
+    orange = hsl("#dc9656"),
+    yellow = hsl("#f7ca88"),
+    green = hsl("#a1b56c"),
+    blue = hsl("#7cafc2"),
+    cyan = hsl("#87c1b9"),
+    purple = hsl("#ba8baf"),
+}
+
+-- local colors = require("lush_theme.colors")
 
 local theme = require("lush")(function()
     return {
         Normal                          { bg = "none" }, -- Normal text
         NormalNC                        { bg = "none" }, -- normal text in non-current windows
         NormalFloat                     { bg = colors.black }, -- Normal text in floating windows.
-        FloatBorder                     { fg = NormalFloat.bg.lighten(30), bg = colors.black },
         Comment                         { fg = colors.black.lighten(25), gui = "italic" }, -- Any comment
+        FloatBorder                     { fg = NormalFloat.bg.lighten(30), bg = colors.black },
         -- Conceal                      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
         -- Cursor                       { }, -- Character under the cursor
         -- lCursor                      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
@@ -20,25 +30,25 @@ local theme = require("lush")(function()
         ColorColumn                     { CursorLine }, -- Columns set with 'colorcolumn'
         VertSplit                       { fg = "none", bg = colors.black.lighten(10) }, -- Column separating vertically split windows
         Directory                       { fg = colors.white }, -- Directory names (and other special names in listings)
-        DiffAdd                         { fg = colors.green }, -- Diff mode: Added line |diff.txt|
-        diffAdded                       { DiffAdd },
-        DiffChange                      { fg = colors.blue }, -- Diff mode: Changed line |diff.txt|
-        diffChanged                     { DiffChange },
-        DiffDelete                      { fg = colors.red }, -- Diff mode: Deleted line |diff.txt|
-        diffDelete                      { DiffDelete },
-        diffRemoved                     { DiffDelete },
-        DiffText                        { fg = colors.blue.lighten(50) }, -- Diff mode: Changed text within a changed line |diff.txt|
+        DiffAdd                         { fg = colors.green.lighten(25), bg = colors.green.darken(75) }, -- Diff mode: Added line |diff.txt|
+        diffAdded                       { fg = colors.green },
+        DiffChange                      { fg = colors.blue.lighten(25), bg = colors.blue.darken(75) }, -- Diff mode: Changed line |diff.txt|
+        diffChanged                     { fg = colors.blue },
+        DiffDelete                      { fg = colors.red.lighten(25), bg = colors.red.darken(75) }, -- Diff mode: Deleted line |diff.txt|
+        diffDelete                      { fg = colors.red },
+        diffRemoved                     { fg = colors.red },
+        DiffText                        { fg = colors.blue.lighten(50), bg = DiffChange.bg, gui = "bold" }, -- Diff mode: Changed text within a changed line |diff.txt|
         EndOfBuffer                     { Normal }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
         -- TermCursor                   { }, -- Cursor in a focused terminal
         -- TermCursorNC                 { }, -- Cursor in an unfocused terminal
         ErrorMsg                        { fg = colors.red }, -- Error messages on the command line
-        Folded                          { CursorLine, fg = CursorLine.bg.lighten(25) }, -- Line used for closed folds
-        FoldColumn                      { Folded }, -- 'foldcolumn'
+        Folded                          { bg = CursorLine.bg.darken(10)}, -- Line used for closed folds
         IncSearch                       { fg = colors.black, bg = colors.yellow, gui = "bold"}, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
         Search                          { CursorLine }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
         Substitute                      { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
-        LineNr                          { fg = colors.black.lighten(20), bg = colors.black.lighten(4) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+        LineNr                          { fg = colors.black.lighten(20), bg = colors.black.lighten(7) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         SignColumn                      { LineNr }, -- Column where |signs| are displayed
+        FoldColumn                      { SignColumn }, -- 'foldcolumn'
         CursorLineNr                    { fg = colors.white, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
         MatchParen                      { CursorLine }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
         -- ModeMsg                      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
@@ -46,10 +56,10 @@ local theme = require("lush")(function()
         -- MsgSeparator                 { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
         MoreMsg                         { fg = colors.green, gui = "bold,italic" }, -- |more-prompt|
         NonText                         { Comment, gui = "none" }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-        Pmenu                           { fg = "none", bg = colors.black.lighten(10) }, -- Popup menu: Normal item.
+        Pmenu                           { fg = "none", bg = colors.black.lighten(15) }, -- Popup menu: Normal item.
         PmenuSel                        { bg = Pmenu.bg.lighten(20) }, -- Popup menu: Selected item.
         PmenuSbar                       { bg = Pmenu.bg.lighten(10) }, -- Popup menu: Scrollbar.
-        PmenuThumb                      { bg = Pmenu.bg.lighten(90) }, -- Popup menu: Thumb of the scrollbar.
+        PmenuThumb                      { bg = Pmenu.bg.lighten(80) }, -- Popup menu: Thumb of the scrollbar.
         DocMenu                         { bg = Pmenu.bg },
         Question                        { fg = colors.green, gui = "bold,italic" }, -- |hit-enter| prompt and yes/no questions
         -- QuickFixLine                 { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -210,16 +220,15 @@ local theme = require("lush")(function()
 
         OffscreenPopup                  { CursorLine },
 
+        BufferTabpageFill               { bg = colors.black.lighten(3) },
         BufferCurrent                   { fg = colors.white, bg = Normal.bg },
         BufferCurrentIcon               { bg = BufferCurrent.bg },
         BufferCurrentMod                { fg = colors.red, bg = BufferCurrent.bg, gui = "italic" },
         BufferCurrentSign               { fg = colors.blue, bg = BufferCurrent.bg },
-
         BufferVisible                   { fg = BufferCurrent.fg.darken(25), bg = colors.black.lighten(5) },
         BufferVisibleMod                { BufferCurrentMod, bg = BufferVisible.bg },
         BufferVisibleIcon               { bg = BufferVisible.bg },
         BufferVisibleSign               { fg = BufferVisisble.fg, bg = BufferVisible.bg },
-
         BufferInactive                  { fg = BufferVisible.fg.darken(50), bg = BufferVisible.bg },
         BufferInactiveMod               { BufferCurrentMod, bg = BufferInactive.bg },
         BufferInactiveIcon              { bg = BufferInactive.bg },
@@ -230,10 +239,10 @@ local theme = require("lush")(function()
 
         MarkSignHL                      { fg = colors.red, bg = LineNr.bg, gui = "bold" },
 
-        GitGutterAdd                    { DiffAdd, bg = LineNr.bg },
-        GitGutterChange                 { DiffChange, bg = LineNr.bg },
-        GitGutterChangeDelete           { DiffChange, bg = LineNr.bg },
-        GitGutterDelete                 { DiffDelete, bg = LineNr.bg },
+        GitGutterAdd                    { diffAdded, bg = LineNr.bg },
+        GitGutterChange                 { diffChanged, bg = LineNr.bg },
+        GitGutterChangeDelete           { diffChanged, bg = LineNr.bg },
+        GitGutterDelete                 { diffDelete, bg = LineNr.bg },
 
         CmpGhostText                    { fg = Comment.fg.darken(10), gui = "none" },
         CmpItemAbbrMatch                { fg = colors.blue, gui = "bold" },
@@ -294,10 +303,10 @@ local theme = require("lush")(function()
         NeoTreeFileIcon                 { DevIconDefault },
         NeoTreeGitUntracked             { fg = colors.orange },
         NeoTreeGitConflict              { fg = colors.red },
-        NeoTreeGitModified              { DiffChange },
+        NeoTreeGitModified              { diffChanged },
         NeoTreeGitRenamed               { fg = colors.purple },
-        NeoTreeGitDeleted               { DiffDelete },
-        NeoTreeGitAdded                 { DiffAdd },
+        NeoTreeGitDeleted               { diffDelete },
+        NeoTreeGitAdded                 { diffAdded },
         NeoTreeFloatBorder              { NeoTreeNormal, fg = NeoTreeNormal.bg },
 
         yamlBool                        { Boolean },
@@ -321,7 +330,7 @@ local theme = require("lush")(function()
         rainbowcol6                     { fg = colors.blue.saturate(25) },
         rainbowcol7                     { fg = colors.purple.saturate(25) },
 
-        ScrollbarHandle                 { bg = colors.black.lighten(25) },
+        ScrollbarHandle                 { bg = colors.black.lighten(15) },
         ScrollbarSearchHandle           { ScrollbarHandle, fg = IncSearch.bg }, -- Inside the scrollbar
         ScrollbarSearch                 { fg = IncSearch.bg }, -- Outside the scrollbr
         ScrollbarErrorHandle            { ScrollbarHandle, fg = DiagnosticError.fg },
