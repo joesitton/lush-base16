@@ -220,7 +220,7 @@ local theme = require("lush")(function()
 
         OffscreenPopup                  { CursorLine },
 
-        BufferTabpageFill               { bg = colors.black.lighten(3) },
+        BufferTabpageFill               { bg = colors.black.lighten(4) },
         BufferCurrent                   { fg = colors.white, bg = Normal.bg },
         BufferCurrentIcon               { bg = BufferCurrent.bg },
         BufferCurrentMod                { fg = colors.red, bg = BufferCurrent.bg, gui = "italic" },
