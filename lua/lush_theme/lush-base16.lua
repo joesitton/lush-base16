@@ -48,7 +48,7 @@ local theme = require("lush")(function()
         Substitute                      { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
         LineNr                          { fg = colors.black.lighten(20), bg = colors.black.lighten(7) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         SignColumn                      { LineNr }, -- Column where |signs| are displayed
-        FoldColumn                      { SignColumn }, -- 'foldcolumn'
+        FoldColumn                      { SignColumn, fg = SignColumn.fg.lighten(25) }, -- 'foldcolumn'
         CursorLineNr                    { fg = colors.white, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
         MatchParen                      { CursorLine }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
         -- ModeMsg                      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
