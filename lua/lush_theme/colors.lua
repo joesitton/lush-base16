@@ -25,7 +25,7 @@ for k, v in pairs(colors) do
 end
 
 colors.fg = colors.white
-colors.bg = colors.black
+colors.bg = colors.black.lighten(4)
 colors.oceanblue = colors.blue
 colors.skyblue = colors.blue
 colors.magenta = colors.purple
