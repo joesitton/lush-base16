@@ -1,18 +1,4 @@
-local hsl = require("lush").hsl
-
-local colors = {
-    black = hsl("#181818"),
-    white = hsl("#f8f8f8"),
-    red = hsl("#ab4642"),
-    orange = hsl("#dc9656"),
-    yellow = hsl("#f7ca88"),
-    green = hsl("#a1b56c"),
-    blue = hsl("#7cafc2"),
-    cyan = hsl("#87c1b9"),
-    purple = hsl("#ba8baf"),
-}
-
--- local colors = require("lush_theme.colors")
+local colors = require("lush_theme.colors")
 
 local theme = require("lush")(function()
     return {
