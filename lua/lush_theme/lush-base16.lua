@@ -206,7 +206,7 @@ local theme = require("lush")(function()
         -- TSLiteral                   { } , -- Literal or verbatim text.
         TSURI                          { gui = "none" }, -- URIs like hyperlinks or email addresses.
         -- TSMath                      { } , -- Math environments like LaTeX's `$ ... $`
-        -- TSTextReference             { } , -- Footnotes, text references, citations, etc.
+        TSTextReference                { fg = colors.red } , -- Footnotes, text references, citations, etc.
         -- TSEnvironment               { } , -- Text environments of markup languages.
         -- TSEnvironmentName           { } , -- Text/string indicating the type of text environment. Like the name of a `\begin` block in LaTeX.
         -- TSNote                      { } , -- Text representation of an informational note.
@@ -233,7 +233,7 @@ local theme = require("lush")(function()
         BufferInactiveMod              { BufferCurrentMod, bg = BufferInactive.bg },
         BufferInactiveIcon             { bg = BufferInactive.bg },
         BufferInactiveSign             { fg = BufferInactive.fg, bg = BufferInactive.bg },
-        BufferInactiveTarget            { fg = colors.purple, bg = BufferInactive.bg, gui = "bold" },
+        BufferInactiveTarget           { fg = colors.purple, bg = BufferInactive.bg, gui = "bold" },
         BufferTabpageFill              { bg = colors.black.lighten(4), fg = colors.black.lighten(15) },
 
         IndentBlanklineChar            { fg = VertSplit.bg },
@@ -252,22 +252,40 @@ local theme = require("lush")(function()
         CmpItemAbbrMatchFuzzy          { fg = CmpItemAbbrMatch.fg.rotate(180) },
         CmpItemAbbrDefault             { fg = colors.white.darken(10) },
         CmpItemMenu                    { fg = Pmenu.bg.lighten(45), gui = "italic" },
-        CmpItemKindVariable            { TSVariable, gui = "reverse" },
-        CmpItemKindConstant            { Constant , gui = "reverse" },
-        CmpItemKindInterface           { Identifier , gui = "reverse" },
-        CmpItemKindFunction            { Function , gui = "reverse" },
-        CmpItemKindMethod              { Function , gui = "reverse" },
-        CmpItemKindSnippet             { fg  =  colors.green , gui="reverse" },
-        CmpItemKindText                { fg  =  colors.white , gui="reverse" },
-        CmpItemKindKeyword             { Keyword , gui = "reverse" },
+
         CmpItemKindField               { TSField, gui = "reverse" },
-        CmpItemKindProperty            { TSProperty , gui = "reverse" },
-        CmpItemKindUnit                { fg  =  colors.white , gui="reverse" },
-        CmpItemKindFile                { fg = colors.white, gui = "reverse" },
-        CmpItemKindColor               { fg = colors.white, gui = "reverse" },
-        CmpItemKindFolder              { fg = colors.cyan, gui = "reverse" },
-        CmpItemKindModule              { fg = PreProc.fg, gui = "reverse" },
+        CmpItemKindProperty            { TSProperty, gui = "reverse" },
+        CmpItemKindEvent               { CmpItemMenu },
         CmpItemKindDeprecated          { fg = colors.black.lighten(50), gui = "strikethrough,italic" },
+
+        CmpItemKindText                { fg = colors.white, gui = "reverse" },
+        CmpItemKindEnum                { Type, gui = "reverse" },
+        CmpItemKindKeyword             { Keyword, gui = "reverse" },
+
+        CmpItemKindConstant            { TSConstant, gui = "reverse" },
+        CmpItemKindConstructor         { TSConstant, gui = "reverse" },
+        CmpItemKindReference           { TSTextReference, gui = "reverse" },
+
+        CmpItemKindFunction            { TSFunction, gui = "reverse" },
+        CmpItemKindStruct              { Type, gui = "reverse" },
+        CmpItemKindClass               { Type, gui = "reverse" },
+        CmpItemKindModule              { PreProc, gui = "reverse" },
+        CmpItemKindOperator            { Operator, gui = "reverse" },
+
+        CmpItemKindVariable            { TSVariable, gui = "reverse" },
+        CmpItemKindFile                { CmpItemKindText },
+
+        CmpItemKindUnit                { CmpItemKindText },
+        CmpItemKindSnippet             { fg = colors.green, gui = "reverse" },
+        CmpItemKindFolder              { fg = colors.cyan, gui = "reverse" },
+
+        CmpItemKindMethod              { TSMethod, gui = "reverse" },
+        CmpItemKindValue               { Special, gui = "reverse" },
+        CmpItemKindEnumMember          { TSProperty, gui = "reverse" },
+
+        CmpItemKindInterface           { Type, gui = "reverse" },
+        CmpItemKindColor               { CmpItemKindText },
+        CmpItemKindTypeParameter       { CmpItemKindText },
 
         TelescopeNormal                { fg = colors.white.darken(50), bg = colors.black },
         TelescopeBorder                { fg = colors.black, bg = colors.black },
