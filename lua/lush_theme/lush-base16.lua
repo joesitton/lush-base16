@@ -19,7 +19,7 @@ local theme = require("lush")(function()
         NormalNC                       { bg = "none" }, -- normal text in non-current windows
         NormalFloat                    { bg = colors.black }, -- Normal text in floating windows.
         Comment                        { fg = colors.black.lighten(25), gui = "italic" }, -- Any comment
-        FloatBorder                    { fg = NormalFloat.bg.lighten(30), bg = colors.black },
+        FloatBorder                    { fg = NormalFloat.bg.lighten(30), bg = "none" },
         -- Conceal                     { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
         -- Cursor                      { }, -- Character under the cursor
         -- lCursor                     { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
