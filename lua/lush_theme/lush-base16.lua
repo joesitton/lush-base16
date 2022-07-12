@@ -56,9 +56,9 @@ local theme = require("lush")(function()
         MoreMsg                        { fg = colors.green, gui = "bold,italic" }, -- |more-prompt|
         NonText                        { Comment, gui = "none" }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
         Pmenu                          { fg = "none", bg = colors.black.lighten(15) }, -- Popup menu: Normal item.
-        PmenuSel                       { bg = Pmenu.bg.lighten(20) }, -- Popup menu: Selected item.
-        PmenuSbar                      { bg = Pmenu.bg.lighten(10) }, -- Popup menu: Scrollbar.
-        PmenuThumb                     { bg = Pmenu.bg.lighten(80) }, -- Popup menu: Thumb of the scrollbar.
+        PmenuSel                       { bg = Pmenu.bg.lighten(10) }, -- Popup menu: Selected item.
+        PmenuSbar                      { bg = Pmenu.bg.darken(20) }, -- Popup menu: Scrollbar.
+        PmenuThumb                     { bg = Pmenu.bg.lighten(75) }, -- Popup menu: Thumb of the scrollbar.
         DocMenu                        { bg = Pmenu.bg },
         Question                       { fg = colors.green, gui = "bold,italic" }, -- |hit-enter| prompt and yes/no questions
         -- QuickFixLine                { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -215,7 +215,7 @@ local theme = require("lush")(function()
         TSType                         { Type }, -- Type (and class) definitions and annotations.
         TSTypeBuiltin                  { Type, gui = "italic" }, -- Built-in types: `i32` in Rust.
         TSTypeDefinition               { Type },
-        TSConstructor                  { Type }, -- Constructor calls and definitions: `                                                                                                                                                                                                                   { }` in Lua, and Java constructors.
+        TSConstructor                  { Type },
 
         OffscreenPopup                 { CursorLine },
 
@@ -421,6 +421,8 @@ local theme = require("lush")(function()
 	NavicIconsTypeParameter        { bg = colors.black.lighten(8) },
         NavicText                      { bg = colors.black.lighten(8) },
         NavicSeparator                 { fg = colors.black.lighten(25), bg = colors.black.lighten(8) },
+
+        HlArgs                         { fg = colors.orange, gui = "italic" },
     }
 end)
 
