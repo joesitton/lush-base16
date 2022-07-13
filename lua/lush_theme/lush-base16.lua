@@ -80,9 +80,9 @@ local theme = require("lush")(function()
         -- Winseparator                { }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
         WildMenu                       { Pmenu }, -- Current match in 'wildmenu' completion
 
-        Constant                       { fg = colors.red }, -- (*) Any constant
+        Constant                       { fg = colors.red, gui = "bold" }, -- (*) Any constant
         String                         { fg = colors.green }, --   A string constant: "this is a string"
-        -- Character                   { }, --   A character constant: 'c', '\n'
+        Character                      { fg = colors.red }, --   A character constant: 'c', '\n'
         Number                         { fg = colors.orange }, --   A number constant: 234, 0xff
         Boolean                        { fg = colors.orange }, --   A boolean constant: TRUE, false
         Float                          { fg = colors.orange }, --   A floating point constant: 2.3e10
@@ -180,7 +180,7 @@ local theme = require("lush")(function()
         -- TSNumber                    { } , -- Numeric literals that don't fit into other categories.
         -- TSOperator                  { } , -- Binary or unary operators: `+`, and also `->` and `*` in C.
         TSVariable                     { fg = colors.white }, -- Variable names that don't fit into other categories.
-        TSParameter                    { TSVariable, gui = "italic" }, -- Parameters of a function.
+        TSParameter                    { fg = colors.orange, gui = "italic" }, -- Parameters of a function.
         TSVariableBuiltin              { fg = colors.yellow, gui = "italic" }, -- Variable names defined by the language: `this` or `self` in Javascript.
         -- TSParameterReference        { } , -- References to parameters of a function.
         -- TSPreProc                   { } , -- Preprocessor #if, #else, #endif, etc.
@@ -422,7 +422,7 @@ local theme = require("lush")(function()
         NavicText                      { bg = colors.black.lighten(8) },
         NavicSeparator                 { fg = colors.black.lighten(25), bg = colors.black.lighten(8) },
 
-        HlArgs                         { fg = colors.orange, gui = "italic" },
+        HlArgs                         { TSParameter },
     }
 end)
 
