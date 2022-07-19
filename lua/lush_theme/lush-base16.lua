@@ -24,7 +24,7 @@ local theme = require("lush")(function()
         -- Cursor                      { }, -- Character under the cursor
         -- lCursor                     { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
         -- CursorIM                    { }, -- Like Cursor, but used when in IME mode |CursorIM|
-        CursorLine                     { bg = colors.black.lighten(8) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+        CursorLine                     { bg = colors.black.lighten(4) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
         CursorColumn                   { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
         ColorColumn                    { CursorLine }, -- Columns set with 'colorcolumn'
         VertSplit                      { fg = "none", bg = colors.black.lighten(10) }, -- Column separating vertically split windows
@@ -41,7 +41,7 @@ local theme = require("lush")(function()
         -- TermCursor                  { }, -- Cursor in a focused terminal
         -- TermCursorNC                { }, -- Cursor in an unfocused terminal
         ErrorMsg                       { fg = colors.red }, -- Error messages on the command line
-        Folded                         { bg = CursorLine.bg.darken(10)}, -- Line used for closed folds
+        Folded                         { }, -- Line used for closed folds
         IncSearch                      { fg = colors.black, bg = colors.yellow, gui = "bold"}, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
         Search                         { CursorLine }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
         Substitute                     { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
@@ -237,7 +237,7 @@ local theme = require("lush")(function()
         BufferTabpageFill              { bg = colors.black.lighten(4), fg = colors.black.lighten(15) },
 
         IndentBlanklineChar            { fg = VertSplit.bg },
-        IndentBlanklineContextChar     { fg = colors.orange.darken(25).desaturate(50) },
+        IndentBlanklineContextChar     { fg = colors.purple.darken(25).desaturate(50) },
         TreeIndentMarker               { IndentBlanklineChar },
 
         MarkSignHL                     { fg = colors.red, bg = LineNr.bg, gui = "bold" },
@@ -423,6 +423,8 @@ local theme = require("lush")(function()
         NavicSeparator                 { fg = colors.black.lighten(25), bg = colors.black.lighten(8) },
 
         HlArgs                         { fg = colors.orange, gui = "italic" },
+
+        UfoMarker                      { FoldColumn, gui = "bold,italic,reverse" },
     }
 end)
 
