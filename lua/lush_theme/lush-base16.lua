@@ -24,7 +24,7 @@ local theme = require("lush")(function()
         -- Cursor                      { }, -- Character under the cursor
         -- lCursor                     { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
         -- CursorIM                    { }, -- Like Cursor, but used when in IME mode |CursorIM|
-        CursorLine                     { bg = colors.black.lighten(4) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+        CursorLine                     { bg = colors.black.lighten(2) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
         CursorColumn                   { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
         ColorColumn                    { CursorLine }, -- Columns set with 'colorcolumn'
         VertSplit                      { fg = "none", bg = colors.black.lighten(10) }, -- Column separating vertically split windows
@@ -45,11 +45,11 @@ local theme = require("lush")(function()
         IncSearch                      { fg = colors.black, bg = colors.yellow, gui = "bold"}, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
         Search                         { CursorLine }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
         Substitute                     { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
-        LineNr                         { fg = colors.black.lighten(20), bg = colors.black.lighten(7) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+        LineNr                         { fg = colors.black.lighten(15), bg = colors.black.lighten(4) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         SignColumn                     { LineNr }, -- Column where |signs| are displayed
         FoldColumn                     { SignColumn, fg = SignColumn.fg.lighten(25) }, -- 'foldcolumn'
         CursorLineNr                   { fg = colors.white, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-        MatchParen                     { CursorLine }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+        MatchParen                     { bg = CursorLine.bg.lighten(8) }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
         -- ModeMsg                     { }, -- 'showmode' message (e.g., "-- INSERT -- ")
         -- MsgArea                     { }, -- Area for messages and cmdline
         -- MsgSeparator                { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
@@ -64,14 +64,14 @@ local theme = require("lush")(function()
         -- QuickFixLine                { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
         SpecialKey                     { fg = colors.orange }, -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
         SpellBad                       { sp = colors.red, gui = "undercurl" }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-        SpellCap                       { sp = colors.blue, gui = "underdot" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+        SpellCap                       { sp = colors.blue, gui = "undercurl" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
         SpellLocal                     { sp = colors.cyan, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
         SpellRare                      { sp = colors.purple, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-        StatusLine                     { CursorLine }, -- Status line of current window
-        StatusLineNC                   { NormalNC }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-        -- TabLine                     { }, -- Tab pages line, not active tab page label
-        -- TabLineFill                 { }, -- Tab pages line, where there are no labels
-        -- TabLineSel                  { }, -- Tab pages line, active tab page label
+        StatusLine                     { bg = "none" }, -- Status line of current window
+        StatusLineNC                   { bg = "none" }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+        TabLine                        { }, -- Tab pages line, not active tab page label
+        TabLineFill                    { }, -- Tab pages line, where there are no labels
+        TabLineSel                     { bg = colors.black.lighten(4) }, -- Tab pages line, active tab page label
         Title                          { fg = colors.blue }, -- Titles for output from ":set all", ":autocmd" etc.
         Visual                         { fg = "none", bg = colors.black.lighten(10) }, -- Visual mode selection
         -- VisualNOS                   { }, -- Visual mode selection when vim is "Not Owning the Selection".
@@ -121,6 +121,33 @@ local theme = require("lush")(function()
         Error                          { fg = colors.red, gui = "bold" }, -- Any erroneous construct
         Todo                           { fg = colors.black, bg = colors.cyan, gui = "bold" }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
+        ConstBuiltin                 { Constant }, -- Built-in constant values: `nil` in Lua.
+        ConstMacro                   { Constant }, -- Constants defined by macros: `NULL` in C.
+        Field                        { fg = colors.red }, -- Object and struct fields.
+        Property                     { Field }, -- Same as `Field`.
+        FuncBuiltin                  { fg = colors.cyan, gui = "italic" }, -- Built-in functions: `print` in Lua.
+        Method                       { Function }, -- Method calls and definitions.
+        Include                      { } , -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
+        Keyword                      { Keyword }, -- Keywords that don't fit into other categories.
+        KeywordFunction              { Keyword, gui = "none" }, -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
+        KeywordReturn                { Keyword, gui = "italic" }, -- Keywords like `return` and `yield`.
+        Label                        { fg = colors.yellow }, -- GOTO labels: `label:` in C, and `::label::` in Lua.
+        None                         { fg = colors.white }, -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
+        Variable                     { fg = colors.white }, -- Variable names that don't fit into other categories.
+        Parameter                    { fg = colors.orange, gui = "italic" }, -- Parameters of a function.
+        VariableBuiltin              { fg = colors.yellow, gui = "italic" }, -- Variable names defined by the language: `this` or `self` in Javascript.
+        Strong                       { gui = "bold" }, -- Text to be represented in bold.
+        Emphasis                     { Strong }, -- Text to be represented with emphasis.
+        Underline                    { gui = "underline" }, -- Text to be represented with an underline.
+        Strike                       { gui = "strikethrough" }, -- Strikethrough text.
+        URI                          { gui = "none" }, -- URIs like hyperlinks or email addresses.
+        TextReference                { fg = colors.red } , -- Footnotes, text references, citations, etc.
+        Warning                      { WarningMsg }, -- Text representation of a warning note.
+        Danger                       { Error }, -- Text representation of a danger note.
+        TypeBuiltin                  { Type, gui = "italic" }, -- Built-in types: `i32` in Rust.
+        TypeDefinition               { Type },
+        Constructor                  { Type },
+
         LspReferenceText               { }, -- Used for highlighting "text" references
         LspReferenceWrite              { CursorLine }, -- Used for highlighting "write" references
         LspReferenceRead               { CursorLine }, -- Used for highlighting "read" references
@@ -137,9 +164,9 @@ local theme = require("lush")(function()
         DiagnosticVirtualTextInfo      { fg = DiagnosticInfo.fg, bg = DiagnosticInfo.fg.darken(70), gui = "italic" }, -- Used for "Info" diagnostic virtual text.
         DiagnosticVirtualTextHint      { fg = DiagnosticHint.fg, bg = DiagnosticHint.fg.darken(70), gui = "italic" }, -- Used for "Hint" diagnostic virtual text.
         DiagnosticUnderlineError       { sp = DiagnosticError.fg, gui = "undercurl" }, -- Used to underline "Error" diagnostics.
-        DiagnosticUnderlineWarn        { sp = DiagnosticWarn.fg, gui = "underdot" }, -- Used to underline "Warn" diagnostics.
-        DiagnosticUnderlineInfo        { sp = DiagnosticInfo.fg, gui = "underdot" }, -- Used to underline "Info" diagnostics.
-        DiagnosticUnderlineHint        { sp = DiagnosticHint.fg, gui = "underdot" }, -- Used to underline "Hint" diagnostics.
+        DiagnosticUnderlineWarn        { sp = DiagnosticWarn.fg, gui = "undercurl" }, -- Used to underline "Warn" diagnostics.
+        DiagnosticUnderlineInfo        { sp = DiagnosticInfo.fg, gui = "undercurl" }, -- Used to underline "Info" diagnostics.
+        DiagnosticUnderlineHint        { sp = DiagnosticHint.fg, gui = "undercurl" }, -- Used to underline "Hint" diagnostics.
         -- DiagnosticFloatingError     { } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
         -- DiagnosticFloatingWarn      { } , -- Used to color "Warn" diagnostic messages in diagnostics float.
         -- DiagnosticFloatingInfo      { } , -- Used to color "Info" diagnostic messages in diagnostics float.
@@ -149,77 +176,9 @@ local theme = require("lush")(function()
         DiagnosticSignInfo             { DiagnosticInfo, bg = LineNr.bg }, -- Used for "Info" signs in sign column.
         DiagnosticSignHint             { DiagnosticHint, bg = LineNr.bg }, -- Used for "Hint" signs in sign column.
 
-        -- TSAttribute                 { } , -- Annotations that can be attached to the code to denote some kind of meta information. e.g. C++/Dart attributes.
-        -- TSBoolean                   { } , -- Boolean literals: `True` and `False` in Python.
-        -- TSCharacter                 { } , -- Character literals: `'a'` in C.
-        -- TSCharacterSpecial          { } , -- Special characters.
-        -- TSComment                   { }, -- Line comments and block comments.
-        -- TSConditional               { } , -- Keywords related to conditionals: `if`, `when`, `cond`, etc.
-        TSConstant                     { fg = colors.red }, -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
-        TSConstBuiltin                 { TSConstant }, -- Built-in constant values: `nil` in Lua.
-        TSConstMacro                   { TSConstant }, -- Constants defined by macros: `NULL` in C.
-        -- TSDebug                     { } , -- Debugging statements.
-        -- TSDefine                    { } , -- Preprocessor #define statements.
-        -- TSError                     { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
-        -- TSException                 { } , -- Exception related keywords: `try`, `except`, `finally` in Python.
-        TSField                        { fg = colors.red }, -- Object and struct fields.
-        TSProperty                     { TSField }, -- Same as `TSField`.
-        -- TSFloat                     { } , -- Floating-point number literals.
-        TSFunction                     { fg = colors.blue, gui = "italic" }, -- Function calls and definitions.
-        TSFuncBuiltin                  { fg = colors.cyan, gui = "italic" }, -- Built-in functions: `print` in Lua.
-        TSMethod                       { TSFunction }, -- Method calls and definitions.
-        -- TSFuncMacro                 { } , -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
-        TSInclude                      { } , -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
-        TSKeyword                      { Keyword }, -- Keywords that don't fit into other categories.
-        TSKeywordFunction              { Keyword, gui = "none" }, -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
-        -- TSKeywordOperator           { } , -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
-        TSKeywordReturn                { Keyword, gui = "italic" }, -- Keywords like `return` and `yield`.
-        TSLabel                        { fg = colors.yellow }, -- GOTO labels: `label:` in C, and `::label::` in Lua.
-        -- TSNamespace                 { TSField } , -- Identifiers referring to modules and namespaces.
-        TSNone                         { fg = colors.white }, -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
-        -- TSNumber                    { } , -- Numeric literals that don't fit into other categories.
-        -- TSOperator                  { } , -- Binary or unary operators: `+`, and also `->` and `*` in C.
-        TSVariable                     { fg = colors.white }, -- Variable names that don't fit into other categories.
-        TSParameter                    { fg = colors.orange, gui = "italic" }, -- Parameters of a function.
-        TSVariableBuiltin              { fg = colors.yellow, gui = "italic" }, -- Variable names defined by the language: `this` or `self` in Javascript.
-        -- TSParameterReference        { } , -- References to parameters of a function.
-        -- TSPreProc                   { } , -- Preprocessor #if, #else, #endif, etc.
-        -- TSPunctDelimiter            { } , -- Punctuation delimiters: Periods, commas, semicolons, etc.
-        -- TSPunctBracket              { } , -- Brackets, braces, parentheses, etc.
-        -- TSPunctSpecial              { } , -- Special punctuation that doesn't fit into the previous categories.
-        -- TSRepeat                    { } , -- Keywords related to loops: `for`, `while`, etc.
-        -- TSStorageClass              { } , -- Keywords that affect how a variable is stored: `static`, `comptime`, `extern`, etc.
-        -- TSString                    { } , -- String literals.
-        -- TSStringRegex               { } , -- Regular expression literals.
-        -- TSStringEscape              { } , -- Escape characters within a string: `\n`, `\t`, etc.
-        -- TSStringSpecial             { } , -- Strings with special meaning that don't fit into the previous categories.
-        -- TSSymbol                    { } , -- Identifiers referring to symbols or atoms.
-        -- TSTag                       { } , -- Tags like HTML tag names.
-        -- TSTagAttribute              { } , -- HTML tag attributes.
-        -- TSTagDelimiter              { } , -- Tag delimiters like `<` `>` `/`.
-        -- TSText                      { } , -- Non-structured text. Like text in a markup language.
-        TSStrong                       { gui = "bold" }, -- Text to be represented in bold.
-        TSEmphasis                     { TSStrong }, -- Text to be represented with emphasis.
-        TSUnderline                    { gui = "underline" }, -- Text to be represented with an underline.
-        TSStrike                       { gui = "strikethrough" }, -- Strikethrough text.
-        -- TSTitle                     { } , -- Text that is part of a title.
-        -- TSLiteral                   { } , -- Literal or verbatim text.
-        TSURI                          { gui = "none" }, -- URIs like hyperlinks or email addresses.
-        -- TSMath                      { } , -- Math environments like LaTeX's `$ ... $`
-        TSTextReference                { fg = colors.red } , -- Footnotes, text references, citations, etc.
-        -- TSEnvironment               { } , -- Text environments of markup languages.
-        -- TSEnvironmentName           { } , -- Text/string indicating the type of text environment. Like the name of a `\begin` block in LaTeX.
-        -- TSNote                      { } , -- Text representation of an informational note.
-        TSWarning                      { WarningMsg }, -- Text representation of a warning note.
-        TSDanger                       { Error }, -- Text representation of a danger note.
-        TSType                         { Type }, -- Type (and class) definitions and annotations.
-        TSTypeBuiltin                  { Type, gui = "italic" }, -- Built-in types: `i32` in Rust.
-        TSTypeDefinition               { Type },
-        TSConstructor                  { Type },
+        TreesitterContext              { MatchParen },
 
-        OffscreenPopup                 { CursorLine },
-
-        BufferCurrent                  { fg = colors.white, bg = Normal.bg },
+        BufferCurrent                  { fg = colors.white, bg = colors.black },
         BufferCurrentIcon              { bg = BufferCurrent.bg },
         BufferCurrentMod               { fg = colors.red, bg = BufferCurrent.bg, gui = "italic" },
         BufferCurrentSign              { fg = colors.blue, bg = BufferCurrent.bg },
@@ -235,6 +194,8 @@ local theme = require("lush")(function()
         BufferInactiveSign             { fg = BufferInactive.fg, bg = BufferInactive.bg },
         BufferInactiveTarget           { fg = colors.purple, bg = BufferInactive.bg, gui = "bold" },
         BufferTabpageFill              { bg = colors.black.lighten(4), fg = colors.black.lighten(15) },
+
+        BufferBg                       { bg = colors.black },
 
         IndentBlanklineChar            { fg = VertSplit.bg },
         IndentBlanklineContextChar     { fg = colors.purple.darken(25).desaturate(50) },
@@ -253,8 +214,8 @@ local theme = require("lush")(function()
         CmpItemAbbrDefault             { fg = colors.white.darken(10) },
         CmpItemMenu                    { fg = Pmenu.bg.lighten(45), gui = "italic" },
 
-        CmpItemKindField               { TSField, gui = "reverse" },
-        CmpItemKindProperty            { TSProperty, gui = "reverse" },
+        CmpItemKindField               { Field, gui = "reverse" },
+        CmpItemKindProperty            { Property, gui = "reverse" },
         CmpItemKindEvent               { CmpItemMenu },
         CmpItemKindDeprecated          { fg = colors.black.lighten(50), gui = "strikethrough,italic" },
 
@@ -262,44 +223,44 @@ local theme = require("lush")(function()
         CmpItemKindEnum                { Type, gui = "reverse" },
         CmpItemKindKeyword             { Keyword, gui = "reverse" },
 
-        CmpItemKindConstant            { TSConstant, gui = "reverse" },
-        CmpItemKindConstructor         { TSConstant, gui = "reverse" },
-        CmpItemKindReference           { TSTextReference, gui = "reverse" },
+        CmpItemKindConstant            { Constant, gui = "reverse" },
+        CmpItemKindConstructor         { Constant, gui = "reverse" },
+        CmpItemKindReference           { TextReference, gui = "reverse" },
 
-        CmpItemKindFunction            { TSFunction, gui = "reverse" },
+        CmpItemKindFunction            { Function, gui = "reverse" },
         CmpItemKindStruct              { Type, gui = "reverse" },
         CmpItemKindClass               { Type, gui = "reverse" },
         CmpItemKindModule              { PreProc, gui = "reverse" },
         CmpItemKindOperator            { Operator, gui = "reverse" },
 
-        CmpItemKindVariable            { TSVariable, gui = "reverse" },
+        CmpItemKindVariable            { Variable, gui = "reverse" },
         CmpItemKindFile                { CmpItemKindText },
 
         CmpItemKindUnit                { CmpItemKindText },
         CmpItemKindSnippet             { fg = colors.green, gui = "reverse" },
         CmpItemKindFolder              { fg = colors.cyan, gui = "reverse" },
 
-        CmpItemKindMethod              { TSMethod, gui = "reverse" },
+        CmpItemKindMethod              { Method, gui = "reverse" },
         CmpItemKindValue               { Special, gui = "reverse" },
-        CmpItemKindEnumMember          { TSProperty, gui = "reverse" },
+        CmpItemKindEnumMember          { Property, gui = "reverse" },
 
         CmpItemKindInterface           { Type, gui = "reverse" },
         CmpItemKindColor               { CmpItemKindText },
         CmpItemKindTypeParameter       { CmpItemKindText },
 
-        TelescopeNormal                { fg = colors.white.darken(50), bg = colors.black },
+        TelescopeNormal                { fg = colors.white.darken(66), bg = colors.black },
         TelescopeBorder                { fg = colors.black, bg = colors.black },
         TelescopeTitle                 { TelescopeBorder },
-        TelescopePreviewNormal         { bg = colors.black },
+        TelescopePreviewNormal         { bg = TelescopeNormal.bg },
         TelescopePreviewBorder         { TelescopeBorder },
-        TelescopePreviewTitle          { fg = colors.white, bg = colors.black, gui = "bold" },
+        TelescopePreviewTitle          { TelescopeBorder },
         TelescopeMatching              { CmpItemAbbrMatch },
         TelescopeResultsTitle          { TelescopeMatching },
         TelescopeResultsBorder         { TelescopeBorder },
-        TelescopePromptNormal          { fg = colors.white, bg = colors.black },
-        TelescopePromptTitle           { TelescopeBorder, fg = colors.white.darken(50), gui = "bold" },
-        TelescopePromptPrefix          { fg = colors.blue, bg = TelescopeNormal.bg, gui = "bold" },
-        TelescopePromptBorder          { TelescopeBorder },
+        TelescopePromptNormal          { fg = colors.white, bg = TelescopeNormal.bg.lighten(10) },
+        TelescopePromptBorder          { fg = TelescopePromptNormal.bg, bg = TelescopePromptNormal.bg },
+        TelescopePromptTitle           { TelescopePromptBorder},
+        TelescopePromptPrefix          { fg = colors.blue, bg = TelescopePromptNormal.bg, gui = "bold" },
         TelescopeResultsLineNr         { LineNr },
         TelescopeSelection             { fg = colors.white, bg = CursorLine.bg },
         TelescopeSelectionCaret        { fg = colors.yellow, bg = TelescopeNormal.bg },
@@ -310,8 +271,8 @@ local theme = require("lush")(function()
         TelescopeResultsConstant       { CmpItemKindConstant },
         TelescopeResultsProperty       { CmpItemKindProperty },
 
-        FidgetTitle                    { fg = colors.white, bg = colors.black },
-        FidgetTask                     { fg = colors.blue, bg = colors.black },
+        FidgetTitle                    { fg = colors.white, bg = "none" },
+        FidgetTask                     { fg = colors.blue, bg = "none" },
 
         DevIconDefault                 { fg = colors.black.lighten(25) },
 
@@ -336,12 +297,12 @@ local theme = require("lush")(function()
         yaraRuleSection                { fg = colors.yellow },
         yaraIdentifier                 { fg = colors.white },
 
-        dockerfileTSKeyword            { Keyword, gui = "none" },
+        dockerfileKeyword            { Keyword, gui = "none" },
 
         devIconDockerfile              { fg = colors.blue },
         devIconDefault                 { fg = colors.blue.desaturate(20).darken(10) },
 
-        helpTSURI                      { TSURI },
+        helpURI                      { URI },
 
         rainbowcol1                    { fg = colors.red.saturate(25) },
         rainbowcol2                    { fg = colors.orange.saturate(25) },
@@ -351,17 +312,17 @@ local theme = require("lush")(function()
         rainbowcol6                    { fg = colors.blue.saturate(25) },
         rainbowcol7                    { fg = colors.purple.saturate(25) },
 
-        ScrollbarHandle                { bg = colors.black.lighten(15) },
+        ScrollbarHandle                { bg = "none" },
         ScrollbarSearchHandle          { ScrollbarHandle, fg = IncSearch.bg }, -- Inside the scrollbar
-        ScrollbarSearch                { fg = IncSearch.bg }, -- Outside the scrollbr
+        ScrollbarSearch                { fg = IncSearch.bg.darken(75) }, -- Outside the scrollbr
         ScrollbarErrorHandle           { ScrollbarHandle, fg = DiagnosticError.fg },
-        ScrollbarError                 { DiagnosticError },
+        ScrollbarError                 { fg = DiagnosticError.fg.darken(75) },
         ScrollbarWarnHandle            { ScrollbarHandle, fg = DiagnosticWarn.fg },
-        ScrollbarWarn                  { DiagnosticWarn },
+        ScrollbarWarn                  { fg = DiagnosticWarn.fg.darken(75) },
         ScrollbarInfoHandle            { ScrollbarHandle, fg = DiagnosticInfo.fg },
-        ScrollbarInfo                  { DiagnosticInfo },
+        ScrollbarInfo                  { fg = DiagnosticInfo.fg.darken(75) },
         ScrollbarHintHandle            { ScrollbarHandle, fg = DiagnosticHint.fg },
-        ScrollbarHint                  { DiagnosticHint },
+        ScrollbarHint                  { fg = DiagnosticHint.fg.darken(75) },
         ScrollbarGitAddHandle          { ScrollbarHandle, fg = colors.green },
         ScrollbarGitAdd                { fg = colors.green, bg = "none" },
         ScrollbarGitChangeHandle       { ScrollbarHandle, fg = colors.blue },
@@ -390,41 +351,43 @@ local theme = require("lush")(function()
         GitSignsChangeInline           { GitSignsChangeLn, bg = GitSignsChangeLn.bg.lighten(10), gui = "bold" },
         -- GitSignsChangeLnInline      { GitSignsChangeLn },
 
-        WinBar                         { bg = colors.black },
-        WinBarNC                       { bg = colors.black },
+        WinBar                         { bg = colors.black.lighten(4) },
+        WinBarNC                       { bg = WinBar.bg },
 
-	NavicIconsFile                 { fg = colors.white, bg = colors.black.lighten(8) },
-	NavicIconsModule               { TSInclude, bg = colors.black.lighten(8) },
-	NavicIconsNamespace            { TSInclude, bg = colors.black.lighten(8) },
-	NavicIconsPackage              { TSInclude, bg = colors.black.lighten(8) },
-	NavicIconsClass                { Type, bg = colors.black.lighten(8) },
-	NavicIconsMethod               { TSFunction, bg = colors.black.lighten(8) },
-	NavicIconsProperty             { TSProperty, bg = colors.black.lighten(8) },
-	NavicIconsField                { TSField, bg = colors.black.lighten(8) },
-	NavicIconsConstructor          { TSConstructor, bg = colors.black.lighten(8) },
-	NavicIconsEnum                 { fg = colors.purple, bg = colors.black.lighten(8) },
-	NavicIconsInterface            { fg = colors.purple, bg = colors.black.lighten(8) },
-	NavicIconsFunction             { TSFunction, bg = colors.black.lighten(8) },
-	NavicIconsVariable             { TSVariable, bg = colors.black.lighten(8) },
-	NavicIconsConstant             { TSConstant, bg = colors.black.lighten(8) },
-	NavicIconsString               { String, bg = colors.black.lighten(8) },
-	NavicIconsNumber               { Number, bg = colors.black.lighten(8) },
-	NavicIconsBoolean              { Boolean, bg = colors.black.lighten(8) },
-	NavicIconsArray                { bg = colors.black.lighten(8) },
-	NavicIconsObject               { bg = colors.black.lighten(8) },
-	NavicIconsKey                  { bg = colors.black.lighten(8) },
-	NavicIconsNull                 { bg = colors.black.lighten(8) },
-	NavicIconsEnumMember           { bg = colors.black.lighten(8) },
-	NavicIconsStruct               { bg = colors.black.lighten(8) },
-	NavicIconsEvent                { bg = colors.black.lighten(8) },
-	NavicIconsOperator             { bg = colors.black.lighten(8) },
-	NavicIconsTypeParameter        { bg = colors.black.lighten(8) },
-        NavicText                      { bg = colors.black.lighten(8) },
-        NavicSeparator                 { fg = colors.black.lighten(25), bg = colors.black.lighten(8) },
+        NavicIconsFile                 { fg = colors.white, bg = WinBar.bg },
+        NavicIconsModule               { Include, bg = WinBar.bg },
+        NavicIconsNamespace            { Include, bg = WinBar.bg },
+        NavicIconsPackage              { Include, bg = WinBar.bg },
+        NavicIconsClass                { Type, bg = WinBar.bg },
+        NavicIconsMethod               { Function, bg = WinBar.bg },
+        NavicIconsProperty             { Property, bg = WinBar.bg },
+        NavicIconsField                { Field, bg = WinBar.bg },
+        NavicIconsConstructor          { Constructor, bg = WinBar.bg },
+        NavicIconsEnum                 { fg = colors.purple, bg = WinBar.bg },
+        NavicIconsInterface            { fg = colors.purple, bg = WinBar.bg },
+        NavicIconsFunction             { Function, bg = WinBar.bg },
+        NavicIconsVariable             { Variable, bg = WinBar.bg },
+        NavicIconsConstant             { Constant, bg = WinBar.bg },
+        NavicIconsString               { String, bg = WinBar.bg },
+        NavicIconsNumber               { Number, bg = WinBar.bg },
+        NavicIconsBoolean              { Boolean, bg = WinBar.bg },
+        NavicIconsArray                { bg = WinBar.bg },
+        NavicIconsObject               { bg = WinBar.bg },
+        NavicIconsKey                  { bg = WinBar.bg },
+        NavicIconsNull                 { bg = WinBar.bg },
+        NavicIconsEnumMember           { bg = WinBar.bg },
+        NavicIconsStruct               { bg = WinBar.bg },
+        NavicIconsEvent                { bg = WinBar.bg },
+        NavicIconsOperator             { bg = WinBar.bg },
+        NavicIconsTypeParameter        { bg = WinBar.bg },
+        NavicText                      { fg = colors.white.darken(35), bg = WinBar.bg, gui = "italic" },
+        NavicSeparator                 { fg = colors.white.darken(65), bg = WinBar.bg, gui = "bold" },
 
         HlArgs                         { fg = colors.orange, gui = "italic" },
 
-        UfoMarker                      { FoldColumn, gui = "bold,italic,reverse" },
+        UfoMarker                      { fg = colors.purple, gui = "bold,reverse" },
+
+        IlluminatedWordText            { CursorLine },
     }
 end)
 
