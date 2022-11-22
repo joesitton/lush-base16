@@ -314,21 +314,21 @@ local theme = require("lush")(function()
 
         ScrollbarHandle                { bg = "none" },
         ScrollbarSearchHandle          { ScrollbarHandle, fg = IncSearch.bg }, -- Inside the scrollbar
-        ScrollbarSearch                { fg = IncSearch.bg.darken(75) }, -- Outside the scrollbr
+        ScrollbarSearch                { fg = IncSearch.bg.darken(50) }, -- Outside the scrollbr
         ScrollbarErrorHandle           { ScrollbarHandle, fg = DiagnosticError.fg },
-        ScrollbarError                 { fg = DiagnosticError.fg.darken(75) },
+        ScrollbarError                 { fg = DiagnosticError.fg.darken(50) },
         ScrollbarWarnHandle            { ScrollbarHandle, fg = DiagnosticWarn.fg },
-        ScrollbarWarn                  { fg = DiagnosticWarn.fg.darken(75) },
+        ScrollbarWarn                  { fg = DiagnosticWarn.fg.darken(50) },
         ScrollbarInfoHandle            { ScrollbarHandle, fg = DiagnosticInfo.fg },
-        ScrollbarInfo                  { fg = DiagnosticInfo.fg.darken(75) },
+        ScrollbarInfo                  { fg = DiagnosticInfo.fg.darken(50) },
         ScrollbarHintHandle            { ScrollbarHandle, fg = DiagnosticHint.fg },
-        ScrollbarHint                  { fg = DiagnosticHint.fg.darken(75) },
+        ScrollbarHint                  { fg = DiagnosticHint.fg.darken(50) },
         ScrollbarGitAddHandle          { ScrollbarHandle, fg = colors.green },
-        ScrollbarGitAdd                { fg = colors.green, bg = "none" },
+        ScrollbarGitAdd                { fg = colors.green.darken(50), bg = "none" },
         ScrollbarGitChangeHandle       { ScrollbarHandle, fg = colors.blue },
-        ScrollbarGitChange             { fg = colors.blue, bg = "none" },
+        ScrollbarGitChange             { fg = colors.blue.darken(50), bg = "none" },
         ScrollbarGitDeleteHandle       { ScrollbarHandle, fg = colors.red },
-        ScrollbarGitDelete             { fg = colors.red, bg = "none" },
+        ScrollbarGitDelete             { fg = colors.red.darken(50), bg = "none" },
         ScrollbarMiscHandle            { ScrollbarHandle },
         ScrollbarMisc                  { },
 
