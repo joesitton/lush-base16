@@ -389,11 +389,13 @@ local theme = require("lush")(function()
 
         HlArgs                          { fg = colors.orange, gui = "italic" },
 
-        UfoMarker                       { fg = colors.purple, gui = "bold,reverse" },
+        UfoMarker                       { fg = colors.orange, gui = "bold" },
 
         IlluminatedWordText             { CursorLine },
 
         LspInfoBorder                   { FloatBorder },
+
+        SmoothCursor                    { fg = colors.orange, bg = SignColumn.bg },
     }
 end)
 
