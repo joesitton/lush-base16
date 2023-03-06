@@ -399,6 +399,9 @@ local theme = require("lush")(function()
         ContextVt                       { fg = colors.black.lighten(15), gui = "italic" },
 
         -- NoiceCmdline                    { fg = colors.white, bg = colors.yellow.darken(90) }
+        SmoothCursor                    { fg = colors.orange, bg = SignColumn.bg },
+
+        VirtColumn                      { fg = colors.black.lighten(5) },
     }
 end)
 
