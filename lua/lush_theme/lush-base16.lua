@@ -396,6 +396,8 @@ local theme = require("lush")(function()
         LspInfoBorder                   { FloatBorder },
 
         SmoothCursor                    { fg = colors.orange, bg = SignColumn.bg },
+
+        VirtColumn                      { fg = colors.black.lighten(5) },
     }
 end)
 
