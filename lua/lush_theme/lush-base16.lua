@@ -43,7 +43,7 @@ local theme = require("lush")(function()
         ErrorMsg                        { fg = colors.red }, -- Error messages on the command line
         Folded                          { }, -- Line used for closed folds
         IncSearch                       { fg = colors.black, bg = colors.yellow, gui = "bold" }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-        Search                          { CursorLine }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+        Search                          { bg = colors.black.lighten(10), gui = "underline" }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
         Substitute                      { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
         LineNr                          { fg = colors.black.lighten(15), bg = colors.black.lighten(4) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         SignColumn                      { LineNr }, -- Column where |signs| are displayed
@@ -176,7 +176,7 @@ local theme = require("lush")(function()
         DiagnosticSignInfo              { DiagnosticInfo, bg = LineNr.bg }, -- Used for "Info" signs in sign column.
         DiagnosticSignHint              { DiagnosticHint, bg = LineNr.bg }, -- Used for "Hint" signs in sign column.
 
-        TreesitterContext               { MatchParen },
+        TreesitterContext               { bg = colors.black.lighten(4) },
 
         BufferCurrent                   { fg = colors.white, bg = colors.black },
         BufferCurrentIcon               { bg = BufferCurrent.bg },
@@ -312,24 +312,24 @@ local theme = require("lush")(function()
         rainbowcol6                     { fg = colors.blue.saturate(25) },
         rainbowcol7                     { fg = colors.purple.saturate(25) },
 
-        ScrollbarCursorHandle           { fg = colors.white.darken(50) },
+        ScrollbarCursorHandle           { fg = colors.white.darken(30) },
         ScrollbarHandle                 { bg = "none" },
         ScrollbarSearchHandle           { ScrollbarHandle, fg = IncSearch.bg }, -- Inside the scrollbar
-        ScrollbarSearch                 { fg = IncSearch.bg.darken(50) }, -- Outside the scrollbr
+        ScrollbarSearch                 { fg = IncSearch.bg.darken(65) }, -- Outside the scrollbr
         ScrollbarErrorHandle            { ScrollbarHandle, fg = DiagnosticError.fg },
-        ScrollbarError                  { fg = DiagnosticError.fg.darken(50) },
+        ScrollbarError                  { fg = DiagnosticError.fg.darken(65) },
         ScrollbarWarnHandle             { ScrollbarHandle, fg = DiagnosticWarn.fg },
-        ScrollbarWarn                   { fg = DiagnosticWarn.fg.darken(50) },
+        ScrollbarWarn                   { fg = DiagnosticWarn.fg.darken(65) },
         ScrollbarInfoHandle             { ScrollbarHandle, fg = DiagnosticInfo.fg },
-        ScrollbarInfo                   { fg = DiagnosticInfo.fg.darken(50) },
+        ScrollbarInfo                   { fg = DiagnosticInfo.fg.darken(65) },
         ScrollbarHintHandle             { ScrollbarHandle, fg = DiagnosticHint.fg },
-        ScrollbarHint                   { fg = DiagnosticHint.fg.darken(50) },
+        ScrollbarHint                   { fg = DiagnosticHint.fg.darken(65) },
         ScrollbarGitAddHandle           { ScrollbarHandle, fg = colors.green },
-        ScrollbarGitAdd                 { fg = colors.green.darken(50), bg = "none" },
+        ScrollbarGitAdd                 { fg = colors.green.darken(65), bg = "none" },
         ScrollbarGitChangeHandle        { ScrollbarHandle, fg = colors.blue },
-        ScrollbarGitChange              { fg = colors.blue.darken(50), bg = "none" },
+        ScrollbarGitChange              { fg = colors.blue.darken(65), bg = "none" },
         ScrollbarGitDeleteHandle        { ScrollbarHandle, fg = colors.red },
-        ScrollbarGitDelete              { fg = colors.red.darken(50), bg = "none" },
+        ScrollbarGitDelete              { fg = colors.red.darken(65), bg = "none" },
         ScrollbarMiscHandle             { ScrollbarHandle },
         ScrollbarMisc                   { },
 
@@ -352,10 +352,10 @@ local theme = require("lush")(function()
         GitSignsChangeInline            { GitSignsChangeLn, bg = GitSignsChangeLn.bg.lighten(10), gui = "bold" },
         -- GitSignsChangeLnInline       { GitSignsChangeLn },
 
-        WinBar                          { fg = colors.white.darken(65), bg = "none" },
+        WinBar                          { fg = colors.white.darken(50), bg = "none" },
         WinBarNC                        { bg = WinBar.bg },
 
-        BarbecueSeparator               { bg = WinBar.bg, fg = colors.white.darken(45), gui = "bold" },
+        BarbecueSeparator               { bg = WinBar.bg, fg = colors.white.darken(25), gui = "bold" },
         BarbecueDirname                 { WinBar },
         BarbecueBasename                { WinBar },
         BarbecueContext                 { WinBar },
@@ -363,7 +363,7 @@ local theme = require("lush")(function()
         BarbecueContextFile             { fg = colors.white, bg = WinBar.bg },
         BarbecueContextModule           { Include, bg = WinBar.bg },
         BarbecueContextNamespace        { Include, bg = WinBar.bg },
-        BarbecueContextPackage          { Include, bg = WinBar.bg },
+        BarbecueContextPackage          { FuncBuiltin, bg = WinBar.bg, gui = "none" },
         BarbecueContextClass            { Type, bg = WinBar.bg },
         BarbecueContextMethod           { Function, bg = WinBar.bg },
         BarbecueContextProperty         { Property, bg = WinBar.bg },
@@ -389,11 +389,16 @@ local theme = require("lush")(function()
 
         HlArgs                          { fg = colors.orange, gui = "italic" },
 
-        UfoMarker                       { fg = colors.purple, gui = "bold,reverse" },
+        UfoMarker                       { Comment },
+        UfoFoldedBg                     { bg = colors.purple.darken(50) },
 
-        IlluminatedWordText             { CursorLine },
+        IlluminatedWordText             { CursorLine, gui = "underline" },
 
         LspInfoBorder                   { FloatBorder },
+
+        ContextVt                       { fg = colors.black.lighten(15), gui = "italic" },
+
+        -- NoiceCmdline                    { fg = colors.white, bg = colors.yellow.darken(90) }
     }
 end)
 
