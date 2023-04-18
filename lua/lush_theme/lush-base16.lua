@@ -19,7 +19,7 @@ local theme = require("lush")(function()
         NormalNC                        { bg = "none" }, -- normal text in non-current windows
         NormalFloat                     { bg = colors.black }, -- Normal text in floating windows.
         Comment                         { fg = colors.black.lighten(25), gui = "italic" }, -- Any comment
-        FloatBorder                     { fg = NormalFloat.bg.lighten(35), bg = "none" },
+        FloatBorder                     { fg = NormalFloat.bg.lighten(45), bg = "none" },
         FloatSel                        { bg = NormalFloat.bg.lighten(20), fg = "none" },
         -- Conceal                      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
         -- Cursor                       { }, -- Character under the cursor
@@ -59,7 +59,7 @@ local theme = require("lush")(function()
         Pmenu                           { fg = "none", bg = colors.black.lighten(30) }, -- Popup menu: Normal item.
         PmenuSel                        { bg = Pmenu.bg.lighten(10) }, -- Popup menu: Selected item.
         PmenuSbar                       { bg = Pmenu.bg.darken(30) }, -- Popup menu: Scrollbar.
-        PmenuThumb                      { bg = Pmenu.bg.lighten(75) }, -- Popup menu: Thumb of the scrollbar.
+        PmenuThumb                      { bg = Pmenu.bg.lighten(70) }, -- Popup menu: Thumb of the scrollbar.
         DocMenu                         { bg = Pmenu.bg },
         Question                        { fg = colors.green, gui = "bold,italic" }, -- |hit-enter| prompt and yes/no questions
         -- QuickFixLine                 { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
