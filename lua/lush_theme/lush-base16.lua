@@ -25,10 +25,9 @@ local theme = require("lush")(function()
         -- Cursor                       { }, -- Character under the cursor
         -- lCursor                      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
         -- CursorIM                     { }, -- Like Cursor, but used when in IME mode |CursorIM|
-        CursorLine                      { bg = colors.black.lighten(2) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+        CursorLine                      { bg = colors.black.lighten(5) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
         CursorColumn                    { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
         ColorColumn                     { CursorLine }, -- Columns set with 'colorcolumn'
-        VertSplit                       { fg = "none", bg = colors.black.lighten(10) }, -- Column separating vertically split windows
         Directory                       { fg = colors.white }, -- Directory names (and other special names in listings)
         DiffAdd                         { fg = colors.green.lighten(25), bg = colors.green.darken(75) }, -- Diff mode: Added line |diff.txt|
         diffAdded                       { fg = colors.green },
@@ -47,6 +46,7 @@ local theme = require("lush")(function()
         Search                          { bg = colors.black.lighten(10), gui = "underline" }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
         Substitute                      { bg = colors.orange, fg = colors.black }, -- |:substitute| replacement text highlighting
         LineNr                          { fg = colors.black.lighten(15), bg = colors.black.lighten(4) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+        VertSplit                       { bg = LineNr.bg, fg = colors.black.lighten(20) }, -- Column separating vertically split windows
         SignColumn                      { LineNr }, -- Column where |signs| are displayed
         FoldColumn                      { SignColumn, fg = SignColumn.fg.lighten(25) }, -- 'foldcolumn'
         CursorLineNr                    { fg = colors.white, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
@@ -70,9 +70,10 @@ local theme = require("lush")(function()
         SpellRare                       { sp = colors.purple, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
         StatusLine                      { bg = "none" }, -- Status line of current window
         StatusLineNC                    { bg = "none" }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-        TabLine                         { }, -- Tab pages line, not active tab page label
-        TabLineFill                     { }, -- Tab pages line, where there are no labels
+        TabLine                         { fg = colors.black.lighten(30), bg = colors.black }, -- Tab pages line, not active tab page label
+        TabLineFill                     { TabLine }, -- Tab pages line, where there are no labels
         TabLineSel                      { bg = colors.black.lighten(4) }, -- Tab pages line, active tab page label
+        TablineLeftSeparator            { fg = VertSplit.fg, bg = TabLine.bg },
         Title                           { fg = colors.blue }, -- Titles for output from ":set all", ":autocmd" etc.
         Visual                          { fg = "none", bg = colors.black.lighten(10) }, -- Visual mode selection
         -- VisualNOS                    { }, -- Visual mode selection when vim is "Not Owning the Selection".
@@ -203,6 +204,7 @@ local theme = require("lush")(function()
         TreeIndentMarker                { IndentBlanklineChar },
 
         MarkSignHL                      { fg = colors.red, bg = LineNr.bg, gui = "bold" },
+        MarkSignNumHL                   { fg = "none" },
 
         GitGutterAdd                    { diffAdded, bg = LineNr.bg },
         GitGutterChange                 { diffChanged, bg = LineNr.bg },
@@ -215,55 +217,58 @@ local theme = require("lush")(function()
         CmpItemAbbrDefault              { fg = colors.white.darken(10) },
         CmpItemMenu                     { fg = Pmenu.bg.lighten(45), gui = "italic" },
 
-        CmpItemKindField                { Field, gui = "reverse" },
-        CmpItemKindProperty             { Property, gui = "reverse" },
-        CmpItemKindEvent                { CmpItemMenu },
-        CmpItemKindDeprecated           { fg = colors.black.lighten(50), gui = "strikethrough,italic" },
+        CmpItemKindField                { Field, gui = "reverse", bg = colors.black },
+        CmpItemKindProperty             { Property, gui = "reverse", bg = colors.black },
+        CmpItemKindEvent                { CmpItemMenu, bg = colors.black },
+        CmpItemKindDeprecated           { fg = colors.black.lighten(50), gui = "strikethrough,italic", bg = colors.black },
 
-        CmpItemKindText                 { fg = colors.white, gui = "reverse" },
-        CmpItemKindEnum                 { Type, gui = "reverse" },
-        CmpItemKindKeyword              { Keyword, gui = "reverse" },
+        CmpItemKindText                 { fg = colors.white, gui = "reverse", bg = colors.black },
+        CmpItemKindEnum                 { Type, gui = "reverse", bg = colors.black },
+        CmpItemKindKeyword              { Keyword, gui = "reverse", bg = colors.black },
 
-        CmpItemKindConstant             { Constant, gui = "reverse" },
-        CmpItemKindConstructor          { Constant, gui = "reverse" },
-        CmpItemKindReference            { TextReference, gui = "reverse" },
+        CmpItemKindConstant             { Constant, gui = "reverse", bg = colors.black },
+        CmpItemKindConstructor          { Constant, gui = "reverse", bg = colors.black },
+        CmpItemKindReference            { TextReference, gui = "reverse", bg = colors.black },
 
-        CmpItemKindFunction             { Function, gui = "reverse" },
-        CmpItemKindStruct               { Type, gui = "reverse" },
-        CmpItemKindClass                { Type, gui = "reverse" },
-        CmpItemKindModule               { PreProc, gui = "reverse" },
-        CmpItemKindOperator             { Operator, gui = "reverse" },
+        CmpItemKindFunction             { Function, gui = "reverse", bg = colors.black },
+        CmpItemKindStruct               { Type, gui = "reverse", bg = colors.black },
+        CmpItemKindClass                { Type, gui = "reverse", bg = colors.black },
+        CmpItemKindModule               { PreProc, gui = "reverse", bg = colors.black },
+        CmpItemKindOperator             { Operator, gui = "reverse", bg = colors.black },
 
-        CmpItemKindVariable             { Variable, gui = "reverse" },
-        CmpItemKindFile                 { CmpItemKindText },
+        CmpItemKindVariable             { Variable, gui = "reverse", bg = colors.black },
+        CmpItemKindFile                 { CmpItemKindText, bg = colors.black },
 
-        CmpItemKindUnit                 { CmpItemKindText },
-        CmpItemKindSnippet              { fg = colors.green, gui = "reverse" },
-        CmpItemKindFolder               { fg = colors.cyan, gui = "reverse" },
+        CmpItemKindUnit                 { CmpItemKindText, bg = colors.black },
+        CmpItemKindSnippet              { fg = colors.green, gui = "reverse", bg = colors.black },
+        CmpItemKindFolder               { fg = colors.cyan, gui = "reverse", bg = colors.black },
 
-        CmpItemKindMethod               { Method, gui = "reverse" },
-        CmpItemKindValue                { Special, gui = "reverse" },
-        CmpItemKindEnumMember           { Property, gui = "reverse" },
+        CmpItemKindMethod               { Method, gui = "reverse", bg = colors.black },
+        CmpItemKindValue                { Special, gui = "reverse", bg = colors.black },
+        CmpItemKindEnumMember           { Property, gui = "reverse", bg = colors.black },
 
-        CmpItemKindInterface            { Type, gui = "reverse" },
-        CmpItemKindColor                { CmpItemKindText },
-        CmpItemKindTypeParameter        { CmpItemKindText },
+        CmpItemKindInterface            { Type, gui = "reverse", bg = colors.black },
+        CmpItemKindColor                { CmpItemKindText, bg = colors.black },
+        CmpItemKindTypeParameter        { CmpItemKindText, bg = colors.black },
+
+        CmpItemKindCopilot              { bg = colors.green, fg = colors.black },
+        CmpItemKindTabNine              { bg = colors.white, fg = colors.black },
 
         TelescopeNormal                 { fg = colors.white.darken(66), bg = colors.black },
         TelescopeBorder                 { fg = colors.black, bg = colors.black },
         TelescopeTitle                  { TelescopeBorder },
         TelescopePreviewNormal          { bg = TelescopeNormal.bg },
-        TelescopePreviewBorder          { TelescopeBorder },
+        TelescopePreviewBorder          { fg = colors.black.lighten(25), bg = colors.black },
         TelescopePreviewTitle           { TelescopeBorder },
         TelescopeMatching               { CmpItemAbbrMatch },
         TelescopeResultsTitle           { TelescopeMatching },
         TelescopeResultsBorder          { TelescopeBorder },
-        TelescopePromptNormal           { fg = colors.white, bg = TelescopeNormal.bg.lighten(10) },
-        TelescopePromptBorder           { fg = TelescopePromptNormal.bg, bg = TelescopePromptNormal.bg },
-        TelescopePromptTitle            { TelescopePromptBorder },
+        TelescopePromptNormal           { fg = colors.white, bg = colors.black },
+        TelescopePromptBorder           { fg = colors.black.lighten(15), bg = colors.black },
+        TelescopePromptTitle            { TelescopeNormal },
         TelescopePromptPrefix           { fg = colors.blue, bg = TelescopePromptNormal.bg, gui = "bold" },
         TelescopeResultsLineNr          { LineNr },
-        TelescopeSelection              { fg = colors.white, bg = CursorLine.bg },
+        TelescopeSelection              { fg = colors.white, bg = FloatSel.bg },
         TelescopeSelectionCaret         { fg = colors.yellow, bg = TelescopeNormal.bg },
         TelescopePreviewLine            { CursorLine },
         TelescopeResultsFunction        { CmpItemKindFunction },
@@ -290,7 +295,7 @@ local theme = require("lush")(function()
         NeoTreeGitRenamed               { fg = colors.purple },
         NeoTreeGitDeleted               { diffDelete },
         NeoTreeGitAdded                 { diffAdded },
-        NeoTreeFloatBorder              { NeoTreeNormal, fg = NeoTreeNormal.bg },
+        -- NeoTreeFloatBorder              { NeoTreeNormal, fg = NeoTreeNormal.bg },
 
         yamlBool                        { Boolean },
         yamlBlockCollectionItemStart    { Special },
@@ -353,7 +358,7 @@ local theme = require("lush")(function()
         GitSignsChangeInline            { GitSignsChangeLn, bg = GitSignsChangeLn.bg.lighten(10), gui = "bold" },
         -- GitSignsChangeLnInline       { GitSignsChangeLn },
 
-        WinBar                          { fg = colors.white.darken(50), bg = "none" },
+        WinBar                          { fg = colors.white.darken(50), bg = BufferVisible.bg },
         WinBarNC                        { bg = WinBar.bg },
 
         BarbecueSeparator               { bg = WinBar.bg, fg = colors.white.darken(25), gui = "bold" },
@@ -399,10 +404,19 @@ local theme = require("lush")(function()
 
         ContextVt                       { fg = colors.black.lighten(15), gui = "italic" },
 
-        -- NoiceCmdline                    { fg = colors.white, bg = colors.yellow.darken(90) }
+        NoiceCmdline                    { fg = colors.white, bg = colors.yellow.darken(90) },
+
         SmoothCursor                    { fg = colors.orange, bg = SignColumn.bg },
 
         VirtColumn                      { fg = colors.black.lighten(5) },
+
+        DapBreakpoint                   { fg = colors.blue, bg = LineNr.bg },
+
+        LeapBackdrop                    { fg = colors.black.lighten(25) },
+        LeapMatch                       { fg = colors.white, gui = "bold" },
+        LeapLabelPrimary                { fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" },
+        LeapLabelSecondary              { fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" },
+        Cursor                          { fg = colors.white, gui = "reverse" },
     }
 end)
 
