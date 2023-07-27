@@ -1,19 +1,7 @@
 local colors = require("lush_theme.colors")
 
-local hsl = require("lush").hsl
-local colors = {
-    black = hsl("#181818"),
-    white = hsl("#f8f8f8"),
-    red = hsl("#ab4642"),
-    orange = hsl("#dc9656"),
-    yellow = hsl("#f7ca88"),
-    green = hsl("#a1b56c"),
-    blue = hsl("#7cafc2"),
-    cyan = hsl("#87c1b9"),
-    purple = hsl("#ba8baf"),
-}
-
-local theme = require("lush")(function()
+local theme = require("lush")(function(injected_functions)
+    local sym = injected_functions.sym
     return {
         Normal                          { bg = "none" }, -- Normal text
         NormalNC                        { bg = "none" }, -- normal text in non-current windows
@@ -68,8 +56,8 @@ local theme = require("lush")(function()
         SpellCap                        { sp = colors.blue, gui = "undercurl" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
         SpellLocal                      { sp = colors.cyan, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
         SpellRare                       { sp = colors.purple, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-        StatusLine                      { bg = "none" }, -- Status line of current window
-        StatusLineNC                    { bg = "none" }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+        StatusLine                      { bg = colors.black.lighten(10) }, -- Status line of current window
+        StatusLineNC                    { bg = colors.black.lighten(10) }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
         TabLine                         { fg = colors.black.lighten(30), bg = colors.black }, -- Tab pages line, not active tab page label
         TabLineFill                     { TabLine }, -- Tab pages line, where there are no labels
         TabLineSel                      { bg = colors.black.lighten(4) }, -- Tab pages line, active tab page label
@@ -180,22 +168,22 @@ local theme = require("lush")(function()
 
         TreesitterContext               { bg = colors.black.lighten(4) },
 
-        BufferCurrent                   { fg = colors.white, bg = colors.black },
+        BufferCurrent                   { fg = colors.white, bg = colors.black.lighten(10) },
         BufferCurrentIcon               { bg = BufferCurrent.bg },
         BufferCurrentMod                { fg = colors.red, bg = BufferCurrent.bg, gui = "italic" },
         BufferCurrentSign               { fg = colors.blue, bg = BufferCurrent.bg },
         BufferCurrentTarget             { fg = colors.purple, bg = BufferCurrent.bg, gui = "bold" },
-        BufferVisible                   { fg = BufferCurrent.fg.darken(25), bg = colors.black.lighten(5) },
+        BufferVisible                   { fg = BufferCurrent.fg.darken(35), bg = colors.black },
         BufferVisibleMod                { BufferCurrentMod, bg = BufferVisible.bg },
         BufferVisibleIcon               { bg = BufferVisible.bg },
         BufferVisibleSign               { fg = colors.white.darken(50), bg = BufferVisible.bg },
         BufferVisibleTarget             { fg = colors.purple, bg = BufferVisible.bg, gui = "bold" },
-        BufferInactive                  { fg = BufferVisible.fg.darken(50), bg = BufferVisible.bg },
+        BufferInactive                  { fg = BufferVisible.fg.darken(50), bg = colors.black },
         BufferInactiveMod               { BufferCurrentMod, bg = BufferInactive.bg },
         BufferInactiveIcon              { bg = BufferInactive.bg },
         BufferInactiveSign              { fg = BufferInactive.fg, bg = BufferInactive.bg },
         BufferInactiveTarget            { fg = colors.purple, bg = BufferInactive.bg, gui = "bold" },
-        BufferTabpageFill               { bg = colors.black.lighten(4), fg = colors.black.lighten(15) },
+        BufferTabpageFill               { bg = colors.black, fg = colors.white.darken(50) },
 
         BufferBg                        { bg = colors.black },
 
@@ -253,6 +241,7 @@ local theme = require("lush")(function()
 
         CmpItemKindCopilot              { bg = colors.green, fg = colors.black },
         CmpItemKindTabNine              { bg = colors.white, fg = colors.black },
+        CmpItemKindTreesitter           { bg = colors.green, fg = colors.black },
 
         TelescopeNormal                 { fg = colors.white.darken(66), bg = colors.black },
         TelescopeBorder                 { fg = colors.black, bg = colors.black },
@@ -277,8 +266,16 @@ local theme = require("lush")(function()
         TelescopeResultsConstant        { CmpItemKindConstant },
         TelescopeResultsProperty        { CmpItemKindProperty },
 
-        FidgetTitle                     { fg = colors.white, bg = "none" },
-        FidgetTask                      { fg = colors.blue, bg = "none" },
+        FidgetTitle                     { fg = colors.white, bg = WinBar.bg },
+        FidgetTask                      { fg = colors.blue, bg = WinBar.bg },
+
+        CodewindowBackground            { bg = "none" },
+        CodewindowBoundsBackground      { bg = CursorLine.bg },
+        CodewindowBorder                { fg = colors.black.lighten(15), bg = "none" },
+        CodewindowWarning               { fg = colors.yellow, bg = "none" },
+        CodewindowError                 { fg = colors.red, bg = "none" },
+        CodewindowAddition              { fg = colors.green, bg = "none" },
+        CodewindowDeletion              { fg = colors.red, bg = "none" },
 
         DevIconDefault                  { fg = colors.black.lighten(25) },
 
@@ -358,7 +355,7 @@ local theme = require("lush")(function()
         GitSignsChangeInline            { GitSignsChangeLn, bg = GitSignsChangeLn.bg.lighten(10), gui = "bold" },
         -- GitSignsChangeLnInline       { GitSignsChangeLn },
 
-        WinBar                          { fg = colors.white.darken(50), bg = BufferVisible.bg },
+        WinBar                          { fg = colors.white.darken(50), bg = colors.black.lighten(4) },
         WinBarNC                        { bg = WinBar.bg },
 
         BarbecueSeparator               { bg = WinBar.bg, fg = colors.white.darken(25), gui = "bold" },
@@ -393,12 +390,26 @@ local theme = require("lush")(function()
         BarbecueContextOperator         { Operator, bg = WinBar.bg },
         BarbecueContextTypeParameter    { fg = colors.white, bg = WinBar.bg },
 
+        NvimTreeFolderIcon              { fg = colors.orange },
+        NvimTreeFolderName              { fg = colors.white },
+        NvimTreeOPENEDFolderName        { NvimTreeFolderName },
+        NvimTreeRootFolder              { fg = colors.purple, gui = "bold", },
+        NvimTreeGitDirty                { fg = colors.red },
+        NvimTreeGitDeleted              { fg = colors.red.darken(25), gui = "italic" },
+        NvimTreeGitStaged               { fg = colors.green },
+        NvimTreeGitNew                  { fg = colors.yellow },
+        NvimTreeNormal                  { bg = colors.black },
+        NvimTreeSpecialFile             { fg = colors.yellow, gui = "underline,bold"},
+        NvimTreeIndentMarker            { FoldColumn, bg = "none" },
+        NvimTreeImageFile               { fg = colors.blue },
+
         HlArgs                          { fg = colors.orange, gui = "italic" },
 
         UfoMarker                       { Comment },
         UfoFoldedBg                     { bg = colors.purple.darken(50) },
 
         IlluminatedWordText             { CursorLine, gui = "underline" },
+        sym("illuminatedWord")          { IlluminatedWordText },
 
         LspInfoBorder                   { FloatBorder },
 
@@ -417,6 +428,21 @@ local theme = require("lush")(function()
         LeapLabelPrimary                { fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" },
         LeapLabelSecondary              { fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" },
         Cursor                          { fg = colors.white, gui = "reverse" },
+
+        FlashMatch                      { fg = colors.white.darken(20) },
+        FlashCurrent                    { fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" },
+        FlashLabel                      { fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" },
+
+        sym("@function.builtin")        { FuncBuiltin },
+        sym("@const.builtin")           { ConstBuiltin},
+        sym("@field")                    { Field },
+        sym("@property")                 { Property },
+        sym("@variable")                 { Variable },
+        sym("@variable.builtin")         { VariableBuiltin },
+        sym("@constructor")              { Constructor },
+        sym("@type.definition")          { TypeDefinition },
+        sym("@parameter")                { Parameter },
+        sym("@include")                  { PreProc },
     }
 end)
 
