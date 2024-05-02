@@ -6,14 +6,14 @@ local theme = require("lush")(function(injected_functions)
 		Normal { bg = "none" },                              -- Normal text
 		NormalNC { bg = "none" },                            -- normal text in non-current windows
 		NormalFloat { bg = colors.black },                   -- Normal text in floating windows.
-		Comment { fg = colors.black.lighten(25), gui = "italic" }, -- Any comment
+		Comment { fg = colors.black.lighten(30), gui = "italic" }, -- Any comment
 		FloatBorder { fg = NormalFloat.bg.lighten(45), bg = "none" },
 		FloatSel { bg = NormalFloat.bg.lighten(20), fg = "none" },
 		-- Conceal                      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
 		-- Cursor                       { }, -- Character under the cursor
 		-- lCursor                      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
 		-- CursorIM                     { }, -- Like Cursor, but used when in IME mode |CursorIM|
-		CursorLine { bg = colors.black.lighten(5) },                        -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+		CursorLine { bg = colors.black.lighten(12) },                       -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
 		CursorColumn { CursorLine },                                        -- Screen-column at the cursor, when 'cursorcolumn' is set.
 		Directory { fg = colors.white },                                    -- Directory names (and other special names in listings)
 		DiffAdd { fg = colors.green.lighten(25), bg = colors.green.darken(75) }, -- Diff mode: Added line |diff.txt|
@@ -50,7 +50,7 @@ local theme = require("lush")(function(injected_functions)
 		PmenuThumb { bg = Pmenu.bg.lighten(70) },               -- Popup menu: Thumb of the scrollbar.
 		DocMenu { bg = Pmenu.bg },
 		Question { fg = colors.green, gui = "bold,italic" },    -- |hit-enter| prompt and yes/no questions
-		-- QuickFixLine                 { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+		QuickFixLine { bg = colors.black.lighten(30) },         -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
 		SpecialKey { fg = colors.orange },                      -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
 		SpellBad { sp = colors.red, gui = "undercurl" },        -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
 		SpellCap { sp = colors.blue, gui = "undercurl" },       -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
@@ -63,7 +63,7 @@ local theme = require("lush")(function(injected_functions)
 		TabLineSel { bg = colors.black.lighten(4) },            -- Tab pages line, active tab page label
 		TablineLeftSeparator { fg = VertSplit.fg, bg = TabLine.bg },
 		Title { fg = colors.blue },                             -- Titles for output from ":set all", ":autocmd" etc.
-		Visual { fg = "none", bg = colors.black.lighten(10) },  -- Visual mode selection
+		Visual { fg = "none", bg = colors.black.lighten(18) },  -- Visual mode selection
 		-- VisualNOS                    { }, -- Visual mode selection when vim is "Not Owning the Selection".
 		WarningMsg { fg = colors.yellow },                      -- Warning messages
 		Whitespace { fg = colors.red, bg = colors.red },        -- "nbsp", "space", "tab" and "trail" in 'listchars'
@@ -191,10 +191,6 @@ local theme = require("lush")(function(injected_functions)
 		MarkSignHL { fg = colors.red, bg = LineNr.bg, gui = "bold" },
 		MarkSignNumHL { fg = "none" },
 
-		GitGutterAdd { diffAdded, bg = LineNr.bg },
-		GitGutterChange { diffChanged, bg = LineNr.bg },
-		GitGutterChangeDelete { diffChanged, bg = LineNr.bg },
-		GitGutterDelete { diffDelete, bg = LineNr.bg },
 		CmpGhostText { fg = Comment.fg.darken(10), gui = "none" },
 		CmpItemAbbrMatch { fg = colors.blue, gui = "bold" },
 		CmpItemAbbrMatchFuzzy { fg = CmpItemAbbrMatch.fg.rotate(180) },
@@ -408,16 +404,27 @@ local theme = require("lush")(function(injected_functions)
 		FlashMatch { fg = colors.white.darken(20) },
 		FlashCurrent { fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" },
 		FlashLabel { fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" },
+
+		GitSignsAdd { diffAdded, bg = LineNr.bg },
+		GitSignsChange { diffChanged, bg = LineNr.bg },
+		GitSignsChangeDelete { diffChanged, bg = LineNr.bg },
+		GitSignsDelete { diffDelete, bg = LineNr.bg },
+
 		sym("@function.builtin") { FuncBuiltin },
 		sym("@const.builtin") { ConstBuiltin },
 		sym("@field") { Field },
 		sym("@property") { Property },
 		sym("@variable") { Variable },
+		sym("@variable.member") { fg = colors.red },
 		sym("@variable.builtin") { VariableBuiltin },
 		sym("@constructor") { Constructor },
-		sym("@type.definition") { TypeDefinition },
+		sym("@type") { TypeDefinition },
 		sym("@parameter") { Parameter },
-		sym("@include") { PreProc },
+		sym("@operator") { fg = colors.purple },
+		sym("@module") { fg = colors.white.darken(20) },
+		sym("@keyword.import") { PreProc },
+
+		sym("@lsp.type.namespace.go") { sym("@module") },
 	}
 end)
 
