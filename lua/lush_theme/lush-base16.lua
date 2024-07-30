@@ -6,7 +6,7 @@ local theme = require("lush")(function(injected_functions)
 		Normal { bg = "none" },                              -- Normal text
 		NormalNC { bg = "none" },                            -- normal text in non-current windows
 		NormalFloat { bg = colors.black },                   -- Normal text in floating windows.
-		Comment { fg = colors.black.lighten(30), gui = "italic" }, -- Any comment
+		Comment { fg = colors.black.lighten(33), gui = "italic" }, -- Any comment
 		FloatBorder { fg = NormalFloat.bg.lighten(45), bg = "none" },
 		FloatSel { bg = NormalFloat.bg.lighten(20), fg = "none" },
 		-- Conceal                      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
@@ -32,13 +32,13 @@ local theme = require("lush")(function(injected_functions)
 		IncSearch { fg = colors.black, bg = colors.yellow, gui = "bold" }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
 		Search { bg = colors.black.lighten(10), gui = "underline" },      -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
 		Substitute { bg = colors.orange, fg = colors.black },             -- |:substitute| replacement text highlighting
-		LineNr { fg = colors.black.lighten(15), bg = colors.black.lighten(4) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+		LineNr { fg = colors.black.lighten(25), bg = colors.black.lighten(8) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
 		ColorColumn { fg = colors.black.lighten(10) },                    -- Columns set with 'colorcolumn'
 		VertSplit { bg = LineNr.bg, fg = colors.black.lighten(20) },      -- Column separating vertically split windows
 		SignColumn { LineNr },                                            -- Column where |signs| are displayed
 		FoldColumn { SignColumn, fg = SignColumn.fg.lighten(25) },        -- 'foldcolumn'
-		CursorLineNr { fg = colors.white, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-		MatchParen { bg = CursorLine.bg.lighten(8) },                     -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+		CursorLineNr { fg = colors.orange, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+		MatchParen { bg = CursorLine.bg.lighten(12) },                    -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
 		-- ModeMsg                      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
 		-- MsgArea                      { }, -- Area for messages and cmdline
 		-- MsgSeparator                 { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
@@ -63,32 +63,33 @@ local theme = require("lush")(function(injected_functions)
 		TabLineSel { bg = colors.black.lighten(4) },            -- Tab pages line, active tab page label
 		TablineLeftSeparator { fg = VertSplit.fg, bg = TabLine.bg },
 		Title { fg = colors.blue },                             -- Titles for output from ":set all", ":autocmd" etc.
-		Visual { fg = "none", bg = colors.black.lighten(18) },  -- Visual mode selection
+		Visual { bg = colors.purple.darken(50).desaturate(35) }, -- Visual mode selection
 		-- VisualNOS                    { }, -- Visual mode selection when vim is "Not Owning the Selection".
 		WarningMsg { fg = colors.yellow },                      -- Warning messages
 		Whitespace { fg = colors.red, bg = colors.red },        -- "nbsp", "space", "tab" and "trail" in 'listchars'
-		-- Winseparator                 { }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
+		WinSeparator { fg = VertSplit.bg.lighten(10), bg = VertSplit.bg },
 		WildMenu { Pmenu },                                     -- Current match in 'wildmenu' completion
+		Yank { bg = colors.yellow, fg = colors.black },
 
-		Constant { fg = colors.red, gui = "bold" },             -- (*) Any constant
-		String { fg = colors.green },                           --   A string constant: "this is a string"
-		Character { fg = colors.red },                          --   A character constant: 'c', '\n'
-		Number { fg = colors.orange },                          --   A number constant: 234, 0xff
-		Boolean { fg = colors.orange },                         --   A boolean constant: TRUE, false
-		Float { fg = colors.orange },                           --   A floating point constant: 2.3e10
+		Constant { fg = colors.red, gui = "bold" }, -- (*) Any constant
+		String { fg = colors.green },               --   A string constant: "this is a string"
+		Character { fg = colors.red },              --   A character constant: 'c', '\n'
+		Number { fg = colors.orange },              --   A number constant: 234, 0xff
+		Boolean { fg = colors.orange },             --   A boolean constant: TRUE, false
+		Float { fg = colors.orange },               --   A floating point constant: 2.3e10
 
-		Identifier { fg = colors.purple },                      -- (*) Any variable name
-		Function { fg = colors.blue },                          --   Function name (also: methods for classes)
+		Identifier { fg = colors.purple },          -- (*) Any variable name
+		Function { fg = colors.blue },              --   Function name (also: methods for classes)
 
-		Statement { fg = colors.purple, gui = "italic" },       -- (*) Any statement
-		Keyword { Statement },                                  --   any other keyword
-		Operator { fg = colors.purple },                        --   "sizeof", "+", "*", etc.
+		Statement { fg = colors.purple, gui = "italic" }, -- (*) Any statement
+		Keyword { Statement },                      --   any other keyword
+		Operator { fg = colors.purple },            --   "sizeof", "+", "*", etc.
 		-- Conditional                  { }, --   if, then, else, endif, switch, etc.
-		Repeat { fg = colors.yellow, gui = "italic" },          --   for, do, while, etc.
+		Repeat { fg = colors.yellow, gui = "italic" }, --   for, do, while, etc.
 		-- Label                        { }, --   case, default, etc.
-		Exception { fg = colors.red, gui = "italic" },          --   try, catch, throw
+		Exception { fg = colors.red, gui = "italic" }, --   try, catch, throw
 
-		PreProc { fg = colors.blue, gui = "italic" },           -- (*) Generic Preprocessor
+		PreProc { fg = colors.blue, gui = "italic" }, -- (*) Generic Preprocessor
 		-- Include                      { }, --   Preprocessor #include
 		-- Define                       { }, --   Preprocessor #define
 		-- Macro                        { }, --   Same as Define
@@ -106,35 +107,35 @@ local theme = require("lush")(function(injected_functions)
 		-- SpecialComment               { }, --   Special things inside a comment (e.g. '\n')
 		-- Debug                        { }, --   Debugging statements
 
-		Underlined { fg = "none", gui = "underline" },        -- Text that stands out, HTML links
-		Ignore { Comment },                                   -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
-		Error { fg = colors.red, gui = "bold" },              -- Any erroneous construct
+		Underlined { fg = "none", gui = "underline" },             -- Text that stands out, HTML links
+		Ignore { Comment },                                        -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
+		Error { fg = colors.red, gui = "bold" },                   -- Any erroneous construct
 		Todo { fg = colors.black, bg = colors.cyan, gui = "bold" }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
-		ConstBuiltin { Constant },                            -- Built-in constant values: `nil` in Lua.
-		ConstMacro { Constant },                              -- Constants defined by macros: `NULL` in C.
-		Field { fg = colors.red },                            -- Object and struct fields.
-		Property { Field },                                   -- Same as `Field`.
-		FuncBuiltin { fg = colors.cyan, gui = "italic" },     -- Built-in functions: `print` in Lua.
-		Method { Function },                                  -- Method calls and definitions.
-		Include {},                                           -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
-		Keyword { Keyword },                                  -- Keywords that don't fit into other categories.
-		KeywordFunction { Keyword, gui = "none" },            -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
-		KeywordReturn { Keyword, gui = "italic" },            -- Keywords like `return` and `yield`.
-		Label { fg = colors.yellow },                         -- GOTO labels: `label:` in C, and `::label::` in Lua.
-		None { fg = colors.white },                           -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
-		Variable { fg = colors.white },                       -- Variable names that don't fit into other categories.
-		Parameter { fg = colors.orange, gui = "italic" },     -- Parameters of a function.
-		VariableBuiltin { fg = colors.yellow, gui = "italic" }, -- Variable names defined by the language: `this` or `self` in Javascript.
-		Strong { gui = "bold" },                              -- Text to be represented in bold.
-		Emphasis { Strong },                                  -- Text to be represented with emphasis.
-		Underline { gui = "underline" },                      -- Text to be represented with an underline.
-		Strike { gui = "strikethrough" },                     -- Strikethrough text.
-		URI { gui = "none" },                                 -- URIs like hyperlinks or email addresses.
-		TextReference { fg = colors.red },                    -- Footnotes, text references, citations, etc.
-		Warning { WarningMsg },                               -- Text representation of a warning note.
-		Danger { Error },                                     -- Text representation of a danger note.
-		TypeBuiltin { Type, gui = "italic" },                 -- Built-in types: `i32` in Rust.
+		ConstBuiltin { fg = colors.red.darken(5), gui = "italic,bold" }, -- Built-in constant values: `nil` in Lua.
+		ConstMacro { Constant },                                   -- Constants defined by macros: `NULL` in C.
+		Field { fg = colors.red },                                 -- Object and struct fields.
+		Property { Field },                                        -- Same as `Field`.
+		FuncBuiltin { fg = colors.cyan, gui = "italic" },          -- Built-in functions: `print` in Lua.
+		Method { Function },                                       -- Method calls and definitions.
+		Include {},                                                -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
+		Keyword { Keyword },                                       -- Keywords that don't fit into other categories.
+		KeywordFunction { Keyword, gui = "none" },                 -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
+		KeywordReturn { Keyword, gui = "italic" },                 -- Keywords like `return` and `yield`.
+		Label { fg = colors.yellow },                              -- GOTO labels: `label:` in C, and `::label::` in Lua.
+		None { fg = colors.white },                                -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
+		Variable { fg = colors.white },                            -- Variable names that don't fit into other categories.
+		Parameter { fg = colors.orange, gui = "italic" },          -- Parameters of a function.
+		VariableBuiltin { fg = colors.yellow, gui = "italic" },    -- Variable names defined by the language: `this` or `self` in Javascript.
+		Strong { gui = "bold" },                                   -- Text to be represented in bold.
+		Emphasis { Strong },                                       -- Text to be represented with emphasis.
+		Underline { gui = "underline" },                           -- Text to be represented with an underline.
+		Strike { gui = "strikethrough" },                          -- Strikethrough text.
+		URI { gui = "none" },                                      -- URIs like hyperlinks or email addresses.
+		TextReference { fg = colors.red },                         -- Footnotes, text references, citations, etc.
+		Warning { WarningMsg },                                    -- Text representation of a warning note.
+		Danger { Error },                                          -- Text representation of a danger note.
+		TypeBuiltin { Type, gui = "italic" },                      -- Built-in types: `i32` in Rust.
 		TypeDefinition { Type },
 		Constructor { Type },
 
@@ -166,8 +167,7 @@ local theme = require("lush")(function(injected_functions)
 		DiagnosticSignInfo { DiagnosticInfo, bg = LineNr.bg }, -- Used for "Info" signs in sign column.
 		DiagnosticSignHint { DiagnosticHint, bg = LineNr.bg }, -- Used for "Hint" signs in sign column.
 
-		TreesitterContext { bg = colors.black.lighten(4) },
-		BufferCurrent { fg = colors.white, bg = colors.black.lighten(10) },
+		BufferCurrent { fg = colors.white, bg = colors.black.lighten(15) },
 		BufferCurrentIcon { bg = BufferCurrent.bg },
 		BufferCurrentMod { fg = colors.red, bg = BufferCurrent.bg, gui = "italic" },
 		BufferCurrentSign { fg = colors.blue, bg = BufferCurrent.bg },
@@ -192,8 +192,8 @@ local theme = require("lush")(function(injected_functions)
 		MarkSignNumHL { fg = "none" },
 
 		CmpGhostText { fg = Comment.fg.darken(10), gui = "none" },
-		CmpItemAbbrMatch { fg = colors.blue, gui = "bold" },
-		CmpItemAbbrMatchFuzzy { fg = CmpItemAbbrMatch.fg.rotate(180) },
+		CmpItemAbbrMatch { fg = colors.orange, gui = "bold" },
+		CmpItemAbbrMatchFuzzy { fg = CmpItemAbbrMatch.fg.desaturate(50) },
 		CmpItemAbbrDefault { fg = colors.white.darken(10) },
 		CmpItemMenu { fg = Pmenu.bg.lighten(45), gui = "italic" },
 		CmpItemKindField { Field, gui = "reverse", bg = colors.black },
@@ -225,6 +225,7 @@ local theme = require("lush")(function(injected_functions)
 		CmpItemKindCopilot { bg = colors.green, fg = colors.black },
 		CmpItemKindTabNine { bg = colors.white, fg = colors.black },
 		CmpItemKindTreesitter { bg = colors.green, fg = colors.black },
+
 		TelescopeNormal { fg = colors.white.darken(50), bg = colors.black },
 		TelescopeBorder { fg = colors.black.lighten(33), bg = colors.black },
 		TelescopeTitle { TelescopeBorder },
@@ -237,7 +238,7 @@ local theme = require("lush")(function(injected_functions)
 		TelescopePromptNormal { fg = colors.white, bg = colors.black },
 		TelescopePromptBorder { TelescopeBorder },
 		TelescopePromptTitle { TelescopeNormal },
-		TelescopePromptPrefix { fg = colors.blue, bg = TelescopePromptNormal.bg, gui = "bold" },
+		TelescopePromptPrefix { fg = colors.orange, bg = TelescopePromptNormal.bg, gui = "bold" },
 		TelescopeResultsLineNr { LineNr },
 		TelescopeSelection { fg = colors.white, bg = FloatSel.bg },
 		TelescopeSelectionCaret { fg = colors.yellow, bg = TelescopeNormal.bg },
@@ -247,6 +248,7 @@ local theme = require("lush")(function(injected_functions)
 		TelescopeResultsVariable { CmpItemKindVariable },
 		TelescopeResultsConstant { CmpItemKindConstant },
 		TelescopeResultsProperty { CmpItemKindProperty },
+
 		FidgetTitle { fg = colors.white, bg = WinBar.bg },
 		FidgetTask { fg = colors.blue, bg = WinBar.bg },
 
@@ -324,6 +326,7 @@ local theme = require("lush")(function(injected_functions)
 		HopNextKey { fg = colors.purple.saturate(25), bg = colors.purple.darken(75), gui = "bold" },
 		HopNextKey1 { fg = colors.blue.saturate(25), bg = colors.blue.darken(75), gui = "bold" },
 		HopNextKey2 { fg = colors.cyan.saturate(25), bg = colors.cyan.darken(75), gui = "bold" },
+
 		GitSignsAddLn { DiffAdd },
 		GitSignsAddInline { GitSignsAddLn, bg = GitSignsAddLn.bg.lighten(10), gui = "bold" },
 		-- GitSignsAddLnInline          { bg = colors.yellow },
@@ -333,9 +336,14 @@ local theme = require("lush")(function(injected_functions)
 		GitSignsChangeLn { DiffChange },
 		GitSignsChangeInline { GitSignsChangeLn, bg = GitSignsChangeLn.bg.lighten(10), gui = "bold" },
 		-- GitSignsChangeLnInline       { GitSignsChangeLn },
+		GitSignsAdd { diffAdded, bg = LineNr.bg },
+		GitSignsChange { diffChanged, bg = LineNr.bg },
+		GitSignsChangeDelete { diffChanged, bg = LineNr.bg },
+		GitSignsDelete { diffDelete, bg = LineNr.bg },
 
-		WinBar { fg = colors.white.darken(50), bg = colors.black.lighten(4) },
+		WinBar { fg = colors.white.darken(50), bg = LineNr.bg },
 		WinBarNC { bg = WinBar.bg },
+
 		BarbecueSeparator { bg = WinBar.bg, fg = colors.white.darken(25), gui = "bold" },
 		BarbecueDirname { WinBar },
 		BarbecueBasename { WinBar },
@@ -367,6 +375,7 @@ local theme = require("lush")(function(injected_functions)
 		BarbecueContextEvent { CmpItemKindEvent, bg = WinBar.bg },
 		BarbecueContextOperator { Operator, bg = WinBar.bg },
 		BarbecueContextTypeParameter { fg = colors.white, bg = WinBar.bg },
+
 		NvimTreeFolderIcon { fg = colors.orange },
 		NvimTreeFolderName { fg = colors.white },
 		NvimTreeOPENEDFolderName { NvimTreeFolderName },
@@ -379,8 +388,9 @@ local theme = require("lush")(function(injected_functions)
 		NvimTreeSpecialFile { fg = colors.yellow, gui = "underline,bold" },
 		NvimTreeIndentMarker { FoldColumn, bg = "none" },
 		NvimTreeImageFile { fg = colors.blue },
+		NvimTreeWinSeparator { WinSeparator },
 
-		HlArgs { fg = colors.orange, gui = "italic" },
+		HlArgs { Parameter },
 
 		UfoMarker { Comment },
 		UfoFoldedBg { bg = colors.purple.darken(50) },
@@ -405,10 +415,9 @@ local theme = require("lush")(function(injected_functions)
 		FlashCurrent { fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" },
 		FlashLabel { fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" },
 
-		GitSignsAdd { diffAdded, bg = LineNr.bg },
-		GitSignsChange { diffChanged, bg = LineNr.bg },
-		GitSignsChangeDelete { diffChanged, bg = LineNr.bg },
-		GitSignsDelete { diffDelete, bg = LineNr.bg },
+		Delimiter { Operator },
+
+		TreesitterContext { fg = "none", bg = WinBar.bg },
 
 		sym("@function.builtin") { FuncBuiltin },
 		sym("@const.builtin") { ConstBuiltin },
@@ -425,6 +434,11 @@ local theme = require("lush")(function(injected_functions)
 		sym("@keyword.import") { PreProc },
 
 		sym("@lsp.type.namespace.go") { sym("@module") },
+		sym("@type.builtin.go") { sym("@type") },
+		sym("@constant.builtin.go") { sym("@const.builtin") },
+		-- sym("@variable.member.go") { fg = colors.white },
+
+		sym("@keyword.exception.python") { fg = colors.red, gui = "italic" },
 	}
 end)
 
