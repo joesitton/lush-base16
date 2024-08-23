@@ -42,33 +42,29 @@ local theme = require("lush")(function(injected_functions)
 		-- ModeMsg                      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
 		-- MsgArea                      { }, -- Area for messages and cmdline
 		-- MsgSeparator                 { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
-		MoreMsg { fg = colors.green, gui = "bold,italic" },     -- |more-prompt|
-		NonText { fg = colors.black.lighten(15) },              -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-		Pmenu { fg = "none", bg = colors.black.lighten(30) },   -- Popup menu: Normal item.
-		PmenuSel { bg = Pmenu.bg.lighten(10) },                 -- Popup menu: Selected item.
-		PmenuSbar { bg = Pmenu.bg.darken(30) },                 -- Popup menu: Scrollbar.
-		PmenuThumb { bg = Pmenu.bg.lighten(70) },               -- Popup menu: Thumb of the scrollbar.
+		MoreMsg { fg = colors.green, gui = "bold,italic" }, -- |more-prompt|
+		NonText { fg = colors.black.lighten(15) },         -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+		Pmenu { fg = "none", bg = colors.black.lighten(30) }, -- Popup menu: Normal item.
+		PmenuSel { bg = Pmenu.bg.lighten(10) },            -- Popup menu: Selected item.
+		PmenuSbar { bg = Pmenu.bg.darken(30) },            -- Popup menu: Scrollbar.
+		PmenuThumb { bg = Pmenu.bg.lighten(70) },          -- Popup menu: Thumb of the scrollbar.
 		DocMenu { bg = Pmenu.bg },
-		Question { fg = colors.green, gui = "bold,italic" },    -- |hit-enter| prompt and yes/no questions
-		QuickFixLine { bg = colors.black.lighten(30) },         -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-		SpecialKey { fg = colors.orange },                      -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
-		SpellBad { sp = colors.red, gui = "undercurl" },        -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-		SpellCap { sp = colors.blue, gui = "undercurl" },       -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-		SpellLocal { sp = colors.cyan, gui = "undercurl" },     -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-		SpellRare { sp = colors.purple, gui = "undercurl" },    -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-		StatusLine { bg = colors.black.lighten(10) },           -- Status line of current window
-		StatusLineNC { bg = colors.black.lighten(10) },         -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-		TabLine { fg = colors.black.lighten(30), bg = colors.black }, -- Tab pages line, not active tab page label
-		TabLineFill { TabLine },                                -- Tab pages line, where there are no labels
-		TabLineSel { bg = colors.black.lighten(4) },            -- Tab pages line, active tab page label
-		TablineLeftSeparator { fg = VertSplit.fg, bg = TabLine.bg },
-		Title { fg = colors.blue },                             -- Titles for output from ":set all", ":autocmd" etc.
+		Question { fg = colors.green, gui = "bold,italic" }, -- |hit-enter| prompt and yes/no questions
+		QuickFixLine { bg = colors.black.lighten(30) },    -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+		SpecialKey { fg = colors.orange },                 -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
+		SpellBad { sp = colors.red, gui = "undercurl" },   -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+		SpellCap { sp = colors.blue, gui = "undercurl" },  -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+		SpellLocal { sp = colors.cyan, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+		SpellRare { sp = colors.purple, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
+		StatusLine { bg = colors.black.lighten(10) },      -- Status line of current window
+		StatusLineNC { bg = colors.black.lighten(10) },    -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+		Title { fg = colors.blue },                        -- Titles for output from ":set all", ":autocmd" etc.
 		Visual { bg = colors.purple.darken(50).desaturate(35) }, -- Visual mode selection
 		-- VisualNOS                    { }, -- Visual mode selection when vim is "Not Owning the Selection".
-		WarningMsg { fg = colors.yellow },                      -- Warning messages
-		Whitespace { fg = colors.red, bg = colors.red },        -- "nbsp", "space", "tab" and "trail" in 'listchars'
+		WarningMsg { fg = colors.yellow },                 -- Warning messages
+		Whitespace { fg = colors.red, bg = colors.red },   -- "nbsp", "space", "tab" and "trail" in 'listchars'
 		WinSeparator { fg = VertSplit.bg.lighten(10), bg = VertSplit.bg },
-		WildMenu { Pmenu },                                     -- Current match in 'wildmenu' completion
+		WildMenu { Pmenu },                                -- Current match in 'wildmenu' completion
 		Yank { bg = colors.yellow, fg = colors.black },
 
 		Constant { fg = colors.red, gui = "bold" }, -- (*) Any constant
@@ -184,6 +180,15 @@ local theme = require("lush")(function(injected_functions)
 		BufferInactiveTarget { fg = colors.purple, bg = BufferInactive.bg, gui = "bold" },
 		BufferTabpageFill { bg = colors.black, fg = colors.white.darken(50) },
 		BufferBg { bg = colors.black },
+
+		TablineHead { fg = colors.purple, bg = colors.black.lighten(15) },
+		TabLine { fg = colors.white, bg = colors.black.lighten(15) },
+		TablineFill { fg = colors.black.lighten(15), bg = colors.black },
+		TablineWin { fg = colors.white.darken(25), bg = colors.black.lighten(15) },
+		TablineSel { fg = colors.white, bg = colors.black.lighten(15) },
+		TablineSep { fg = colors.black, bg = colors.black.lighten(15) },
+		TablineTail { fg = colors.green, bg = colors.black.lighten(15) },
+		BufferModified { fg = colors.red, bg = colors.black.lighten(15) },
 
 		IblIndent { fg = VertSplit.bg.lighten(10) },
 		IblScope { fg = colors.purple.darken(25).desaturate(50) },
@@ -418,6 +423,8 @@ local theme = require("lush")(function(injected_functions)
 		Delimiter { Operator },
 
 		TreesitterContext { fg = "none", bg = WinBar.bg },
+
+		WhichKeyBorder { FloatBorder },
 
 		sym("@function.builtin") { FuncBuiltin },
 		sym("@const.builtin") { ConstBuiltin },
