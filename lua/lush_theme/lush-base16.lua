@@ -2,6 +2,7 @@ local colors = require("lush_theme.colors")
 
 local theme = require("lush")(function(injected_functions)
 	local sym = injected_functions.sym
+
 	return {
 		Normal { bg = "none" },                              -- Normal text
 		NormalNC { bg = "none" },                            -- normal text in non-current windows
@@ -32,7 +33,7 @@ local theme = require("lush")(function(injected_functions)
 		IncSearch { fg = colors.black, bg = colors.yellow, gui = "bold" }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
 		Search { bg = colors.black.lighten(10), gui = "underline" },      -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
 		Substitute { bg = colors.orange, fg = colors.black },             -- |:substitute| replacement text highlighting
-		LineNr { fg = colors.black.lighten(25), bg = colors.black.lighten(8) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+		LineNr { fg = colors.black.lighten(30), bg = colors.black.lighten(6) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
 		ColorColumn { fg = colors.black.lighten(10) },                    -- Columns set with 'colorcolumn'
 		VertSplit { bg = LineNr.bg, fg = colors.black.lighten(20) },      -- Column separating vertically split windows
 		SignColumn { LineNr },                                            -- Column where |signs| are displayed
@@ -163,7 +164,7 @@ local theme = require("lush")(function(injected_functions)
 		DiagnosticSignInfo { DiagnosticInfo, bg = LineNr.bg }, -- Used for "Info" signs in sign column.
 		DiagnosticSignHint { DiagnosticHint, bg = LineNr.bg }, -- Used for "Hint" signs in sign column.
 
-		BufferCurrent { fg = colors.white, bg = colors.black.lighten(15) },
+		BufferCurrent { fg = colors.white, bg = colors.black.lighten(20) },
 		BufferCurrentIcon { bg = BufferCurrent.bg },
 		BufferCurrentMod { fg = colors.red, bg = BufferCurrent.bg, gui = "italic" },
 		BufferCurrentSign { fg = colors.blue, bg = BufferCurrent.bg },
@@ -346,40 +347,8 @@ local theme = require("lush")(function(injected_functions)
 		GitSignsChangeDelete { diffChanged, bg = LineNr.bg },
 		GitSignsDelete { diffDelete, bg = LineNr.bg },
 
-		WinBar { fg = colors.white.darken(50), bg = LineNr.bg },
+		WinBar { fg = colors.white.darken(50), bg = colors.black.lighten(14) },
 		WinBarNC { bg = WinBar.bg },
-
-		BarbecueSeparator { bg = WinBar.bg, fg = colors.white.darken(25), gui = "bold" },
-		BarbecueDirname { WinBar },
-		BarbecueBasename { WinBar },
-		BarbecueContext { WinBar },
-		BarbecueEllipsis { WinBar },
-		BarbecueContextFile { fg = colors.white, bg = WinBar.bg },
-		BarbecueContextModule { Include, bg = WinBar.bg },
-		BarbecueContextNamespace { Include, bg = WinBar.bg },
-		BarbecueContextPackage { FuncBuiltin, bg = WinBar.bg, gui = "none" },
-		BarbecueContextClass { Type, bg = WinBar.bg },
-		BarbecueContextMethod { Function, bg = WinBar.bg },
-		BarbecueContextProperty { Property, bg = WinBar.bg },
-		BarbecueContextField { Field, bg = WinBar.bg },
-		BarbecueContextConstructor { Constructor, bg = WinBar.bg },
-		BarbecueContextEnum { fg = colors.purple, bg = WinBar.bg },
-		BarbecueContextInterface { fg = colors.purple, bg = WinBar.bg },
-		BarbecueContextFunction { Function, bg = WinBar.bg },
-		BarbecueContextVariable { Variable, bg = WinBar.bg },
-		BarbecueContextConstant { Constant, bg = WinBar.bg },
-		BarbecueContextString { String, bg = WinBar.bg },
-		BarbecueContextNumber { Number, bg = WinBar.bg },
-		BarbecueContextBoolean { Boolean, bg = WinBar.bg },
-		BarbecueContextArray { Type, bg = WinBar.bg },
-		BarbecueContextObject { Type, bg = WinBar.bg },
-		BarbecueContextKey { Keyword, bg = WinBar.bg },
-		BarbecueContextNull { ConstMacro, bg = WinBar.bg },
-		BarbecueContextEnumMember { Type, bg = WinBar.bg },
-		BarbecueContextStruct { Type, bg = WinBar.bg },
-		BarbecueContextEvent { CmpItemKindEvent, bg = WinBar.bg },
-		BarbecueContextOperator { Operator, bg = WinBar.bg },
-		BarbecueContextTypeParameter { fg = colors.white, bg = WinBar.bg },
 
 		NvimTreeFolderIcon { fg = colors.orange },
 		NvimTreeFolderName { fg = colors.white },
@@ -409,12 +378,39 @@ local theme = require("lush")(function(injected_functions)
 		NoiceCmdline { fg = colors.white, bg = colors.yellow.darken(90) },
 		SmoothCursor { fg = colors.orange, bg = SignColumn.bg },
 		VirtColumn { fg = colors.black.lighten(5) },
-		DapBreakpoint { fg = colors.blue, bg = LineNr.bg },
+
 		LeapBackdrop { fg = colors.black.lighten(25) },
 		LeapMatch { fg = colors.white, gui = "bold" },
 		LeapLabelPrimary { fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" },
 		LeapLabelSecondary { fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" },
+
 		Cursor { fg = colors.white, gui = "reverse" },
+
+		DapBreakpoint { fg = colors.red, bg = LineNr.bg, gui = "bold" },
+		DapStopped { fg = colors.red, bg = LineNr.bg },
+		DapUIDecoration { fg = colors.white },
+		DapUIStop { DapStopped },
+		DapUIBreakpointsPath { fg = colors.blue },
+		DapUIBreakpointsLine { fg = colors.orange },
+		DapUIWatchesEmpty { fg = colors.red },
+		DapUIWatchesValue { fg = colors.green },
+		DapUIStoppedThread { fg = colors.purple },
+		DapUIThread { fg = colors.green },
+		DapUICurrentFrameName { fg = colors.green },
+		DapUISource { fg = colors.blue },
+		DapUIScope { fg = colors.blue },
+		DapUIVariable { fg = colors.white },
+		DapUIType { fg = colors.yellow },
+		DapUIValue { fg = colors.green },
+		DapUIPlayPause { fg = colors.green, bg = LineNr.bg },
+		DapUIRestart { fg = colors.green, bg = LineNr.bg },
+		DapUIStepOver { fg = colors.blue, bg = LineNr.bg },
+		DapUIStepInto { fg = colors.blue, bg = LineNr.bg },
+		DapUIStepOut { fg = colors.blue, bg = LineNr.bg },
+		DapUIStepBack { fg = colors.blue, bg = LineNr.bg },
+		DapUILineNumber { fg = colors.orange },
+		DapUINormalNC { bg = LineNr.bg },
+		DapUIModifiedValue { fg = colors.red },
 
 		FlashMatch { fg = colors.white.darken(20) },
 		FlashCurrent { fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" },
@@ -422,30 +418,66 @@ local theme = require("lush")(function(injected_functions)
 
 		Delimiter { Operator },
 
-		TreesitterContext { fg = "none", bg = WinBar.bg },
+		TreesitterContext { bg = WinBar.bg, gui = "" },
+		TreesitterContextBottom { bg = WinBar.bg, gui = "" },
+		TreesitterContextLineNumberBottom { fg = colors.orange, gui = "underline" },
 
 		WhichKeyBorder { FloatBorder },
 
-		sym("@function.builtin") { FuncBuiltin },
-		sym("@const.builtin") { ConstBuiltin },
-		sym("@field") { Field },
-		sym("@property") { Property },
-		sym("@variable") { Variable },
-		sym("@variable.member") { fg = colors.red },
-		sym("@variable.builtin") { VariableBuiltin },
-		sym("@constructor") { Constructor },
-		sym("@type") { TypeDefinition },
-		sym("@parameter") { Parameter },
-		sym("@operator") { fg = colors.purple },
-		sym("@module") { fg = colors.white.darken(20) },
+		LspSignatureActiveParameter { HlArgs, gui = "underline" },
+		LspInlayHint { fg = colors.black.lighten(50), gui = "italic" },
+
+		sym("@lsp.type.class") { Type },
+		sym("@lsp.type.comment") { Comment },
+		sym("@lsp.type.decorator") { PreProc },
+		sym("@lsp.type.enum") { Type },
+		sym("@lsp.type.enumMember") { Field },
+		sym("@lsp.type.event") { Type },
+		sym("@lsp.type.function") {},
+		sym("@lsp.type.interface") { Type },
+		sym("@lsp.type.keyword") {},
+		sym("@lsp.type.macro") { Constant },
+		sym("@lsp.type.method") { Function },
+		sym("@lsp.type.modifier") { Type },
+		sym("@lsp.type.namespace") { fg = colors.white.darken(20), gui = "italic" },
+		sym("@lsp.type.number") { Number },
+		sym("@lsp.type.operator") { Operator },
+		sym("@lsp.type.parameter") { Parameter },
+		sym("@lsp.type.property") { Field },
+		sym("@lsp.type.regexp") { fg = colors.orange },
+		sym("@lsp.type.string") { String },
+		sym("@lsp.type.struct") { Type },
+		sym("@lsp.type.type") { Type },
+		sym("@lsp.type.typeParameter") { Type },
+		sym("@lsp.type.variable") {},
+
+		sym("@lsp.mod.abstract") {},
+		sym("@lsp.mod.async") {},
+		sym("@lsp.mod.declaration") {},
+		sym("@lsp.mod.defaultLibrary") {},
+		sym("@lsp.mod.definition") {},
+		sym("@lsp.mod.deprecated") { Comment },
+		sym("@lsp.mod.documentation") {},
+		sym("@lsp.mod.modification") {},
+		sym("@lsp.mod.readonly") {},
+		sym("@lsp.mod.static") {},
+
+		sym("@lsp.typemod.type") { Type },
+		sym("@lsp.typemod.method") { sym("@lsp.type.method") },
+		sym("@lsp.typemod.definition") {},
+		sym("@lsp.typemod.variable.readonly") {},
+		sym("@lsp.typemod.type.defaultLibrary") {},
+		sym("@lsp.typemod.function.defaultLibrary") { FuncBuiltin },
+
+		sym("@type.builtin") { Type },
 		sym("@keyword.import") { PreProc },
-
-		sym("@lsp.type.namespace.go") { sym("@module") },
-		sym("@type.builtin.go") { sym("@type") },
-		sym("@constant.builtin.go") { sym("@const.builtin") },
-		-- sym("@variable.member.go") { fg = colors.white },
-
-		sym("@keyword.exception.python") { fg = colors.red, gui = "italic" },
+		sym("@module") { sym("@lsp.type.namespace") },
+		sym("@variable.member") { Field },
+		sym("@variable.parameter") { Parameter },
+		sym("@function.builtin") { FuncBuiltin },
+		sym("@property") { Field },
+		sym("@type.variable") { Field },
+		sym("@constructor") { Type },
 	}
 end)
 
