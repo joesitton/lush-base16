@@ -194,8 +194,9 @@ local theme = require("lush")(function(injected_functions)
 		IblIndent { fg = VertSplit.bg.lighten(10) },
 		IblScope { fg = colors.purple.darken(25).desaturate(50) },
 		TreeIndentMarker { IblIndent },
+
 		MarkSignHL { fg = colors.red, bg = LineNr.bg, gui = "bold" },
-		MarkSignNumHL { fg = "none" },
+		MarkSignNumHL { CursorLineNr },
 
 		CmpGhostText { fg = Comment.fg.darken(10), gui = "none" },
 		CmpItemAbbrMatch { fg = colors.orange, gui = "bold" },
@@ -254,6 +255,7 @@ local theme = require("lush")(function(injected_functions)
 		TelescopeResultsVariable { CmpItemKindVariable },
 		TelescopeResultsConstant { CmpItemKindConstant },
 		TelescopeResultsProperty { CmpItemKindProperty },
+		TelescopeResultsStruct { Type },
 
 		FidgetTitle { fg = colors.white, bg = WinBar.bg },
 		FidgetTask { fg = colors.blue, bg = WinBar.bg },
@@ -369,6 +371,11 @@ local theme = require("lush")(function(injected_functions)
 		UfoMarker { Comment },
 		UfoFoldedBg { bg = colors.purple.darken(50) },
 
+		NullLsInfoBorder { FloatBorder },
+
+		CodeActionNumber { fg = colors.orange, gui = "bold" },
+		RenameNormal { Normal },
+
 		IlluminatedWordText { CursorLine, gui = "underline" },
 		sym("illuminatedWord") { IlluminatedWordText },
 
@@ -419,13 +426,22 @@ local theme = require("lush")(function(injected_functions)
 		Delimiter { Operator },
 
 		TreesitterContext { bg = WinBar.bg, gui = "" },
-		TreesitterContextBottom { bg = WinBar.bg, gui = "" },
-		TreesitterContextLineNumberBottom { fg = colors.orange, gui = "underline" },
+		TreesitterContextBottom { bg = WinBar.bg, gui = "none", guisp = colors.gray },
+		TreesitterContextLineNumberBottom { fg = LineNr.fg, gui = "underline", guisp = colors.gray },
 
 		WhichKeyBorder { FloatBorder },
 
 		LspSignatureActiveParameter { HlArgs, gui = "underline" },
 		LspInlayHint { fg = colors.black.lighten(50), gui = "italic" },
+
+		AerialConstant { Constant },
+		AerialFunction { Function },
+		AerialStruct { Type },
+		AerialField { Field },
+		AerialMethod { Function },
+		AerialModule { PreProc },
+
+		UndotreeBranch { fg = colors.purple },
 
 		sym("@lsp.type.class") { Type },
 		sym("@lsp.type.comment") { Comment },
@@ -445,7 +461,7 @@ local theme = require("lush")(function(injected_functions)
 		sym("@lsp.type.parameter") { Parameter },
 		sym("@lsp.type.property") { Field },
 		sym("@lsp.type.regexp") { fg = colors.orange },
-		sym("@lsp.type.string") { String },
+		sym("@lsp.type.string") {},
 		sym("@lsp.type.struct") { Type },
 		sym("@lsp.type.type") { Type },
 		sym("@lsp.type.typeParameter") { Type },
@@ -478,6 +494,12 @@ local theme = require("lush")(function(injected_functions)
 		sym("@property") { Field },
 		sym("@type.variable") { Field },
 		sym("@constructor") { Type },
+
+		sym("@lsp.type.property.lua") {},
+
+		sym("@diff.minus") { diffRemoved },
+		sym("@diff.plus") { diffAdded },
+		sym("@diff.delta") { diffChanged },
 	}
 end)
 
