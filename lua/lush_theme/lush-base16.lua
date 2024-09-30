@@ -440,6 +440,7 @@ local theme = require("lush")(function(injected_functions)
 		AerialField { Field },
 		AerialMethod { Function },
 		AerialModule { PreProc },
+		AerialLine { CursorLine },
 
 		UndotreeBranch { fg = colors.purple },
 
