@@ -35,7 +35,7 @@ local theme = require("lush")(function(injected_functions)
 		Substitute { bg = colors.orange, fg = colors.black },             -- |:substitute| replacement text highlighting
 		LineNr { fg = colors.black.lighten(30), bg = colors.black.lighten(6) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
 		ColorColumn { fg = colors.black.lighten(10) },                    -- Columns set with 'colorcolumn'
-		VertSplit { bg = LineNr.bg, fg = colors.black.lighten(20) },      -- Column separating vertically split windows
+		VertSplit { bg = "none", fg = colors.black.lighten(20) },         -- Column separating vertically split windows
 		SignColumn { LineNr },                                            -- Column where |signs| are displayed
 		FoldColumn { SignColumn, fg = SignColumn.fg.lighten(25) },        -- 'foldcolumn'
 		CursorLineNr { fg = colors.orange, bg = LineNr.bg, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
@@ -64,7 +64,7 @@ local theme = require("lush")(function(injected_functions)
 		-- VisualNOS                    { }, -- Visual mode selection when vim is "Not Owning the Selection".
 		WarningMsg { fg = colors.yellow },                 -- Warning messages
 		Whitespace { fg = colors.red, bg = colors.red },   -- "nbsp", "space", "tab" and "trail" in 'listchars'
-		WinSeparator { fg = VertSplit.bg.lighten(10), bg = VertSplit.bg },
+		WinSeparator { fg = VertSplit.fg, bg = VertSplit.bg },
 		WildMenu { Pmenu },                                -- Current match in 'wildmenu' completion
 		Yank { bg = colors.yellow, fg = colors.black },
 
@@ -191,7 +191,7 @@ local theme = require("lush")(function(injected_functions)
 		TablineTail { fg = colors.green, bg = colors.black.lighten(15) },
 		BufferModified { fg = colors.red, bg = colors.black.lighten(15) },
 
-		IblIndent { fg = VertSplit.bg.lighten(10) },
+		IblIndent { fg = colors.white.darken(70) },
 		IblScope { fg = colors.purple.darken(25).desaturate(50) },
 		TreeIndentMarker { IblIndent },
 
@@ -269,8 +269,8 @@ local theme = require("lush")(function(injected_functions)
 		CodewindowDeletion { fg = colors.red, bg = "none" },
 		DevIconDefault { fg = colors.black.lighten(25) },
 
-		NeoTreeNormal { bg = colors.black },
-		NeoTreeNormalNC { bg = colors.black },
+		NeoTreeNormal { bg = "none" },
+		NeoTreeNormalNC { bg = "none" },
 		TreeExpander { fg = colors.orange },
 		TreeModified { fg = BufferCurrentMod.fg },
 		NeoTreeDirectoryIcon { Directory },
@@ -352,6 +352,8 @@ local theme = require("lush")(function(injected_functions)
 		WinBar { fg = colors.white.darken(50), bg = colors.black.lighten(14) },
 		WinBarNC { bg = WinBar.bg },
 
+		NvimTreeNormal { bg = "none" },
+		NvimTreeNormalNC { NvimTreeNormal },
 		NvimTreeFolderIcon { fg = colors.orange },
 		NvimTreeFolderName { fg = colors.white },
 		NvimTreeOPENEDFolderName { NvimTreeFolderName },
@@ -360,9 +362,8 @@ local theme = require("lush")(function(injected_functions)
 		NvimTreeGitDeleted { fg = colors.red.darken(25), gui = "italic" },
 		NvimTreeGitStaged { fg = colors.green },
 		NvimTreeGitNew { fg = colors.yellow },
-		NvimTreeNormal { bg = colors.black },
 		NvimTreeSpecialFile { fg = colors.yellow, gui = "underline,bold" },
-		NvimTreeIndentMarker { FoldColumn, bg = "none" },
+		NvimTreeIndentMarker { IblIndent },
 		NvimTreeImageFile { fg = colors.blue },
 		NvimTreeWinSeparator { WinSeparator },
 
