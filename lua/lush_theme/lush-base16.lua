@@ -45,8 +45,8 @@ local theme = require("lush")(function(injected_functions)
 		-- MsgSeparator                 { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
 		MoreMsg({ fg = colors.green, gui = "bold,italic" }), -- |more-prompt|
 		NonText({ fg = colors.black.lighten(15) }), -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-		Pmenu({ fg = "none", bg = colors.black.lighten(30) }), -- Popup menu: Normal item.
-		PmenuSel({ bg = Pmenu.bg.lighten(10) }), -- Popup menu: Selected item.
+		Pmenu({ fg = "none", bg = colors.black.lighten(10) }), -- Popup menu: Normal item.
+		PmenuSel({ bg = Pmenu.bg.lighten(15) }), -- Popup menu: Selected item.
 		PmenuSbar({ bg = Pmenu.bg.darken(30) }), -- Popup menu: Scrollbar.
 		PmenuThumb({ bg = Pmenu.bg.lighten(70) }), -- Popup menu: Thumb of the scrollbar.
 		DocMenu({ bg = Pmenu.bg }),
@@ -230,8 +230,11 @@ local theme = require("lush")(function(injected_functions)
 		CmpItemKindColor({ CmpItemKindText, bg = colors.black }),
 		CmpItemKindTypeParameter({ CmpItemKindText, bg = colors.black }),
 		CmpItemKindCopilot({ bg = colors.green, fg = colors.black }),
+		CmpItemKindCodeium({  CmpItemKindCopilot }),
 		CmpItemKindTabNine({ bg = colors.white, fg = colors.black }),
 		CmpItemKindTreesitter({ bg = colors.green, fg = colors.black }),
+
+        BlinkCmpDoc({ bg = Pmenu.bg }),
 
 		TelescopeNormal({ fg = colors.white.darken(50), bg = colors.black }),
 		TelescopeBorder({ fg = colors.black.lighten(33), bg = colors.black }),
