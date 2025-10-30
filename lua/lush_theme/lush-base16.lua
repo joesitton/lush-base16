@@ -4,166 +4,143 @@ local theme = require("lush")(function(injected_functions)
 	local sym = injected_functions.sym
 
 	return {
-		Normal({ bg = "none" }), -- Normal text
-		NormalNC({ bg = "none" }), -- normal text in non-current windows
-		NormalFloat({ bg = colors.black }), -- Normal text in floating windows.
-		Comment({ fg = colors.black.lighten(33), gui = "italic" }), -- Any comment
+		-- core
+		Normal({ bg = "none" }),
+		NormalNC({ bg = "none" }),
+		NormalFloat({ bg = colors.black }),
+		Comment({ fg = colors.black.lighten(33), gui = "italic" }),
 		FloatBorder({ fg = NormalFloat.bg.lighten(45), bg = colors.black }),
 		FloatSel({ bg = NormalFloat.bg.lighten(20), fg = "none" }),
-		-- Conceal                      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-		-- Cursor                       { }, -- Character under the cursor
-		-- lCursor                      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
-		-- CursorIM                     { }, -- Like Cursor, but used when in IME mode |CursorIM|
-		CursorLine({ bg = colors.black.lighten(10) }), -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
-		CursorColumn({ CursorLine }), -- Screen-column at the cursor, when 'cursorcolumn' is set.
-		Directory({ fg = colors.white }), -- Directory names (and other special names in listings)
-		DiffAdd({ fg = colors.green.lighten(25), bg = colors.green.darken(75) }), -- Diff mode: Added line |diff.txt|
+		CursorLine({ bg = colors.black.lighten(8) }),
+		CursorColumn({ CursorLine }),
+		Cursor({ fg = colors.white, gui = "reverse" }),
+		Directory({ fg = colors.white }),
+		DiffAdd({ fg = colors.green.lighten(25), bg = colors.green.darken(75) }),
 		diffAdded({ fg = colors.green }),
-		DiffChange({ fg = colors.blue.lighten(25), bg = colors.blue.darken(75) }), -- Diff mode: Changed line |diff.txt|
+		DiffChange({ fg = colors.blue.lighten(25), bg = colors.blue.darken(75) }),
 		diffChanged({ fg = colors.blue }),
-		DiffDelete({ fg = colors.red.lighten(25), bg = colors.red.darken(75) }), -- Diff mode: Deleted line |diff.txt|
+		DiffDelete({ fg = colors.red.lighten(25), bg = colors.red.darken(75) }),
 		diffDelete({ fg = colors.red }),
 		diffRemoved({ fg = colors.red }),
-		DiffText({ fg = colors.blue.lighten(50), bg = DiffChange.bg, gui = "bold" }), -- Diff mode: Changed text within a changed line |diff.txt|
-		EndOfBuffer({ Normal }), -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
-		-- TermCursor                   { }, -- Cursor in a focused terminal
-		-- TermCursorNC                 { }, -- Cursor in an unfocused terminal
-		ErrorMsg({ fg = colors.red }), -- Error messages on the command line
-		Folded({}), -- Line used for closed folds
-		IncSearch({ fg = colors.black, bg = colors.yellow, gui = "bold" }), -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-		Search({ bg = colors.black.lighten(10), gui = "underline" }), -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
-		Substitute({ bg = colors.orange, fg = colors.black }), -- |:substitute| replacement text highlighting
-		LineNr({ fg = colors.black.lighten(30), bg = colors.black.lighten(6) }), -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-		ColorColumn({ fg = colors.black.lighten(10) }), -- Columns set with 'colorcolumn'
-		VertSplit({ bg = "none", fg = colors.black.lighten(20) }), -- Column separating vertically split windows
-		SignColumn({ LineNr }), -- Column where |signs| are displayed
-		FoldColumn({ SignColumn, fg = SignColumn.fg.lighten(25) }), -- 'foldcolumn'
-		CursorLineNr({ fg = colors.orange, bg = LineNr.bg, gui = "bold" }), -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-		MatchParen({ bg = CursorLine.bg.lighten(12) }), -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-		-- ModeMsg                      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
-		-- MsgArea                      { }, -- Area for messages and cmdline
-		-- MsgSeparator                 { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
-		MoreMsg({ fg = colors.green, gui = "bold,italic" }), -- |more-prompt|
-		NonText({ fg = colors.black.lighten(15) }), -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-		Pmenu({ fg = "none", bg = colors.black.lighten(10) }), -- Popup menu: Normal item.
-		PmenuSel({ bg = Pmenu.bg.lighten(15) }), -- Popup menu: Selected item.
-		PmenuSbar({ bg = Pmenu.bg.darken(30) }), -- Popup menu: Scrollbar.
-		PmenuThumb({ bg = Pmenu.bg.lighten(70) }), -- Popup menu: Thumb of the scrollbar.
+		DiffText({ fg = colors.blue.lighten(50), bg = DiffChange.bg, gui = "bold" }),
+		EndOfBuffer({ Normal }),
+		ErrorMsg({ fg = colors.red }),
+		Folded({}),
+		IncSearch({ fg = colors.black, bg = colors.yellow, gui = "bold" }),
+		Search({ bg = colors.black.lighten(10), gui = "underline" }),
+		Substitute({ bg = colors.orange, fg = colors.black }),
+		LineNr({ fg = colors.black.lighten(30), bg = colors.black.lighten(6) }),
+		ColorColumn({ fg = colors.black.lighten(10) }),
+		VertSplit({ bg = "none", fg = colors.black.lighten(20) }),
+		SignColumn({ LineNr }),
+		FoldColumn({ SignColumn, fg = SignColumn.fg.lighten(25) }),
+		CursorLineNr({ fg = colors.orange, bg = LineNr.bg, gui = "bold" }),
+		MatchParen({ bg = CursorLine.bg.lighten(12) }),
+		MoreMsg({ fg = colors.green, gui = "bold,italic" }),
+		NonText({ fg = colors.black.lighten(15) }),
+		Pmenu({ fg = "none", bg = colors.black.lighten(10) }),
+		PmenuSel({ bg = Pmenu.bg.lighten(15) }),
+		PmenuSbar({ bg = Pmenu.bg.darken(30) }),
+		PmenuThumb({ bg = Pmenu.bg.lighten(70) }),
 		DocMenu({ bg = Pmenu.bg }),
-		Question({ fg = colors.green, gui = "bold,italic" }), -- |hit-enter| prompt and yes/no questions
-		QuickFixLine({ bg = colors.black.lighten(30) }), -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-		SpecialKey({ fg = colors.orange }), -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
-		SpellBad({ sp = colors.red, gui = "undercurl" }), -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-		SpellCap({ sp = colors.blue, gui = "undercurl" }), -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-		SpellLocal({ sp = colors.cyan, gui = "undercurl" }), -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-		SpellRare({ sp = colors.purple, gui = "undercurl" }), -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-		StatusLine({ bg = colors.black.lighten(10) }), -- Status line of current window
-		StatusLineNC({ bg = colors.black.lighten(10) }), -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-		Title({ fg = colors.blue }), -- Titles for output from ":set all", ":autocmd" etc.
-		Visual({ bg = colors.purple.darken(65).desaturate(55) }), -- Visual mode selection
-		-- VisualNOS                    { }, -- Visual mode selection when vim is "Not Owning the Selection".
-		WarningMsg({ fg = colors.yellow }), -- Warning messages
-		Whitespace({ fg = colors.red, bg = colors.red }), -- "nbsp", "space", "tab" and "trail" in 'listchars'
+		Question({ fg = colors.green, gui = "bold,italic" }),
+		QuickFixLine({ bg = colors.black.lighten(30) }),
+		SpecialKey({ fg = colors.orange }),
+		SpellBad({ sp = colors.red, gui = "undercurl" }),
+		SpellCap({ sp = colors.blue, gui = "undercurl" }),
+		SpellLocal({ sp = colors.cyan, gui = "undercurl" }),
+		SpellRare({ sp = colors.purple, gui = "undercurl" }),
+		StatusLine({ bg = colors.black.lighten(10) }),
+		StatusLineNC({ bg = colors.black.lighten(10) }),
+		Title({ fg = colors.blue }),
+		Visual({ bg = colors.purple.darken(65).desaturate(55) }),
+		WarningMsg({ fg = colors.yellow }),
+		Whitespace({ fg = colors.red, bg = colors.red }),
 		WinSeparator({ fg = VertSplit.fg, bg = VertSplit.bg }),
-		WildMenu({ Pmenu }), -- Current match in 'wildmenu' completion
+		WildMenu({ Pmenu }),
 		Yank({ bg = colors.yellow, fg = colors.black }),
-
-		Constant({ fg = colors.red, gui = "bold" }), -- (*) Any constant
-		String({ fg = colors.green }), --   A string constant: "this is a string"
-		Character({ fg = colors.red }), --   A character constant: 'c', '\n'
-		Number({ fg = colors.orange }), --   A number constant: 234, 0xff
-		Boolean({ fg = colors.orange }), --   A boolean constant: TRUE, false
-		Float({ fg = colors.orange }), --   A floating point constant: 2.3e10
-
-		Identifier({ fg = colors.purple }), -- (*) Any variable name
-		Function({ fg = colors.blue }), --   Function name (also: methods for classes)
-
-		Statement({ fg = colors.purple, gui = "italic" }), -- (*) Any statement
-		Keyword({ Statement }), --   any other keyword
-		Operator({ fg = colors.purple }), --   "sizeof", "+", "*", etc.
-		-- Conditional                  { }, --   if, then, else, endif, switch, etc.
-		Repeat({ fg = colors.yellow, gui = "italic" }), --   for, do, while, etc.
-		-- Label                        { }, --   case, default, etc.
-		Exception({ fg = colors.red, gui = "italic" }), --   try, catch, throw
-
-		PreProc({ fg = colors.blue, gui = "italic" }), -- (*) Generic Preprocessor
-		-- Include                      { }, --   Preprocessor #include
-		-- Define                       { }, --   Preprocessor #define
-		-- Macro                        { }, --   Same as Define
-		-- PreCondit                    { }, --   Preprocessor #if, #else, #endif, etc.
-
-		Type({ fg = colors.yellow }), -- (*) int, long, char, etc.
-		-- StorageClass                 { }, --   static, register, volatile, etc.
-		-- Structure                    { }, --   struct, union, enum, etc.
-		-- Typedef                      { }, --   A typedef
-
-		Special({ fg = colors.orange }), -- (*) Any special symbol
-		-- SpecialChar                  { }, --   Special character in a constant
-		-- Tag                          { }, --   You can use CTRL-] on this
-		-- Delimiter                    { }, --   Character that needs attention
-		-- SpecialComment               { }, --   Special things inside a comment (e.g. '\n')
-		-- Debug                        { }, --   Debugging statements
-
-		Underlined({ fg = "none", gui = "underline" }), -- Text that stands out, HTML links
-		Ignore({ Comment }), -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
-		Error({ fg = colors.red, gui = "bold" }), -- Any erroneous construct
-		Todo({ fg = colors.black, bg = colors.cyan, gui = "bold" }), -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-
-		ConstBuiltin({ fg = colors.red.darken(5), gui = "italic,bold" }), -- Built-in constant values: `nil` in Lua.
-		ConstMacro({ Constant }), -- Constants defined by macros: `NULL` in C.
-		Field({ fg = colors.red }), -- Object and struct fields.
-		Property({ Field }), -- Same as `Field`.
-		FuncBuiltin({ fg = colors.cyan, gui = "italic" }), -- Built-in functions: `print` in Lua.
-		Method({ Function }), -- Method calls and definitions.
-		Include({}), -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
-		Keyword({ Keyword }), -- Keywords that don't fit into other categories.
-		KeywordFunction({ Keyword, gui = "none" }), -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
-		KeywordReturn({ Keyword, gui = "italic" }), -- Keywords like `return` and `yield`.
-		Label({ fg = colors.yellow }), -- GOTO labels: `label:` in C, and `::label::` in Lua.
-		None({ fg = colors.white }), -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
-		Variable({ fg = colors.white }), -- Variable names that don't fit into other categories.
-		Parameter({ fg = colors.orange, gui = "italic" }), -- Parameters of a function.
-		VariableBuiltin({ fg = colors.yellow, gui = "italic" }), -- Variable names defined by the language: `this` or `self` in Javascript.
-		Strong({ gui = "bold" }), -- Text to be represented in bold.
-		Emphasis({ Strong }), -- Text to be represented with emphasis.
-		Underline({ gui = "underline" }), -- Text to be represented with an underline.
-		Strike({ gui = "strikethrough" }), -- Strikethrough text.
-		URI({ gui = "none" }), -- URIs like hyperlinks or email addresses.
-		TextReference({ fg = colors.red }), -- Footnotes, text references, citations, etc.
-		Warning({ WarningMsg }), -- Text representation of a warning note.
-		Danger({ Error }), -- Text representation of a danger note.
-		TypeBuiltin({ Type, gui = "italic" }), -- Built-in types: `i32` in Rust.
+		Constant({ fg = colors.red, gui = "bold" }),
+		String({ fg = colors.green }),
+		Character({ fg = colors.red }),
+		Number({ fg = colors.orange }),
+		Boolean({ fg = colors.orange }),
+		Float({ fg = colors.orange }),
+		Identifier({ fg = colors.purple }),
+		Function({ fg = colors.blue }),
+		Statement({ fg = colors.purple, gui = "italic" }),
+		Keyword({ Statement }),
+		Operator({ fg = colors.purple }),
+		Repeat({ fg = colors.yellow, gui = "italic" }),
+		Exception({ fg = colors.red, gui = "italic" }),
+		PreProc({ fg = colors.blue, gui = "italic" }),
+		Type({ fg = colors.yellow }),
+		Special({ fg = colors.orange }),
+		Underlined({ fg = "none", gui = "underline" }),
+		Ignore({ Comment }),
+		Error({ fg = colors.red, gui = "bold" }),
+		Todo({ fg = colors.black, bg = colors.cyan, gui = "bold" }),
+		ConstBuiltin({ fg = colors.red.darken(5), gui = "italic,bold" }),
+		ConstMacro({ Constant }),
+		Field({ fg = colors.red }),
+		Property({ Field }),
+		FuncBuiltin({ fg = colors.cyan, gui = "italic" }),
+		Method({ Function }),
+		Include({}),
+		Keyword({ Keyword }),
+		KeywordFunction({ Keyword, gui = "none" }),
+		KeywordReturn({ Keyword, gui = "italic" }),
+		Label({ fg = colors.yellow }),
+		None({ fg = colors.white }),
+		Variable({ fg = colors.white }),
+		Parameter({ fg = colors.orange, gui = "italic" }),
+		VariableBuiltin({ fg = colors.yellow, gui = "italic" }),
+		Strong({ gui = "bold" }),
+		Emphasis({ Strong }),
+		Underline({ gui = "underline" }),
+		Strike({ gui = "strikethrough" }),
+		URI({ gui = "none" }),
+		TextReference({ fg = colors.red }),
+		Warning({ WarningMsg }),
+		Danger({ Error }),
+		TypeBuiltin({ Type, gui = "italic" }),
 		TypeDefinition({ Type }),
 		Constructor({ Type }),
+		Delimiter({ Operator }),
+		LspReferenceText({}),
+		LspReferenceWrite({ CursorLine }),
+		LspReferenceRead({ CursorLine }),
+		DiagnosticError({ fg = colors.red }),
+		DiagnosticWarn({ fg = colors.yellow }),
+		DiagnosticInfo({ fg = colors.blue }),
+		DiagnosticHint({ fg = colors.white }),
+		DiagnosticVirtualTextError({ fg = DiagnosticError.fg, bg = DiagnosticError.fg.darken(70), gui = "italic" }),
+		DiagnosticVirtualTextWarn({ fg = DiagnosticWarn.fg, bg = DiagnosticWarn.fg.darken(70), gui = "italic" }),
+		DiagnosticVirtualTextInfo({ fg = DiagnosticInfo.fg, bg = DiagnosticInfo.fg.darken(70), gui = "italic" }),
+		DiagnosticVirtualTextHint({ fg = DiagnosticHint.fg, bg = DiagnosticHint.fg.darken(70), gui = "italic" }),
+		DiagnosticUnderlineError({ sp = DiagnosticError.fg, gui = "undercurl" }),
+		DiagnosticUnderlineWarn({ sp = DiagnosticWarn.fg, gui = "undercurl" }),
+		DiagnosticUnderlineInfo({ sp = DiagnosticInfo.fg, gui = "undercurl" }),
+		DiagnosticUnderlineHint({ sp = DiagnosticHint.fg, gui = "undercurl" }),
+		DiagnosticSignError({ DiagnosticError, bg = LineNr.bg }),
+		DiagnosticSignWarn({ DiagnosticWarn, bg = LineNr.bg }),
+		DiagnosticSignInfo({ DiagnosticInfo, bg = LineNr.bg }),
+		DiagnosticSignHint({ DiagnosticHint, bg = LineNr.bg }),
+		WinBar({ fg = colors.white.darken(50), bg = colors.black.lighten(10) }),
+		WinBarNC({ bg = WinBar.bg }),
+		TablineHead({ fg = colors.purple, bg = colors.black.lighten(15) }),
+		TabLine({ fg = colors.white, bg = colors.black.lighten(15) }),
+		TablineFill({ fg = colors.black.lighten(15), bg = colors.black }),
+		TablineWin({ fg = colors.white.darken(25), bg = colors.black.lighten(15) }),
+		TablineSel({ fg = colors.white, bg = colors.black.lighten(15) }),
+		TablineSep({ fg = colors.black, bg = colors.black.lighten(15) }),
+		TablineTail({ fg = colors.green, bg = colors.black.lighten(15) }),
 
-		LspReferenceText({}), -- Used for highlighting "text" references
-		LspReferenceWrite({ CursorLine }), -- Used for highlighting "write" references
-		LspReferenceRead({ CursorLine }), -- Used for highlighting "read" references
-		-- LspCodeLens                  { } , -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
-		-- LspCodeLensSeparator         { } , -- Used to color the separator between two or more code lens.
-		-- LspSignatureActiveParameter  { } , -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
+		-- indent-blankline
+		IblIndent({ fg = colors.white.darken(70) }),
+		IblScope({ fg = colors.purple.darken(25).desaturate(50) }),
 
-		DiagnosticError({ fg = colors.red }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-		DiagnosticWarn({ fg = colors.yellow }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-		DiagnosticInfo({ fg = colors.blue }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-		DiagnosticHint({ fg = colors.white }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-		DiagnosticVirtualTextError({ fg = DiagnosticError.fg, bg = DiagnosticError.fg.darken(70), gui = "italic" }), -- Used for "Error" diagnostic virtual text.
-		DiagnosticVirtualTextWarn({ fg = DiagnosticWarn.fg, bg = DiagnosticWarn.fg.darken(70), gui = "italic" }), -- Used for "Warn" diagnostic virtual text.
-		DiagnosticVirtualTextInfo({ fg = DiagnosticInfo.fg, bg = DiagnosticInfo.fg.darken(70), gui = "italic" }), -- Used for "Info" diagnostic virtual text.
-		DiagnosticVirtualTextHint({ fg = DiagnosticHint.fg, bg = DiagnosticHint.fg.darken(70), gui = "italic" }), -- Used for "Hint" diagnostic virtual text.
-		DiagnosticUnderlineError({ sp = DiagnosticError.fg, gui = "undercurl" }), -- Used to underline "Error" diagnostics.
-		DiagnosticUnderlineWarn({ sp = DiagnosticWarn.fg, gui = "undercurl" }), -- Used to underline "Warn" diagnostics.
-		DiagnosticUnderlineInfo({ sp = DiagnosticInfo.fg, gui = "undercurl" }), -- Used to underline "Info" diagnostics.
-		DiagnosticUnderlineHint({ sp = DiagnosticHint.fg, gui = "undercurl" }), -- Used to underline "Hint" diagnostics.
-		-- DiagnosticFloatingError      { } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
-		-- DiagnosticFloatingWarn       { } , -- Used to color "Warn" diagnostic messages in diagnostics float.
-		-- DiagnosticFloatingInfo       { } , -- Used to color "Info" diagnostic messages in diagnostics float.
-		-- DiagnosticFloatingHint       { } , -- Used to color "Hint" diagnostic messages in diagnostics float.
-		DiagnosticSignError({ DiagnosticError, bg = LineNr.bg }), -- Used for "Error" signs in sign column.
-		DiagnosticSignWarn({ DiagnosticWarn, bg = LineNr.bg }), -- Used for "Warn" signs in sign column.
-		DiagnosticSignInfo({ DiagnosticInfo, bg = LineNr.bg }), -- Used for "Info" signs in sign column.
-		DiagnosticSignHint({ DiagnosticHint, bg = LineNr.bg }), -- Used for "Hint" signs in sign column.
-
+		-- barbar
+		BufferModified({ fg = colors.red, bg = colors.black.lighten(15) }),
 		BufferCurrent({ fg = colors.white, bg = colors.black.lighten(20) }),
 		BufferCurrentIcon({ bg = BufferCurrent.bg }),
 		BufferCurrentMod({ fg = colors.red, bg = BufferCurrent.bg, gui = "italic" }),
@@ -182,124 +159,92 @@ local theme = require("lush")(function(injected_functions)
 		BufferTabpageFill({ bg = colors.black, fg = colors.white.darken(50) }),
 		BufferBg({ bg = colors.black }),
 
-		TablineHead({ fg = colors.purple, bg = colors.black.lighten(15) }),
-		TabLine({ fg = colors.white, bg = colors.black.lighten(15) }),
-		TablineFill({ fg = colors.black.lighten(15), bg = colors.black }),
-		TablineWin({ fg = colors.white.darken(25), bg = colors.black.lighten(15) }),
-		TablineSel({ fg = colors.white, bg = colors.black.lighten(15) }),
-		TablineSep({ fg = colors.black, bg = colors.black.lighten(15) }),
-		TablineTail({ fg = colors.green, bg = colors.black.lighten(15) }),
-		BufferModified({ fg = colors.red, bg = colors.black.lighten(15) }),
+		-- blink
+		BlinkCmpGhostText({ fg = Comment.fg.darken(10), gui = "none" }),
+		BlinkCmpAbbrMatch({ fg = colors.orange, gui = "bold" }),
+		-- BlinkCmpAbbrMatchFuzzy { fg = BlinkCmpItemAbbrMatch.fg.desaturate(50) },
+		BlinkCmpAbbrDefault({ fg = colors.white.darken(10) }),
+		BlinkCmpMenu({ fg = colors.whiter, bg = "none" }),
+		BlinkCmpBorder({ FloatBorder, bg = "none" }),
+		BlinkCmpMenuBorder({ BlinkCmpBorder }),
+		BlinkCmpDocSeparator({ BlinkCmpBorder }),
+		BlinkCmpDoc({ BlinkCmpMenu }),
+		BlinkCmpDocBorder({ BlinkCmpBorder }),
+		BlinkCmpSignatureHelp({ BlinkCmpMenu }),
+		BlinkCmpSignatureHelpBorder({ BlinkCmpBorder }),
+		BlinkCmpKindField({ Field, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindProperty({ Property, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindEvent({ BlinkCmpMenu, bg = colors.black }),
+		BlinkCmpKindDeprecated({ fg = colors.black.lighten(50), gui = "strikethrough,italic", bg = colors.black }),
+		BlinkCmpKindText({ fg = colors.white, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindEnum({ Type, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindKeyword({ Keyword, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindConstant({ Constant, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindConstructor({ Constant, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindReference({ TextReference, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindFunction({ Function, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindStruct({ Type, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindClass({ Type, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindModule({ PreProc, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindOperator({ Operator, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindVariable({ Variable, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindFile({ BlinkCmpKindText, bg = colors.black }),
+		BlinkCmpKindUnit({ BlinkCmpKindText, bg = colors.black }),
+		BlinkCmpKindSnippet({ fg = colors.green, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindFolder({ fg = colors.cyan, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindMethod({ Method, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindValue({ Special, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindEnumMember({ Property, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindInterface({ Type, gui = "reverse", bg = colors.black }),
+		BlinkCmpKindColor({ BlinkCmpKindText, bg = colors.black }),
+		BlinkCmpKindTypeParameter({ BlinkCmpKindText, bg = colors.black }),
+		BlinkCmpKindCopilot({ bg = colors.green, fg = colors.black }),
+		BlinkCmpKindCodeium({ BlinkCmpKindCopilot }),
+		BlinkCmpKindTabNine({ bg = colors.white, fg = colors.black }),
+		BlinkCmpKindTreesitter({ bg = colors.green, fg = colors.black }),
+		BlinkCmpSource({ fg = colors.white.darken(50), gui = "italic" }),
 
-		IblIndent({ fg = colors.white.darken(70) }),
-		IblScope({ fg = colors.purple.darken(25).desaturate(50) }),
-		TreeIndentMarker({ IblIndent }),
+		-- telescope
+		-- TelescopeNormal { fg = colors.white.darken(50), bg = colors.black },
+		-- TelescopeBorder { fg = colors.black.lighten(33), bg = colors.black },
+		-- TelescopeTitle { TelescopeBorder },
+		-- TelescopePreviewNormal { bg = TelescopeNormal.bg },
+		-- TelescopePreviewBorder { TelescopeBorder },
+		-- TelescopePreviewTitle { TelescopeBorder },
+		-- TelescopeMatching { BlinkCmpItemAbbrMatch },
+		-- TelescopeResultsTitle { TelescopeMatching },
+		-- TelescopeResultsBorder { TelescopeBorder },
+		-- TelescopePromptNormal { fg = colors.white, bg = colors.black },
+		-- TelescopePromptBorder { TelescopeBorder },
+		-- TelescopePromptTitle { TelescopeNormal },
+		-- TelescopePromptPrefix { fg = colors.orange, bg = TelescopePromptNormal.bg, gui = "bold" },
+		-- TelescopeResultsLineNr { LineNr },
+		-- TelescopeSelection { fg = colors.white, bg = FloatSel.bg },
+		-- TelescopeSelectionCaret { fg = colors.yellow, bg = TelescopeNormal.bg },
+		-- TelescopePreviewLine { CursorLine },
+		-- TelescopeResultsFunction { BlinkCmpKindFunction },
+		-- TelescopeResultsClass { BlinkCmpKindFunction },
+		-- TelescopeResultsVariable { BlinkCmpKindVariable },
+		-- TelescopeResultsConstant { BlinkCmpKindConstant },
+		-- TelescopeResultsProperty { BlinkCmpKindProperty },
+		-- TelescopeResultsStruct { Type },
 
-		MarkSignHL({ fg = colors.red, bg = LineNr.bg, gui = "bold" }),
-		MarkSignNumHL({ CursorLineNr }),
-
-		CmpGhostText({ fg = Comment.fg.darken(10), gui = "none" }),
-		CmpItemAbbrMatch({ fg = colors.orange, gui = "bold" }),
-		CmpItemAbbrMatchFuzzy({ fg = CmpItemAbbrMatch.fg.desaturate(50) }),
-		CmpItemAbbrDefault({ fg = colors.white.darken(10) }),
-		CmpItemMenu({ fg = Pmenu.bg.lighten(45), gui = "italic" }),
-		CmpItemKindField({ Field, gui = "reverse", bg = colors.black }),
-		CmpItemKindProperty({ Property, gui = "reverse", bg = colors.black }),
-		CmpItemKindEvent({ CmpItemMenu, bg = colors.black }),
-		CmpItemKindDeprecated({ fg = colors.black.lighten(50), gui = "strikethrough,italic", bg = colors.black }),
-		CmpItemKindText({ fg = colors.white, gui = "reverse", bg = colors.black }),
-		CmpItemKindEnum({ Type, gui = "reverse", bg = colors.black }),
-		CmpItemKindKeyword({ Keyword, gui = "reverse", bg = colors.black }),
-		CmpItemKindConstant({ Constant, gui = "reverse", bg = colors.black }),
-		CmpItemKindConstructor({ Constant, gui = "reverse", bg = colors.black }),
-		CmpItemKindReference({ TextReference, gui = "reverse", bg = colors.black }),
-		CmpItemKindFunction({ Function, gui = "reverse", bg = colors.black }),
-		CmpItemKindStruct({ Type, gui = "reverse", bg = colors.black }),
-		CmpItemKindClass({ Type, gui = "reverse", bg = colors.black }),
-		CmpItemKindModule({ PreProc, gui = "reverse", bg = colors.black }),
-		CmpItemKindOperator({ Operator, gui = "reverse", bg = colors.black }),
-		CmpItemKindVariable({ Variable, gui = "reverse", bg = colors.black }),
-		CmpItemKindFile({ CmpItemKindText, bg = colors.black }),
-		CmpItemKindUnit({ CmpItemKindText, bg = colors.black }),
-		CmpItemKindSnippet({ fg = colors.green, gui = "reverse", bg = colors.black }),
-		CmpItemKindFolder({ fg = colors.cyan, gui = "reverse", bg = colors.black }),
-		CmpItemKindMethod({ Method, gui = "reverse", bg = colors.black }),
-		CmpItemKindValue({ Special, gui = "reverse", bg = colors.black }),
-		CmpItemKindEnumMember({ Property, gui = "reverse", bg = colors.black }),
-		CmpItemKindInterface({ Type, gui = "reverse", bg = colors.black }),
-		CmpItemKindColor({ CmpItemKindText, bg = colors.black }),
-		CmpItemKindTypeParameter({ CmpItemKindText, bg = colors.black }),
-		CmpItemKindCopilot({ bg = colors.green, fg = colors.black }),
-		CmpItemKindCodeium({  CmpItemKindCopilot }),
-		CmpItemKindTabNine({ bg = colors.white, fg = colors.black }),
-		CmpItemKindTreesitter({ bg = colors.green, fg = colors.black }),
-
-        BlinkCmpDoc({ bg = Pmenu.bg }),
-
-		TelescopeNormal({ fg = colors.white.darken(50), bg = colors.black }),
-		TelescopeBorder({ fg = colors.black.lighten(33), bg = colors.black }),
-		TelescopeTitle({ TelescopeBorder }),
-		TelescopePreviewNormal({ bg = TelescopeNormal.bg }),
-		TelescopePreviewBorder({ TelescopeBorder }),
-		TelescopePreviewTitle({ TelescopeBorder }),
-		TelescopeMatching({ CmpItemAbbrMatch }),
-		TelescopeResultsTitle({ TelescopeMatching }),
-		TelescopeResultsBorder({ TelescopeBorder }),
-		TelescopePromptNormal({ fg = colors.white, bg = colors.black }),
-		TelescopePromptBorder({ TelescopeBorder }),
-		TelescopePromptTitle({ TelescopeNormal }),
-		TelescopePromptPrefix({ fg = colors.orange, bg = TelescopePromptNormal.bg, gui = "bold" }),
-		TelescopeResultsLineNr({ LineNr }),
-		TelescopeSelection({ fg = colors.white, bg = FloatSel.bg }),
-		TelescopeSelectionCaret({ fg = colors.yellow, bg = TelescopeNormal.bg }),
-		TelescopePreviewLine({ CursorLine }),
-		TelescopeResultsFunction({ CmpItemKindFunction }),
-		TelescopeResultsClass({ CmpItemKindFunction }),
-		TelescopeResultsVariable({ CmpItemKindVariable }),
-		TelescopeResultsConstant({ CmpItemKindConstant }),
-		TelescopeResultsProperty({ CmpItemKindProperty }),
-		TelescopeResultsStruct({ Type }),
-
-		FidgetTitle({ fg = colors.white, bg = WinBar.bg }),
-		FidgetTask({ fg = colors.blue, bg = WinBar.bg }),
-
-		CodewindowBackground({ bg = "none" }),
-		CodewindowBoundsBackground({ bg = CursorLine.bg }),
-		CodewindowBorder({ fg = colors.black.lighten(15), bg = "none" }),
-		CodewindowWarning({ fg = colors.yellow, bg = "none" }),
-		CodewindowError({ fg = colors.red, bg = "none" }),
-		CodewindowAddition({ fg = colors.green, bg = "none" }),
-		CodewindowDeletion({ fg = colors.red, bg = "none" }),
-		DevIconDefault({ fg = colors.black.lighten(25) }),
-
+		-- neotree
 		NeoTreeNormal({ bg = "none" }),
 		NeoTreeNormalNC({ bg = "none" }),
 		TreeExpander({ fg = colors.orange }),
 		TreeModified({ fg = BufferCurrentMod.fg }),
 		NeoTreeDirectoryIcon({ Directory }),
-		NeoTreeRootName({ Directory, gui = "bold,italic" }),
-		NeoTreeFileIcon({ DevIconDefault }),
-		NeoTreeGitUntracked({ fg = colors.orange }),
+		NeoTreeRootName({ fg = colors.purple, gui = "bold,italic" }),
+		NeoTreeFileIcon({ fg = colors.orange }),
+		NeoTreeGitUntracked({ fg = colors.yellow }),
 		NeoTreeGitConflict({ fg = colors.red }),
 		NeoTreeGitModified({ diffChanged }),
-		NeoTreeGitRenamed({ fg = colors.purple }),
+		NeoTreeGitRenamed({ fg = colors.yellow }),
 		NeoTreeGitDeleted({ diffDelete }),
 		NeoTreeGitAdded({ diffAdded }),
-		-- NeoTreeFloatBorder              { NeoTreeNormal, fg = NeoTreeNormal.bg },
 
-		yamlBool({ Boolean }),
-		yamlBlockCollectionItemStart({ Special }),
-
-		yaraRuleSection({ fg = colors.yellow }),
-		yaraIdentifier({ fg = colors.white }),
-
-		dockerfileKeyword({ Keyword, gui = "none" }),
-
-		devIconDockerfile({ fg = colors.blue }),
-		devIconDefault({ fg = colors.blue.desaturate(20).darken(10) }),
-
-		helpURI({ URI }),
-
+		-- rainbow-delimiters
 		rainbowcol1({ fg = colors.red }),
 		rainbowcol2({ fg = colors.orange }),
 		rainbowcol3({ fg = colors.yellow }),
@@ -308,36 +253,7 @@ local theme = require("lush")(function(injected_functions)
 		rainbowcol6({ fg = colors.blue }),
 		rainbowcol7({ fg = colors.purple }),
 
-		ScrollbarCursorHandle({ fg = colors.white.darken(30) }),
-		ScrollbarHandle({ bg = "none" }),
-		ScrollbarSearchHandle({ ScrollbarHandle, fg = IncSearch.bg }), -- Inside the scrollbar
-		ScrollbarSearch({ fg = IncSearch.bg.darken(65) }), -- Outside the scrollbr
-		ScrollbarErrorHandle({ ScrollbarHandle, fg = DiagnosticError.fg }),
-		ScrollbarError({ fg = DiagnosticError.fg.darken(65) }),
-		ScrollbarWarnHandle({ ScrollbarHandle, fg = DiagnosticWarn.fg }),
-		ScrollbarWarn({ fg = DiagnosticWarn.fg.darken(65) }),
-		ScrollbarInfoHandle({ ScrollbarHandle, fg = DiagnosticInfo.fg }),
-		ScrollbarInfo({ fg = DiagnosticInfo.fg.darken(65) }),
-		ScrollbarHintHandle({ ScrollbarHandle, fg = DiagnosticHint.fg }),
-		ScrollbarHint({ fg = DiagnosticHint.fg.darken(65) }),
-		ScrollbarGitAddHandle({ ScrollbarHandle, fg = colors.green }),
-		ScrollbarGitAdd({ fg = colors.green.darken(65), bg = "none" }),
-		ScrollbarGitChangeHandle({ ScrollbarHandle, fg = colors.blue }),
-		ScrollbarGitChange({ fg = colors.blue.darken(65), bg = "none" }),
-		ScrollbarGitDeleteHandle({ ScrollbarHandle, fg = colors.red }),
-		ScrollbarGitDelete({ fg = colors.red.darken(65), bg = "none" }),
-		ScrollbarMiscHandle({ ScrollbarHandle }),
-		ScrollbarMisc({}),
-
-		HlSearchLens({ Comment, gui = "none" }),
-
-		-- HopCursor                    { },
-		HopUnmatched({ Comment, gui = "none" }),
-		-- HopPreview                   { },
-		HopNextKey({ fg = colors.purple.saturate(25), bg = colors.purple.darken(75), gui = "bold" }),
-		HopNextKey1({ fg = colors.blue.saturate(25), bg = colors.blue.darken(75), gui = "bold" }),
-		HopNextKey2({ fg = colors.cyan.saturate(25), bg = colors.cyan.darken(75), gui = "bold" }),
-
+		-- gitsigns
 		GitSignsAddLn({ DiffAdd }),
 		GitSignsAddInline({ GitSignsAddLn, bg = GitSignsAddLn.bg.lighten(10), gui = "bold" }),
 		-- GitSignsAddLnInline          { bg = colors.yellow },
@@ -352,102 +268,21 @@ local theme = require("lush")(function(injected_functions)
 		GitSignsChangeDelete({ diffChanged, bg = LineNr.bg }),
 		GitSignsDelete({ diffDelete, bg = LineNr.bg }),
 
-		WinBar({ fg = colors.white.darken(50), bg = colors.black.lighten(10) }),
-		WinBarNC({ bg = WinBar.bg }),
-
-		NvimTreeNormal({ bg = "none" }),
-		NvimTreeNormalNC({ NvimTreeNormal }),
-		NvimTreeFolderIcon({ fg = colors.orange }),
-		NvimTreeFolderName({ fg = colors.white }),
-		NvimTreeOPENEDFolderName({ NvimTreeFolderName }),
-		NvimTreeRootFolder({ fg = colors.purple, gui = "bold" }),
-		NvimTreeGitDirty({ fg = colors.red }),
-		NvimTreeGitDeleted({ fg = colors.red.darken(25), gui = "italic" }),
-		NvimTreeGitStaged({ fg = colors.green }),
-		NvimTreeGitNew({ fg = colors.yellow }),
-		NvimTreeSpecialFile({ fg = colors.yellow, gui = "underline,bold" }),
-		NvimTreeIndentMarker({ IblIndent }),
-		NvimTreeImageFile({ fg = colors.blue }),
-		NvimTreeWinSeparator({ WinSeparator }),
-
-		HlArgs({ Parameter }),
-
-		UfoMarker({ Comment }),
-		UfoFoldedBg({ bg = colors.purple.darken(50) }),
-
-		NullLsInfoBorder({ FloatBorder }),
-
-		CodeActionNumber({ fg = colors.orange, gui = "bold" }),
-		RenameNormal({ Normal }),
-
+		-- illuminate
 		IlluminatedWordText({ CursorLine, gui = "underline" }),
 		sym("illuminatedWord")({ IlluminatedWordText }),
 
-		LspInfoBorder({ FloatBorder }),
-
-		ContextVt({ fg = colors.black.lighten(15), gui = "italic" }),
-		NoiceCmdline({ fg = colors.white, bg = colors.yellow.darken(90) }),
-		SmoothCursor({ fg = colors.orange, bg = SignColumn.bg }),
-		VirtColumn({ fg = colors.black.lighten(5) }),
-
-		LeapBackdrop({ fg = colors.black.lighten(25) }),
-		LeapMatch({ fg = colors.white, gui = "bold" }),
-		LeapLabelPrimary({ fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" }),
-		LeapLabelSecondary({ fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" }),
-
-		Cursor({ fg = colors.white, gui = "reverse" }),
-
-		DapBreakpoint({ fg = colors.red, bg = LineNr.bg, gui = "bold" }),
-		DapStopped({ fg = colors.red, bg = LineNr.bg }),
-		DapUIDecoration({ fg = colors.white }),
-		DapUIStop({ DapStopped }),
-		DapUIBreakpointsPath({ fg = colors.blue }),
-		DapUIBreakpointsLine({ fg = colors.orange }),
-		DapUIWatchesEmpty({ fg = colors.red }),
-		DapUIWatchesValue({ fg = colors.green }),
-		DapUIStoppedThread({ fg = colors.purple }),
-		DapUIThread({ fg = colors.green }),
-		DapUICurrentFrameName({ fg = colors.green }),
-		DapUISource({ fg = colors.blue }),
-		DapUIScope({ fg = colors.blue }),
-		DapUIVariable({ fg = colors.white }),
-		DapUIType({ fg = colors.yellow }),
-		DapUIValue({ fg = colors.green }),
-		DapUIPlayPause({ fg = colors.green, bg = LineNr.bg }),
-		DapUIRestart({ fg = colors.green, bg = LineNr.bg }),
-		DapUIStepOver({ fg = colors.blue, bg = LineNr.bg }),
-		DapUIStepInto({ fg = colors.blue, bg = LineNr.bg }),
-		DapUIStepOut({ fg = colors.blue, bg = LineNr.bg }),
-		DapUIStepBack({ fg = colors.blue, bg = LineNr.bg }),
-		DapUILineNumber({ fg = colors.orange }),
-		DapUINormalNC({ bg = LineNr.bg }),
-		DapUIModifiedValue({ fg = colors.red }),
-
+		-- flash
 		FlashMatch({ fg = colors.white.darken(20) }),
 		FlashCurrent({ fg = colors.purple, bg = colors.purple.darken(60), gui = "bold" }),
 		FlashLabel({ fg = colors.blue, bg = colors.blue.darken(60), gui = "bold" }),
 
-		Delimiter({ Operator }),
-
+		-- treesitter-context
 		TreesitterContext({ bg = WinBar.bg, gui = "" }),
 		TreesitterContextBottom({ bg = WinBar.bg, gui = "none", guisp = colors.gray }),
 		TreesitterContextLineNumberBottom({ fg = LineNr.fg, gui = "underline", guisp = colors.gray }),
 
-		WhichKeyBorder({ FloatBorder }),
-
-		LspSignatureActiveParameter({ HlArgs, gui = "underline" }),
-		LspInlayHint({ fg = colors.black.lighten(50), gui = "italic" }),
-
-		AerialConstant({ Constant }),
-		AerialFunction({ Function }),
-		AerialStruct({ Type }),
-		AerialField({ Field }),
-		AerialMethod({ Function }),
-		AerialModule({ PreProc }),
-		AerialLine({ CursorLine }),
-
-		UndotreeBranch({ fg = colors.purple }),
-
+		-- Semantic tokens
 		sym("@lsp.type.class")({ Type }),
 		sym("@lsp.type.comment")({ Comment }),
 		sym("@lsp.type.decorator")({ PreProc }),
@@ -471,7 +306,6 @@ local theme = require("lush")(function(injected_functions)
 		sym("@lsp.type.type")({ Type }),
 		sym("@lsp.type.typeParameter")({ Type }),
 		sym("@lsp.type.variable")({}),
-
 		sym("@lsp.mod.abstract")({}),
 		sym("@lsp.mod.async")({}),
 		sym("@lsp.mod.declaration")({}),
@@ -482,14 +316,12 @@ local theme = require("lush")(function(injected_functions)
 		sym("@lsp.mod.modification")({}),
 		sym("@lsp.mod.readonly")({}),
 		sym("@lsp.mod.static")({}),
-
 		sym("@lsp.typemod.type")({ Type }),
 		sym("@lsp.typemod.method")({ sym("@lsp.type.method") }),
 		sym("@lsp.typemod.definition")({}),
 		sym("@lsp.typemod.variable.readonly")({}),
 		sym("@lsp.typemod.type.defaultLibrary")({}),
 		sym("@lsp.typemod.function.defaultLibrary")({ FuncBuiltin }),
-
 		sym("@type.builtin")({ Type }),
 		sym("@keyword.import")({ PreProc }),
 		sym("@module")({ sym("@lsp.type.namespace") }),
@@ -499,9 +331,7 @@ local theme = require("lush")(function(injected_functions)
 		sym("@property")({ Field }),
 		sym("@type.variable")({ Field }),
 		sym("@constructor")({ Type }),
-
 		sym("@lsp.type.property.lua")({}),
-
 		sym("@diff.minus")({ diffRemoved }),
 		sym("@diff.plus")({ diffAdded }),
 		sym("@diff.delta")({ diffChanged }),
