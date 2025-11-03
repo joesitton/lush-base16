@@ -11,7 +11,7 @@ local theme = require("lush")(function(injected_functions)
 		Comment({ fg = colors.black.lighten(33), gui = "italic" }),
 		FloatBorder({ fg = NormalFloat.bg.lighten(45), bg = colors.black }),
 		FloatSel({ bg = NormalFloat.bg.lighten(20), fg = "none" }),
-		CursorLine({ bg = colors.black.lighten(8) }),
+		CursorLine({ bg = colors.black.lighten(3) }),
 		CursorColumn({ CursorLine }),
 		Cursor({ fg = colors.white, gui = "reverse" }),
 		Directory({ fg = colors.orange }),
@@ -125,7 +125,7 @@ local theme = require("lush")(function(injected_functions)
 		DiagnosticSignWarn({ DiagnosticWarn, bg = LineNr.bg }),
 		DiagnosticSignInfo({ DiagnosticInfo, bg = LineNr.bg }),
 		DiagnosticSignHint({ DiagnosticHint, bg = LineNr.bg }),
-		WinBar({ fg = colors.white.darken(50), bg = colors.black.lighten(10) }),
+		WinBar({ fg = colors.white.darken(50), bg = colors.black.lighten(11) }),
 		WinBarNC({ bg = WinBar.bg }),
 		TablineHead({ fg = colors.purple, bg = colors.black.lighten(15) }),
 		TabLine({ fg = colors.white, bg = colors.black.lighten(15) }),
@@ -247,6 +247,10 @@ local theme = require("lush")(function(injected_functions)
 		NeoTreeGitDeleted({ diffDelete }),
 		NeoTreeGitAdded({ diffAdded }),
 		NeoTreeExpander({ fg = colors.white.darken(50) }),
+		NeoTreeTabActive({ fg = colors.white, bg = WinBar.bg }),
+		NeoTreeTabInactive({ fg = colors.white.darken(60), bg = WinBar.bg }),
+		NeoTreeTabSeparatorActive({ fg = colors.black }),
+		NeoTreeTabSeparatorInactive({ fg = colors.black }),
 
 		-- rainbow-delimiters
 		rainbowcol1({ fg = colors.red }),
@@ -285,6 +289,18 @@ local theme = require("lush")(function(injected_functions)
 		TreesitterContext({ bg = WinBar.bg, gui = "" }),
 		TreesitterContextBottom({ bg = WinBar.bg, gui = "none", guisp = colors.gray }),
 		TreesitterContextLineNumberBottom({ fg = LineNr.fg, gui = "underline", guisp = colors.gray }),
+
+		-- satellite
+		SatelliteCursor({ fg = CursorLineNr.fg, bg = "none" }),
+		SatelliteSearch({ fg = IncSearch.bg, bg = "none" }),
+		SatelliteBackground({ bg = "none" }),
+		SatelliteMark({ fg = colors.red }),
+		SatelliteGitSignsAdd({ bg = colors.black }),
+		SatelliteGitSignsChange({ bg = colors.black }),
+		SatelliteGitSignsDelete({ bg = colors.black }),
+
+		-- hlargs
+		Hlargs({ Parameter }),
 
 		-- Semantic tokens
 		sym("@lsp.type.class")({ Type }),
