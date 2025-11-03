@@ -126,7 +126,7 @@ local theme = require("lush")(function(injected_functions)
 		DiagnosticSignInfo({ DiagnosticInfo, bg = LineNr.bg }),
 		DiagnosticSignHint({ DiagnosticHint, bg = LineNr.bg }),
 		WinBar({ fg = colors.white.darken(50), bg = colors.black.lighten(11) }),
-		WinBarNC({ bg = WinBar.bg }),
+		WinBarNC({ WinBar }),
 		TablineHead({ fg = colors.purple, bg = colors.black.lighten(15) }),
 		TabLine({ fg = colors.white, bg = colors.black.lighten(15) }),
 		TablineFill({ fg = colors.black.lighten(15), bg = colors.black }),
