@@ -304,7 +304,7 @@ local theme = require("lush")(function(injected_functions)
 
 		-- dropbar
 		DropBarMenuHoverEntry({ CursorLine }),
-		DropBarIconUIIndicator({ fg = colors.orange, gui = "none" }),
+		DropBarIconUIIndicator({ bg = "none", fg = colors.white }),
 		DropBarMenuCurrentContext({ Visual }),
 
 		-- Semantic tokens
