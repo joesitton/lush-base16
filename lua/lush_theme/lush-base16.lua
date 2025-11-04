@@ -302,6 +302,11 @@ local theme = require("lush")(function(injected_functions)
 		-- hlargs
 		Hlargs({ Parameter }),
 
+		-- dropbar
+		DropBarMenuHoverEntry({ CursorLine }),
+		DropBarIconUIIndicator({ fg = colors.orange, gui = "none" }),
+		DropBarMenuCurrentContext({ Visual }),
+
 		-- Semantic tokens
 		sym("@lsp.type.class")({ Type }),
 		sym("@lsp.type.comment")({ Comment }),
