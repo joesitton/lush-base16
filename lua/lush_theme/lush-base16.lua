@@ -219,7 +219,7 @@ local theme = require("lush")(function(injected_functions)
 		TelescopePromptTitle({ TelescopeNormal }),
 		TelescopePromptPrefix({ fg = colors.orange, bg = TelescopePromptNormal.bg, gui = "bold" }),
 		TelescopeResultsLineNr({ LineNr }),
-		TelescopeSelection({ fg = colors.white, bg = FloatSel.bg }),
+		TelescopeSelection({ bg = FloatSel.bg }),
 		TelescopeSelectionCaret({ fg = colors.yellow, bg = TelescopeNormal.bg }),
 		TelescopePreviewLine({ CursorLine }),
 		-- TelescopeResultsFunction({ BlinkCmpKindFunction }),
