@@ -236,6 +236,7 @@ local theme = require("lush")(function(injected_functions)
 		-- neotree
 		NeoTreeNormal({ bg = "none" }),
 		NeoTreeNormalNC({ bg = "none" }),
+		NeoTreeModified({ fg = colors.green }),
 		NeoTreeDirectoryIcon({ Directory }),
 		NeoTreeDirectoryName({ fg = colors.white }),
 		NeoTreeRootName({ fg = colors.purple, gui = "bold,italic" }),
@@ -290,14 +291,18 @@ local theme = require("lush")(function(injected_functions)
 		TreesitterContextBottom({ bg = WinBar.bg, gui = "none", guisp = colors.gray }),
 		TreesitterContextLineNumberBottom({ fg = LineNr.fg, gui = "underline", guisp = colors.gray }),
 
+		-- marks
+		MarkSignHL({ fg = colors.purple }),
+
 		-- satellite
 		SatelliteCursor({ fg = CursorLineNr.fg, bg = "none" }),
 		SatelliteSearch({ fg = IncSearch.bg, bg = "none" }),
-		SatelliteBackground({ bg = "none" }),
-		SatelliteMark({ fg = colors.red }),
-		SatelliteGitSignsAdd({ bg = colors.black }),
-		SatelliteGitSignsChange({ bg = colors.black }),
-		SatelliteGitSignsDelete({ bg = colors.black }),
+		SatelliteBackground({ bg = LineNr.bg }),
+		SatelliteBar({ bg = colors.white.darken(75) }),
+		SatelliteMark({ fg = MarkSignHL.fg }),
+		SatelliteGitSignsAdd({ fg = diffAdded.fg, bg = colors.black }),
+		SatelliteGitSignsChange({ fg = diffChanged.fg, bg = colors.black }),
+		SatelliteGitSignsDelete({ fg = diffDelete.fg, bg = colors.black }),
 
 		-- hlargs
 		Hlargs({ Parameter }),
